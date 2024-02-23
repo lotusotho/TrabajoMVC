@@ -116,6 +116,7 @@ public class Principal extends JFrame {
         inputEstamina.setColumns(10);
 
         // LOGICA BOTONES
+        //TODO: QUERYS QUE INVOLUCRA CENTRAL.JAVA
         botonNombre.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String nombre = inputNombre.getText();
