@@ -1,6 +1,8 @@
 package vista;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -8,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import controlador.Central;
 
 public class Principal extends JFrame {
     private JPanel contentPane;
@@ -20,7 +24,7 @@ public class Principal extends JFrame {
     private JTextField inputFuerza;
     private JTextField inputEstamina;
 
-    public Principal(){
+    public Principal() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
 
@@ -33,18 +37,106 @@ public class Principal extends JFrame {
         contentPane.add(panel, BorderLayout.CENTER);
         panel.setLayout(null);
 
-        JButton boton1 = new JButton("Boton 1");
-        boton1.setBounds(141, 145, 89, 20);
-        panel.add(boton1);
+        JButton botonTodos = new JButton("Botón Todos");
+        botonTodos.setBounds(325, 217, 89, 23);
+        panel.add(botonTodos);
+
+        JButton botonNombre = new JButton("Botón Nombre");
+        botonNombre.setBounds(141, 145, 89, 20);
+        panel.add(botonNombre);
 
         inputNombre = new JTextField();
         inputNombre.setBounds(195, 80, 86, 20);
         panel.add(inputNombre);
         inputNombre.setColumns(10);
+
+        JButton botonRaza = new JButton("Botón Raza");
+        botonRaza.setBounds(509, 289, 89, 26);
+        panel.add(botonRaza);
         
         inputRaza = new JTextField();
         inputRaza.setBounds(195, 80, 86, 20);
         panel.add(inputRaza);
         inputRaza.setColumns(10);
+        
+        JCheckBox botonFaccion = new JCheckBox("Checkbox Facción");
+        botonFaccion.setBounds(509, 289, 89, 26);
+        panel.add(botonFaccion);
+
+        
+        inputFaccion = new JCheckBox();
+        inputFaccion.setBounds(195, 80, 86, 20);
+        panel.add(inputFaccion);
+        inputFaccion.setEnabled(true);
+        
+        JButton botonTitulo = new JButton("Botón Título");
+        botonTitulo.setBounds(509, 289, 89, 26);
+        panel.add(botonTitulo);
+
+        
+        inputTitulo = new JTextField();
+        inputTitulo.setBounds(195, 80, 86, 20);
+        panel.add(inputTitulo);
+        inputTitulo.setColumns(10);
+
+        JButton botonVida = new JButton("Botón Vida");
+        botonVida.setBounds(693, 473, 89, 29);
+        panel.add(botonVida);
+        
+        inputVida = new JTextField();
+        inputVida.setBounds(195, 80, 86, 20);
+        panel.add(inputVida);
+        inputVida.setColumns(10);
+        
+        JButton botonPRunico = new JButton("Botón Poder Rúnico");
+        botonPRunico.setBounds(693, 473, 89, 29);
+        panel.add(botonPRunico);
+        
+        inputPoderRunico = new JTextField();
+        inputPoderRunico.setBounds(195, 80, 86, 20);
+        panel.add(inputPoderRunico);
+        inputPoderRunico.setColumns(10);
+
+        JButton botonFuerza = new JButton("Botón Fuerza");
+        botonFuerza.setBounds(693, 473, 89, 29);
+        panel.add(botonFuerza);
+        
+        inputFuerza = new JTextField();
+        inputFuerza.setBounds(195, 80, 86, 20);
+        panel.add(inputFuerza);
+        inputFuerza.setColumns(10);
+
+        JButton botonEstamina = new JButton("Botón Estamina");
+        botonEstamina.setBounds(693, 473, 89, 29);
+        panel.add(botonEstamina);
+        
+        inputEstamina = new JTextField();
+        inputEstamina.setBounds(195, 80, 86, 20);
+        panel.add(inputEstamina);
+        inputEstamina.setColumns(10);
+
+        botonNombre.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String nombre = inputNombre.getText();
+                new Central().buscarPersonaje(nombre);
+            }
+        });
+
+        botonFaccion.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(inputFaccion.isSelected()) {
+                    new Central().setFaccion("Alianza");
+                } else {
+                    new Central().setFaccion("Horda");
+                }
+            }
+        });
+
+        botonTodos.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new Central().verTodos();
+            }
+        });
     }
+
 }

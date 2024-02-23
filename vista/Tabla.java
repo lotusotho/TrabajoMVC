@@ -43,7 +43,7 @@ public class Tabla extends JFrame {
             fila[0] = persI.getId();
             fila[1] = persI.getNombre();
             fila[2] = persI.getRaza();
-            fila[3] = persI.isFaccion();
+            fila[3] = persI.getFaccion();
             fila[4] = persI.getTitulo();
             fila[5] = persI.getVida();
             fila[6] = persI.getPoderRunico();

@@ -48,10 +48,6 @@ public class Personaje {
         return faccion;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setFaccion(String faccion) {
         this.faccion = faccion;
     }

@@ -68,4 +68,29 @@ public class Personajes {
 
         return personajes;
     }
+
+    public ArrayList<Personaje> recogerTodosPersonajesFaccion(String faccionQ){
+        ArrayList<Personaje> personajes = new ArrayList<Personaje>();
+        ResultSet resultado = Conexion.EjecutarSentencia("SELECT * FROM personajes WHERE faccion='"+faccionQ+"';");
+        
+        try {
+            while (resultado.next()) {
+                int id = resultado.getInt("id");
+                String nombre = resultado.getString("nombre");
+                String raza = resultado.getString("raza");
+                String faccion = resultado.getString("faccion");
+                String titulo = resultado.getString("titulo");
+                double vida = resultado.getDouble("vida");
+                int poderRunico = resultado.getInt("poderRunico");
+                double fuerza = resultado.getDouble("fuerza");
+                double estamina = resultado.getDouble("estamina");
+
+                personajes.add(new Personaje(id, nombre, raza, faccion, titulo, vida, poderRunico, fuerza, estamina));
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return personajes;
+    }
 }
