@@ -1,25 +1,19 @@
 package beans;
 
-import java.util.Arrays;
-
 public class Personaje {
+    private int id;
     private String nombre;
     private String raza;
-    private boolean faccion;
+    private String faccion;
     private String titulo;
     private double vida;
     private int poderRunico;
     private double fuerza;
-    private double stamina;
-    private int porCritico;
-    private int porVelocidad;
-    private int porMaestria;
-    private int porVersatilidad;
-    private String[] espC;
+    private double estamina;
 
-    public Personaje(String nombre, String raza, boolean faccion, String titulo, double vida, int poderRunico,
-            double fuerza, double stamina, int porCritico, int porVelocidad, int porMaestria, int porVersatilidad,
-            String[] espC) {
+    public Personaje(int id, String nombre, String raza, String faccion, String titulo, double vida, int poderRunico,
+            double fuerza, double estamina) {
+        this.id = id;
         this.nombre = nombre;
         this.raza = raza;
         this.faccion = faccion;
@@ -27,12 +21,11 @@ public class Personaje {
         this.vida = vida;
         this.poderRunico = poderRunico;
         this.fuerza = fuerza;
-        this.stamina = stamina;
-        this.porCritico = porCritico;
-        this.porVelocidad = porVelocidad;
-        this.porMaestria = porMaestria;
-        this.porVersatilidad = porVersatilidad;
-        this.espC = espC;
+        this.estamina = estamina;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getNombre() {
@@ -51,11 +44,15 @@ public class Personaje {
         this.raza = raza;
     }
 
-    public boolean isFaccion() {
+    public String getFaccion() {
         return faccion;
     }
 
-    public void setFaccion(boolean faccion) {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setFaccion(String faccion) {
         this.faccion = faccion;
     }
 
@@ -91,59 +88,18 @@ public class Personaje {
         this.fuerza = fuerza;
     }
 
-    public double getStamina() {
-        return stamina;
+    public double getEstamina() {
+        return estamina;
     }
 
-    public void setStamina(double stamina) {
-        this.stamina = stamina;
-    }
-
-    public int getPorCritico() {
-        return porCritico;
-    }
-
-    public void setPorCritico(int porCritico) {
-        this.porCritico = porCritico;
-    }
-
-    public int getPorVelocidad() {
-        return porVelocidad;
-    }
-
-    public void setPorVelocidad(int porVelocidad) {
-        this.porVelocidad = porVelocidad;
-    }
-
-    public int getPorMaestria() {
-        return porMaestria;
-    }
-
-    public void setPorMaestria(int porMaestria) {
-        this.porMaestria = porMaestria;
-    }
-
-    public int getPorVersatilidad() {
-        return porVersatilidad;
-    }
-
-    public void setPorVersatilidad(int porVersatilidad) {
-        this.porVersatilidad = porVersatilidad;
-    }
-
-    public String[] getEspC() {
-        return espC;
-    }
-
-    public void setEspC(String[] espC) {
-        this.espC = espC;
+    public void setEstamina(double estamina) {
+        this.estamina = estamina;
     }
 
     @Override
     public String toString() {
-        return "Personaje [nombre=" + nombre + ", raza=" + raza + ", faccion=" + faccion + ", titulo=" + titulo
-                + ", vida=" + vida + ", poderRunico=" + poderRunico + ", fuerza=" + fuerza + ", stamina=" + stamina
-                + ", porCritico=" + porCritico + ", porVelocidad=" + porVelocidad + ", porMaestria=" + porMaestria
-                + ", porVersatilidad=" + porVersatilidad + ", espC=" + Arrays.toString(espC) + "]";
+        return "Personaje [id=" + id + ", nombre=" + nombre + ", raza=" + raza + ", faccion=" + faccion + ", titulo="
+                + titulo + ", vida=" + vida + ", poderRunico=" + poderRunico + ", fuerza=" + fuerza + ", estamina="
+                + estamina + "]";
     }
 }

@@ -5,10 +5,10 @@ import javax.swing.JOptionPane;
 
 public class Conexion {
     static String timeZone = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-	static String dbName = "prueba";
+	static String dbName = "perswow";
 	static String url = "jdbc:mysql://localhost:3306/" + dbName + timeZone;
-	static String user = "admin";
-	static String pass = "admin";
+	static String user = "root";
+	static String pass = "";
 	static String driver = "com.mysql.cj.jdbc.Driver";
 
     static Connection conexion;
