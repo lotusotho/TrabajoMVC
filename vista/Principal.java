@@ -127,7 +127,7 @@ public class Principal extends JFrame {
         botonRaza.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String raza = inputRaza.getText();
-                new Central().setRaza(raza);
+                new Central().busquedaCustom(raza, "raza");
             }
         });
 
@@ -135,9 +135,9 @@ public class Principal extends JFrame {
         botonFaccion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(inputFaccion.isSelected()) {
-                    new Central().setFaccion("Alianza");
+                    new Central().busquedaCustom("Alianza", "faccion");
                 } else {
-                    new Central().setFaccion("Horda");
+                    new Central().busquedaCustom("Horda", "faccion");
                 }
             }
         });
@@ -145,14 +145,28 @@ public class Principal extends JFrame {
         botonTitulo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String titulo = inputTitulo.getText();
-                new Central().setTitulo(titulo);
+                new Central().busquedaCustom(titulo, "titulo");
             }
         });
         
         botonVida.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String vida = inputVida.getText();
-                new Central().setVida(vida);
+                new Central().busquedaCustom(vida, "vida");
+            }
+        });
+
+        botonPRunico.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String pRunico = inputPoderRunico.getText();
+                new Central().busquedaCustom(pRunico, "poderRunico");
+            }
+        });
+
+        botonFuerza.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String fuerza = inputFuerza.getText();
+                new Central().busquedaCustom(fuerza, "fuerza");
             }
         });
         
