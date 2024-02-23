@@ -45,6 +45,9 @@ public class Personajes {
         return null;
     }
 
+    //TODO: VER SI BORRAR ESTO O NO
+    //TODO: QUERYS QUE INVOLUCRA CENTRAL.JAVA Y PRINCIPAL.JAVA
+
     public ArrayList<Personaje> recogerTodosPersonajes(){
         ArrayList<Personaje> personajes = new ArrayList<Personaje>();
         ResultSet resultado = Conexion.EjecutarSentencia("SELECT * FROM personajes;");
@@ -69,9 +72,33 @@ public class Personajes {
         return personajes;
     }
 
-    public ArrayList<Personaje> recogerTodosPersonajesFaccion(String faccionQ){
+    public Personaje recogerPersonajeQuery(String query, String value){
+        ResultSet resultado = Conexion.EjecutarSentencia("SELECT * FROM personajes WHERE '"+query+"'='"+value+"';");
+        try {
+            if (resultado.next()) {
+                int id = resultado.getInt("id");
+                String nombre = resultado.getString("nombre");
+                String raza = resultado.getString("raza");
+                String faccion = resultado.getString("faccion");
+                String titulo = resultado.getString("titulo");
+                double vida = resultado.getDouble("vida");
+                int poderRunico = resultado.getInt("poderRunico");
+                double fuerza = resultado.getDouble("fuerza");
+                double estamina = resultado.getDouble("estamina");
+
+                Personaje queryPersonaje = new Personaje(id, nombre, raza, faccion, titulo, vida, poderRunico, fuerza, estamina);
+                return queryPersonaje;
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+    
+    public ArrayList<Personaje> recogerTodosPersonajesQuery(String query, String value){
         ArrayList<Personaje> personajes = new ArrayList<Personaje>();
-        ResultSet resultado = Conexion.EjecutarSentencia("SELECT * FROM personajes WHERE faccion='"+faccionQ+"';");
+        ResultSet resultado = Conexion.EjecutarSentencia("SELECT * FROM personajes WHERE '"+query+"'='"+value+"';");
         
         try {
             while (resultado.next()) {
@@ -93,4 +120,5 @@ public class Personajes {
 
         return personajes;
     }
+
 }

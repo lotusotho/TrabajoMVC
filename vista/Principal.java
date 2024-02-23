@@ -115,6 +115,7 @@ public class Principal extends JFrame {
         panel.add(inputEstamina);
         inputEstamina.setColumns(10);
 
+        // LOGICA BOTONES
         botonNombre.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String nombre = inputNombre.getText();
@@ -122,6 +123,14 @@ public class Principal extends JFrame {
             }
         });
 
+        botonRaza.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String raza = inputRaza.getText();
+                new Central().setRaza(raza);
+            }
+        });
+
+        
         botonFaccion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(inputFaccion.isSelected()) {
@@ -131,7 +140,21 @@ public class Principal extends JFrame {
                 }
             }
         });
-
+        
+        botonTitulo.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String titulo = inputTitulo.getText();
+                new Central().setTitulo(titulo);
+            }
+        });
+        
+        botonVida.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String vida = inputVida.getText();
+                new Central().setVida(vida);
+            }
+        });
+        
         botonTodos.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new Central().verTodos();
