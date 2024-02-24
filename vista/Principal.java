@@ -26,7 +26,7 @@ public class Principal extends JFrame {
 
     public Principal() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 450, 300);
+        setBounds(100, 100, 1280, 720);
 
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -51,7 +51,7 @@ public class Principal extends JFrame {
         panel.add(botonNombre);
 
         JButton botonRaza = new JButton("Botón Raza");
-        botonRaza.setBounds(509, 289, 120, 26);
+        botonRaza.setBounds(140, 100, 100, 23);
         panel.add(botonRaza);
         
         inputRaza = new JTextField();
@@ -60,7 +60,7 @@ public class Principal extends JFrame {
         inputRaza.setColumns(10);
         
         JCheckBox botonFaccion = new JCheckBox("Checkbox Facción");
-        botonFaccion.setBounds(509, 289, 120, 26);
+        botonFaccion.setBounds(140, 150, 150, 23);
         panel.add(botonFaccion);
 
         
