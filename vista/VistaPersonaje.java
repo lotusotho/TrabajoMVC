@@ -1,7 +1,6 @@
 package vista;
 
 import java.awt.BorderLayout;
-import java.awt.Panel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 

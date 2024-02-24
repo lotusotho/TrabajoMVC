@@ -38,20 +38,20 @@ public class Principal extends JFrame {
         panel.setLayout(null);
 
         JButton botonTodos = new JButton("Botón Todos");
-        botonTodos.setBounds(325, 217, 89, 23);
+        botonTodos.setBounds(3, 3, 120, 23);
         panel.add(botonTodos);
 
-        JButton botonNombre = new JButton("Botón Nombre");
-        botonNombre.setBounds(141, 145, 89, 20);
-        panel.add(botonNombre);
-
         inputNombre = new JTextField();
-        inputNombre.setBounds(195, 80, 86, 20);
+        inputNombre.setBounds(3, 70, 120, 23);
         panel.add(inputNombre);
         inputNombre.setColumns(10);
+        
+        JButton botonNombre = new JButton("Botón Nombre");
+        botonNombre.setBounds(3, 100, 120, 23);
+        panel.add(botonNombre);
 
         JButton botonRaza = new JButton("Botón Raza");
-        botonRaza.setBounds(509, 289, 89, 26);
+        botonRaza.setBounds(509, 289, 120, 26);
         panel.add(botonRaza);
         
         inputRaza = new JTextField();
@@ -60,7 +60,7 @@ public class Principal extends JFrame {
         inputRaza.setColumns(10);
         
         JCheckBox botonFaccion = new JCheckBox("Checkbox Facción");
-        botonFaccion.setBounds(509, 289, 89, 26);
+        botonFaccion.setBounds(509, 289, 120, 26);
         panel.add(botonFaccion);
 
         
