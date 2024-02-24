@@ -25,6 +25,7 @@ public class VistaPersonaje extends JFrame {
         setContentPane(contentPane);
 
         JPanel panel = new JPanel();
+       
         contentPane.add(panel, BorderLayout.CENTER);
         panel.setLayout(null);
 
