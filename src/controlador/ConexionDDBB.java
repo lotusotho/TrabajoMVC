@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConexionBBDD {
+public class ConexionDDBB {
 	private final static String bbdd = "gestwow";
 	private final static String user = "root";
 	private final static String passwd = "";

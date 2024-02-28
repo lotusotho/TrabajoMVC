@@ -8,10 +8,10 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 
-public class UsuariosControladorBBDD {
+public class UsersControllerDDBB {
 	
 	public static void usersLogin(String nombre, String contrasena) {
-		Connection conx = ConexionBBDD.connectBBDD();
+		Connection conx = ConexionDDBB.connectBBDD();
 		Statement stmt;
 		ResultSet result;
 		
@@ -28,7 +28,7 @@ public class UsuariosControladorBBDD {
 	}
 
 	public static boolean usersRegister(String nombre, String contrasena, boolean permiso) {
-		Connection conx = ConexionBBDD.connectBBDD();
+		Connection conx = ConexionDDBB.connectBBDD();
 		
 		String rolConv = permiso ? "admin" : "normalUser";
 		

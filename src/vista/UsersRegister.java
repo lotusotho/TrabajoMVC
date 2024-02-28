@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 
-import controlador.UsuariosControladorBBDD;
+import controlador.UsersControllerDDBB;
 
 public class UsersRegister extends JFrame {
 
@@ -82,7 +82,7 @@ public class UsersRegister extends JFrame {
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					UsuariosControladorBBDD.usersRegister(userTextField.getText(), passTextField.getText(), adminCheckBox.isSelected());
+					UsersControllerDDBB.usersRegister(userTextField.getText(), passTextField.getText(), adminCheckBox.isSelected());
 				} catch(Exception exc) {
 					exc.printStackTrace();
 				}

@@ -2,7 +2,7 @@ package vista;
 
 import java.awt.EventQueue;
 
-import controlador.UsuariosControladorBBDD;
+import controlador.UsersControllerDDBB;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -84,7 +84,7 @@ public class UsersLogin extends JFrame {
 		btnUserLogin.setFont(new Font("Verdana", Font.PLAIN, 17));
 		btnUserLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UsuariosControladorBBDD.usersLogin(userTextField.getText(), passTextField.getText());
+				UsersControllerDDBB.usersLogin(userTextField.getText(), passTextField.getText());
 			}
 		});
 		contentPane.add(btnUserLogin);
