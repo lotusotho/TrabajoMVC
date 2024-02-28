@@ -2,6 +2,8 @@ package vista;
 
 import java.awt.EventQueue;
 
+import controlador.UsuariosControladorBBDD;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -26,7 +28,7 @@ public class UsersLogin extends JFrame {
 	private JPanel contentPane;
 	private JTextField userTextField;
 	private JTextField passTextField;
-	private JPanel panel;
+	private JPanel panelFormUsers;
 
 	/**
 	 * Create the frame.
@@ -48,33 +50,33 @@ public class UsersLogin extends JFrame {
 		contentPane.add(lblLoginTitle);
 		lblLoginTitle.setFont(new Font("Verdana", Font.PLAIN, 28));
 		
-		panel = new JPanel();
-		panel.setBounds(442, 182, 385, 164);
-		panel.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
-		panel.setForeground(UIManager.getColor(Color.BLUE));
-		contentPane.add(panel);
-		panel.setLayout(null);
+		panelFormUsers = new JPanel();
+		panelFormUsers.setBounds(442, 182, 385, 164);
+		panelFormUsers.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
+		panelFormUsers.setForeground(UIManager.getColor(Color.BLUE));
+		contentPane.add(panelFormUsers);
+		panelFormUsers.setLayout(null);
 		
 		JLabel lblUserTitle = new JLabel("Usuario:");
 		lblUserTitle.setBounds(56, 25, 82, 24);
-		panel.add(lblUserTitle);
+		panelFormUsers.add(lblUserTitle);
 		lblUserTitle.setHorizontalAlignment(SwingConstants.LEFT);
 		lblUserTitle.setFont(new Font("Verdana", Font.PLAIN, 19));
 		
 		JLabel lblPassTitle = new JLabel("Contraseña:");
 		lblPassTitle.setBounds(56, 102, 116, 24);
-		panel.add(lblPassTitle);
+		panelFormUsers.add(lblPassTitle);
 		lblPassTitle.setHorizontalAlignment(SwingConstants.LEFT);
 		lblPassTitle.setFont(new Font("Verdana", Font.PLAIN, 19));
 		
 		userTextField = new JTextField();
 		userTextField.setBounds(195, 27, 143, 29);
-		panel.add(userTextField);
+		panelFormUsers.add(userTextField);
 		userTextField.setColumns(10);
 		
 		passTextField = new JTextField();
 		passTextField.setBounds(195, 97, 143, 29);
-		panel.add(passTextField);
+		panelFormUsers.add(passTextField);
 		passTextField.setColumns(10);
 		
 		JButton btnUserLogin = new JButton("Entrar");
@@ -82,6 +84,7 @@ public class UsersLogin extends JFrame {
 		btnUserLogin.setFont(new Font("Verdana", Font.PLAIN, 17));
 		btnUserLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				UsuariosControladorBBDD.usersLogin(userTextField.getText(), passTextField.getText());
 			}
 		});
 		contentPane.add(btnUserLogin);
@@ -90,6 +93,13 @@ public class UsersLogin extends JFrame {
 		btnUserRegister.setBounds(575, 441, 136, 42);
 		btnUserRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					UsersRegister userReg = new UsersRegister();					
+					userReg.setVisible(true);
+					
+				} catch(Exception exc) {
+					exc.printStackTrace();
+				}
 			}
 		});
 		btnUserRegister.setFont(new Font("Verdana", Font.PLAIN, 17));
