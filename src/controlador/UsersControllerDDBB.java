@@ -7,6 +7,8 @@ import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
+import vista.UsersPanel;
+
 
 public class UsersControllerDDBB {
 	
@@ -15,12 +17,18 @@ public class UsersControllerDDBB {
 		Statement stmt;
 		ResultSet result;
 		
-		String loginQuery = "SELECT nombre, contrasena FROM users WHERE nombre='"+nombre+"' AND contrasena='"+contrasena+"';";
+		String loginQuery = "SELECT name, passwd FROM users WHERE name='"+nombre+"' AND passwd='"+contrasena+"';";
 		
 		try {
 			stmt = conx.createStatement();
 			result = stmt.executeQuery(loginQuery);
-			JOptionPane.showMessageDialog(null, result.next());
+			
+			// Intentar basico mediante la base de datos
+			if(result.next()) {
+				new UsersPanel().setVisible(true);
+			} else {
+				JOptionPane.showMessageDialog(null, result.next());
+			}
 			
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
@@ -32,7 +40,7 @@ public class UsersControllerDDBB {
 		
 		String rolConv = permiso ? "admin" : "normalUser";
 		
-		String regQuery = "INSERT INTO users (nombre, contrasena, permiso) VALUES('"+nombre+"','"+contrasena+"','"+rolConv+"');";
+		String regQuery = "INSERT INTO users (name, passwd, permit) VALUES('"+nombre+"','"+contrasena+"','"+rolConv+"');";
 		
 		try {
 			conx.prepareStatement(regQuery).execute();
