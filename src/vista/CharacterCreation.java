@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controlador.CharCreationControllerDDBB;
-import modelo.Heroes;
+import modelo.Hero;
 
 import javax.swing.JLabel;
 import java.awt.Color;
@@ -204,7 +204,7 @@ public class CharacterCreation extends JFrame {
 		contentPane.add(btnCreateChar);
 		btnCreateChar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Heroes tempHero = new Heroes(NameTextField.getText(), RaceTextField.getText(), 
+				Hero tempHero = new Hero(NameTextField.getText(), RaceTextField.getText(), 
 						FactionTextField.getText(), TitleTextField.getText(), Double.parseDouble(LifeTextField.getText()), 
 						Integer.parseInt(RunicPTextField.getText()), Double.parseDouble(StrTextField.getText()), Double.parseDouble(StmTextField.getText()));
 				

@@ -1,6 +1,7 @@
 package modelo;
 
-public class Heroes {
+public class Hero {
+	private int id;
     private String name;
     private String race;
     private String faction;
@@ -10,7 +11,7 @@ public class Heroes {
     private double strength;
     private double stamina;
 
-    public Heroes(String name, String race, String faction, String title, double life, int runicPower,
+    public Hero(String name, String race, String faction, String title, double life, int runicPower,
             double strength, double stamina) {
         this.name = name;
         this.race = race;
@@ -20,6 +21,14 @@ public class Heroes {
         this.runicPower = runicPower;
         this.strength = strength;
         this.stamina = stamina;
+    }
+    
+    public int getId() {
+    	return this.id;
+    }
+    
+    public void setId(int id) {
+    	this.id = id;
     }
 
 	public String getName() {
@@ -88,7 +97,8 @@ public class Heroes {
 
 	@Override
 	public String toString() {
-		return "Heroes [name=" + name + ", race=" + race + ", faction=" + faction + ", title=" + title + ", life="
-				+ life + ", runicPower=" + runicPower + ", strength=" + strength + ", stamina=" + stamina + "]";
+		return "Heroes [id=" + id + ", name=" + name + ", race=" + race + ", faction=" + faction + ", title=" + title
+				+ ", life=" + life + ", runicPower=" + runicPower + ", strength=" + strength + ", stamina=" + stamina
+				+ "]";
 	}
 }

@@ -12,12 +12,14 @@ import vista.UsersPanel;
 
 public class UsersControllerDDBB {
 	
+	private static int currentUserId;
+	
 	public static void usersLogin(String nombre, String contrasena) {
 		Connection conx = ConexionDDBB.connectBBDD();
 		Statement stmt;
 		ResultSet result;
 		
-		String loginQuery = "SELECT name, passwd FROM users WHERE name='"+nombre+"' AND passwd='"+contrasena+"';";
+		String loginQuery = "SELECT user_id, name, passwd FROM users WHERE name='"+nombre+"' AND passwd='"+contrasena+"';";
 		
 		try {
 			stmt = conx.createStatement();
@@ -26,6 +28,7 @@ public class UsersControllerDDBB {
 			// Intentar basico mediante la base de datos
 			if(result.next()) {
 				new UsersPanel().setVisible(true);
+				currentUserId = result.getInt("user_id");
 			} else {
 				JOptionPane.showMessageDialog(null, result.next());
 			}
@@ -49,6 +52,10 @@ public class UsersControllerDDBB {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	public static int getUserId() {
+		return currentUserId;
 	}
 	
 }
