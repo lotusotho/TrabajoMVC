@@ -1,5 +1,9 @@
 package modelo;
 
+/**
+ * Bean del heroe
+ */
+
 public class Hero {
 	private int id;
     private String name;

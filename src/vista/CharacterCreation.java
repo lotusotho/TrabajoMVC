@@ -18,6 +18,10 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Interfaz de la creacion de personajes
+ */
+
 public class CharacterCreation extends JFrame {
 
 	private JPanel contentPane;

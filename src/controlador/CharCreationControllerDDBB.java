@@ -10,9 +10,14 @@ import javax.swing.JOptionPane;
 
 import modelo.Hero;
 
+/**
+ * Aqui definimos las funciones necesarias para gestionar
+ * la base de datos de la tabla users
+ */
+
 public class CharCreationControllerDDBB {
 	public static void InsertCharacter(Hero heroObj) {
-		Connection conx = ConexionDDBB.connectBBDD();
+		Connection conx = ConnectionDDBB.connectBBDD();
 				
 		String insertQuery = "INSERT INTO characters (user_id, name, race, faction, title, life, runicpower, strength, stamina) "
 				+ "VALUES('"+UsersControllerDDBB.getUserId()+"','"+heroObj.getName()+"','"+heroObj.getRace()+"','"+heroObj.getFaction()+"','"+heroObj.getTitle()+"','"+heroObj.getLife()+"','"

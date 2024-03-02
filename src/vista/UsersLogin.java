@@ -22,6 +22,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 
+/**
+ * Interfaz del logeo de usuarios. PAGINA DE INICIO
+ */
+
 public class UsersLogin extends JFrame {
 
 	private static final long serialVersionUID = 1L;

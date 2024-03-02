@@ -9,13 +9,17 @@ import javax.swing.JOptionPane;
 
 import vista.UsersPanel;
 
+/**
+ * Aqui definimos las funciones necesarias para gestionar
+ * la base de datos de la tabla characters
+ */
 
 public class UsersControllerDDBB {
 	
 	private static int currentUserId;
 	
 	public static void usersLogin(String nombre, String contrasena) {
-		Connection conx = ConexionDDBB.connectBBDD();
+		Connection conx = ConnectionDDBB.connectBBDD();
 		Statement stmt;
 		ResultSet result;
 		
@@ -39,7 +43,7 @@ public class UsersControllerDDBB {
 	}
 
 	public static boolean usersRegister(String nombre, String contrasena, boolean permiso) {
-		Connection conx = ConexionDDBB.connectBBDD();
+		Connection conx = ConnectionDDBB.connectBBDD();
 		
 		String rolConv = permiso ? "admin" : "normalUser";
 		

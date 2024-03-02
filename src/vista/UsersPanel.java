@@ -13,6 +13,10 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Interfaz del panel de gestion de usuario
+ */
+
 public class UsersPanel extends JFrame {
 
 	private static final long serialVersionUID = 1L;

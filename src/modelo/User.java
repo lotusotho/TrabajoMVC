@@ -1,5 +1,9 @@
 package modelo;
 
+/**
+ * Bean del usuario
+ */
+
 public class User {
 	private String name;
 	private String password;

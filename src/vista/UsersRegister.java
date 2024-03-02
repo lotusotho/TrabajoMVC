@@ -18,6 +18,10 @@ import javax.swing.JButton;
 
 import controlador.UsersControllerDDBB;
 
+/**
+ * Interfaz del registro de usuarios
+ */
+
 public class UsersRegister extends JFrame {
 
 	private JPanel contentPane;

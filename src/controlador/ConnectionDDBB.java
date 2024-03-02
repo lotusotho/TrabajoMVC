@@ -4,7 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConexionDDBB {
+/**
+ * Aqui realizamos la conexion a la BBDD
+ */
+
+public class ConnectionDDBB {
 	private final static String bbdd = "gestwow";
 	private final static String user = "root";
 	private final static String passwd = "";
