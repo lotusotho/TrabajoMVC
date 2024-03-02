@@ -42,6 +42,7 @@ public class UsersControllerDDBB {
 		}
 	}
 
+	// TODO: Cambiar de "permit" a otra cosa diferente que tenga una mejor nomenglatura
 	public static boolean usersRegister(String nombre, String contrasena, boolean permiso) {
 		Connection conx = ConnectionDDBB.connectBBDD();
 		
