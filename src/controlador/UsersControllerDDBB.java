@@ -1,4 +1,4 @@
-package servicio;
+package controlador;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,8 +16,7 @@ import vista.UsersPanel;
 
 public class UsersControllerDDBB {
 	
-	// TODO: No me gusta declarar esto como publico
-	public static int currentUserId;
+	private static int currentUserId;
 	
 	public static void usersLogin(String nombre, String contrasena) {
 		Connection conx = ConnectionDDBB.connectBBDD();
@@ -58,6 +57,10 @@ public class UsersControllerDDBB {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	public static int getUserId() {
+		return currentUserId;
 	}
 	
 }

@@ -5,9 +5,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import controlador.FunctionsHandler;
-
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
@@ -46,24 +43,15 @@ public class UsersPanel extends JFrame {
 		lblBG.setBounds(279, 383, 46, 14);
 		contentPane.add(lblBG);
 		
-		JButton btnCreateChar = new JButton("Creación de Personajes");
-		btnCreateChar.setFont(new Font("Verdana", Font.PLAIN, 17));
-		btnCreateChar.setBounds(500, 145, 236, 80);
-		btnCreateChar.addActionListener(new ActionListener() {
+		JButton btnNewButton = new JButton("Creación de Personajes");
+		btnNewButton.setFont(new Font("Verdana", Font.PLAIN, 17));
+		btnNewButton.setBounds(500, 145, 236, 80);
+		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.CharacterCreationPanel(true);
+				CharacterCreation tempCharCreation = new CharacterCreation();
+				tempCharCreation.setVisible(true);
 			}
 		});
-		contentPane.add(btnCreateChar);
-		
-		JButton btnDeleteChar = new JButton("Borrar Personajes");
-		btnDeleteChar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		btnDeleteChar.setFont(new Font("Verdana", Font.PLAIN, 17));
-		btnDeleteChar.setBounds(500, 273, 236, 80);
-		contentPane.add(btnDeleteChar);
+		contentPane.add(btnNewButton);
 	}
 }

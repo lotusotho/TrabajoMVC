@@ -5,10 +5,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import controlador.FunctionsHandler;
-import servicio.UsersControllerDDBB;
-
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -19,6 +15,8 @@ import javax.swing.UIManager;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
+
+import controlador.UsersControllerDDBB;
 
 /**
  * Interfaz del registro de usuarios
@@ -87,7 +85,11 @@ public class UsersRegister extends JFrame {
 		btnRegistrar.setBounds(263, 363, 136, 42);
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.UsersRegister(userTextField.getText(), passTextField.getText(), adminCheckBox.isEnabled());
+				try {
+					UsersControllerDDBB.usersRegister(userTextField.getText(), passTextField.getText(), adminCheckBox.isSelected());
+				} catch(Exception exc) {
+					exc.printStackTrace();
+				}
 			}
 		});
 		contentPane.add(btnRegistrar);
