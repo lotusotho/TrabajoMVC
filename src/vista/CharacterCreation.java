@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import controlador.CharCreationControllerDDBB;
+import controlador.FunctionsHandler;
 import modelo.Hero;
 
 import javax.swing.JLabel;
@@ -43,6 +43,20 @@ public class CharacterCreation extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+				JButton btnCreateChar = new JButton("Crear Personaje");
+				btnCreateChar.setFont(new Font("Tahoma", Font.PLAIN, 19));
+				btnCreateChar.setBounds(542, 457, 187, 53);
+				contentPane.add(btnCreateChar);
+				btnCreateChar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Hero tempHero = new Hero(NameTextField.getText(), RaceTextField.getText(), 
+								FactionTextField.getText(), TitleTextField.getText(), Double.parseDouble(LifeTextField.getText()), 
+								Integer.parseInt(RunicPTextField.getText()), Double.parseDouble(StrTextField.getText()), Double.parseDouble(StmTextField.getText()));
+						
+						FunctionsHandler.InsertCharacter(tempHero);
+					}
+				});
 		
 		
 		JPanel panelFormStamina = new JPanel();
@@ -201,19 +215,5 @@ public class CharacterCreation extends JFrame {
 		lblCreacinDePersonajes.setFont(new Font("Verdana", Font.PLAIN, 28));
 		lblCreacinDePersonajes.setBackground(Color.BLACK);
 		contentPane.add(lblCreacinDePersonajes);
-
-		JButton btnCreateChar = new JButton("Crear Personaje");
-		btnCreateChar.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		btnCreateChar.setBounds(533, 454, 187, 53);
-		contentPane.add(btnCreateChar);
-		btnCreateChar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Hero tempHero = new Hero(NameTextField.getText(), RaceTextField.getText(), 
-						FactionTextField.getText(), TitleTextField.getText(), Double.parseDouble(LifeTextField.getText()), 
-						Integer.parseInt(RunicPTextField.getText()), Double.parseDouble(StrTextField.getText()), Double.parseDouble(StmTextField.getText()));
-				
-				CharCreationControllerDDBB.InsertCharacter(tempHero);
-			}
-		});
 	}
 }

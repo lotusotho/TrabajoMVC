@@ -2,11 +2,12 @@ package vista;
 
 import java.awt.EventQueue;
 
-import controlador.UsersControllerDDBB;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controlador.FunctionsHandler;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.FlowLayout;
@@ -88,7 +89,7 @@ public class UsersLogin extends JFrame {
 		btnUserLogin.setFont(new Font("Verdana", Font.PLAIN, 17));
 		btnUserLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UsersControllerDDBB.usersLogin(userTextField.getText(), passTextField.getText());
+				FunctionsHandler.UsersLogin(userTextField.getText(), passTextField.getText());
 			}
 		});
 		contentPane.add(btnUserLogin);
@@ -97,13 +98,7 @@ public class UsersLogin extends JFrame {
 		btnUserRegister.setBounds(575, 441, 136, 42);
 		btnUserRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					UsersRegister userReg = new UsersRegister();					
-					userReg.setVisible(true);
-					
-				} catch(Exception exc) {
-					exc.printStackTrace();
-				}
+				FunctionsHandler.UserRegisterPanel(true);
 			}
 		});
 		btnUserRegister.setFont(new Font("Verdana", Font.PLAIN, 17));
