@@ -11,6 +11,9 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTable;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CharacterView extends JFrame {
 
@@ -26,6 +29,15 @@ public class CharacterView extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		charTable = new JTable(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"char_id", "user_id", "Nombre", "Raza", "Faccion", "Titulo", "Vida", "Poder Runico", "Fuerza", "Estamina"
+			}
+		));
+		charTable.setBounds(224, 95, 822, 444);
+		contentPane.add(charTable);
 		
 		JLabel lblPanelDelUsuario = new JLabel("Vista de Personajes:");
 		lblPanelDelUsuario.setHorizontalAlignment(SwingConstants.CENTER);
@@ -35,11 +47,18 @@ public class CharacterView extends JFrame {
 		lblPanelDelUsuario.setBounds(472, 31, 305, 35);
 		contentPane.add(lblPanelDelUsuario);
 		
+		JButton btnViewChars = new JButton("Ver Personajes");
+		btnViewChars.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Implement method
+			}
+		});
+		btnViewChars.setFont(new Font("Verdana", Font.PLAIN, 17));
+		btnViewChars.setBounds(507, 570, 236, 80);
+		contentPane.add(btnViewChars);
+		
 		// TODO: Anadir personajes a la tabla conectando con FunctionsHandler
 		DefaultTableModel model = new DefaultTableModel();
-		charTable = new JTable(model);
-		charTable.setBounds(288, 95, 700, 500);
-		contentPane.add(charTable);
 		
 		model.addColumn(model);
 	}
