@@ -2,9 +2,12 @@ package controlador;
 
 import java.sql.Connection;
 
+import javax.swing.table.DefaultTableModel;
+
 import modelo.Hero;
 import servicio.UsersControllerDDBB;
 import vista.CharacterCreation;
+import vista.CharacterView;
 import vista.UsersRegister;
 import servicio.CharControllerDDBB;
 import servicio.ConnectionDDBB;
@@ -42,6 +45,14 @@ public class FunctionsHandler {
 		return CharControllerDDBB.ShowAllCharacters();
 	}
 	
+	public static void ViewCharactersTable(DefaultTableModel dtm) {
+		try {
+			CharControllerDDBB.GetDataDB(dtm);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	// Vista Panels
 	public static void UserRegisterPanel(boolean visible) {
 		try {
@@ -58,6 +69,17 @@ public class FunctionsHandler {
 			CharacterCreation charCreation = new CharacterCreation();
 			charCreation.setVisible(visible);
 		} catch (Exception e) {
+			// TODO: Cambiar a StringHandler
+			e.printStackTrace();
+		}
+	}
+	
+	public static void CharacterManagementPanel(boolean visible) {
+		try {
+			CharacterView charView = new CharacterView();
+			charView.setVisible(visible);
+			
+		} catch(Exception e) {
 			// TODO: Cambiar a StringHandler
 			e.printStackTrace();
 		}

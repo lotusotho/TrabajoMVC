@@ -56,14 +56,14 @@ public class UsersPanel extends JFrame {
 		});
 		contentPane.add(btnCreateChar);
 		
-		JButton btnDeleteChar = new JButton("Borrar Personajes");
-		btnDeleteChar.addActionListener(new ActionListener() {
+		JButton btnAdminChars = new JButton("Admin Personajes");
+		btnAdminChars.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				FunctionsHandler.CharacterManagementPanel(true);
 			}
 		});
-		btnDeleteChar.setFont(new Font("Verdana", Font.PLAIN, 17));
-		btnDeleteChar.setBounds(500, 273, 236, 80);
-		contentPane.add(btnDeleteChar);
+		btnAdminChars.setFont(new Font("Verdana", Font.PLAIN, 17));
+		btnAdminChars.setBounds(500, 273, 236, 80);
+		contentPane.add(btnAdminChars);
 	}
 }

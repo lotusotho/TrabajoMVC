@@ -5,8 +5,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
+import java.sql.ResultSetMetaData;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 import controlador.FunctionsHandler;
 import controlador.StringHandler;
@@ -43,6 +46,39 @@ public class CharControllerDDBB {
 			conx.prepareStatement(deleteQuery).execute();
 			JOptionPane.showMessageDialog(null, "El personaje ha sido eliminado satisfactoriamente");
 		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void GetDataDB(DefaultTableModel dtm) {
+		
+		Connection conx = FunctionsHandler.ConnectDDBB();
+		String allQuery = "SELECT * FROM characters WHERE user_id="+UsersControllerDDBB.currentUserId+" ORDER BY name ASC;";
+		
+		try {
+			Statement stmt = conx.prepareStatement(allQuery);
+			ResultSet result = stmt.executeQuery(allQuery);
+			
+			String char_id, user_id, name, race, faction, title, life, rpower, strength, stamina;
+			
+			while(result.next()) {
+				char_id = result.getString(1);
+				user_id = result.getString(2);
+				name = result.getString(3);
+				race = result.getString(4);
+				faction = result.getString(5);
+				title = result.getString(6);
+				life = result.getString(7);
+				rpower = result.getString(8);
+				strength = result.getString(9);
+				stamina = result.getString(10);
+				
+				String[] rows = { char_id, user_id, name, race, faction, title, life, rpower, strength, stamina };
+				System.out.println(Arrays.toString(rows));
+				dtm.addRow(rows);
+			}
+			
+		} catch(SQLException e) {
 			e.printStackTrace();
 		}
 	}
