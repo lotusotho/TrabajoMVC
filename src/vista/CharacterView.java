@@ -37,7 +37,7 @@ public class CharacterView extends JFrame {
 		contentPane.setLayout(null);
 		
 		tableScrollPane = new JScrollPane();
-		tableScrollPane.setBounds(285, 92, 744, 500);
+		tableScrollPane.setBounds(285, 104, 744, 500);
 		contentPane.add(tableScrollPane);
 		
 		
@@ -73,15 +73,30 @@ public class CharacterView extends JFrame {
 		});
 		
 		btnViewChars.setFont(new Font("Verdana", Font.PLAIN, 17));
-		btnViewChars.setBounds(550, 603, 214, 61);
+		btnViewChars.setBounds(1039, 109, 214, 61);
 		contentPane.add(btnViewChars);
+		
+		JButton btnDelLastRow = new JButton("Borrar Ultimo Personaje");
+		btnDelLastRow.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FunctionsHandler.DeleteLastCharacter();
+				
+				// TODO: Pasar a FunctionsHandler
+				if(charTable.getModel().getRowCount() > 0) {
+					((DefaultTableModel)charTable.getModel()).removeRow(charTable.getModel().getRowCount() - 1);
+				}
+			}
+		});
+		btnDelLastRow.setFont(new Font("Verdana", Font.PLAIN, 15));
+		btnDelLastRow.setBounds(1039, 200, 214, 61);
+		contentPane.add(btnDelLastRow);
 		
 		JLabel lblPanelDelUsuario = new JLabel("Vista de Personajes:");
 		lblPanelDelUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPanelDelUsuario.setForeground(Color.BLACK);
 		lblPanelDelUsuario.setFont(new Font("Verdana", Font.PLAIN, 28));
 		lblPanelDelUsuario.setBackground(Color.BLACK);
-		lblPanelDelUsuario.setBounds(511, 31, 305, 35);
+		lblPanelDelUsuario.setBounds(511, 43, 305, 35);
 		contentPane.add(lblPanelDelUsuario);
 	}
 }

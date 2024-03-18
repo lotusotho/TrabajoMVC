@@ -21,6 +21,8 @@ import modelo.Hero;
  */
 
 public class CharControllerDDBB {
+	private static boolean oneShotTable = false;
+	
 	public static void InsertCharacter(Hero heroObj) {
 		Connection conx = ConnectionDDBB.connectBBDD();
 				
@@ -75,7 +77,13 @@ public class CharControllerDDBB {
 				
 				String[] rows = { char_id, user_id, name, race, faction, title, life, rpower, strength, stamina };
 				System.out.println(Arrays.toString(rows));
-				dtm.addRow(rows);
+				
+				if(!oneShotTable) {
+					dtm.addRow(rows);
+					oneShotTable = true;
+				} else {
+					System.out.println("Ya he imprimido la tabla!");
+				}
 			}
 			
 		} catch(SQLException e) {
@@ -105,6 +113,19 @@ public class CharControllerDDBB {
 			return new String[0];
 		}
 		
+	}
+	
+	public static void DeleteLastCharacterDB() {
+		Connection conx = FunctionsHandler.ConnectDDBB();
+		String allQuery = "DELETE FROM characters ORDER BY name DESC;";
+		
+		try {
+			Statement stmt = conx.prepareStatement(allQuery);
+			stmt.execute(allQuery);
+			
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
 	}
 	// TODO: Borrar mas tarde si no acabo usando
 //	public static String[] GetCharactersNames() {

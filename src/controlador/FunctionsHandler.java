@@ -53,6 +53,14 @@ public class FunctionsHandler {
 		}
 	}
 	
+	public static void DeleteLastCharacter() {
+		try {
+			CharControllerDDBB.DeleteLastCharacterDB();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	// Vista Panels
 	public static void UserRegisterPanel(boolean visible) {
 		try {
