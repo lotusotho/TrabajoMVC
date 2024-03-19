@@ -63,6 +63,11 @@ public class UsersControllerDDBB {
 		}
 	}
 
+	
+	/**
+	 * Checkea si el usuario actual es admin o no
+	 * @return
+	 */
 	public static boolean isUserAdmin() {
 		Connection conx = ConnectionDDBB.connectBBDD();
 
