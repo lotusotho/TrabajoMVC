@@ -2,6 +2,7 @@ package controlador;
 
 import java.sql.Connection;
 
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import modelo.Hero;
@@ -61,9 +62,13 @@ public class FunctionsHandler {
 		}
 	}
 	
-	public static void DeleteLastCharacter() {
+	public static void DeleteLastCharacter(JTable jtable) {
 		try {
 			CharControllerDDBB.DeleteLastCharacterDB();
+			
+			if(jtable.getModel().getRowCount() > 0) {
+				((DefaultTableModel)jtable.getModel()).removeRow(jtable.getModel().getRowCount() - 1);
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

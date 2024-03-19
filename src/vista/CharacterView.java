@@ -79,14 +79,10 @@ public class CharacterView extends JFrame {
 		JButton btnDelLastRow = new JButton("Borrar Ultimo Personaje");
 		btnDelLastRow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.DeleteLastCharacter();
-				
-				// TODO: Pasar a FunctionsHandler
-				if(charTable.getModel().getRowCount() > 0) {
-					((DefaultTableModel)charTable.getModel()).removeRow(charTable.getModel().getRowCount() - 1);
-				}
+				FunctionsHandler.DeleteLastCharacter(charTable);
 			}
 		});
+		
 		btnDelLastRow.setFont(new Font("Verdana", Font.PLAIN, 15));
 		btnDelLastRow.setBounds(1039, 200, 214, 61);
 		contentPane.add(btnDelLastRow);
