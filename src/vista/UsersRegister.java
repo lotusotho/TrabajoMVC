@@ -87,7 +87,7 @@ public class UsersRegister extends JFrame {
 		btnRegistrar.setBounds(263, 363, 136, 42);
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.UsersRegister(userTextField.getText(), passTextField.getText(), adminCheckBox.isEnabled());
+				FunctionsHandler.UsersRegister(userTextField.getText(), passTextField.getText(), adminCheckBox.isSelected());
 			}
 		});
 		contentPane.add(btnRegistrar);

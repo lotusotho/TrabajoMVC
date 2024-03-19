@@ -18,14 +18,18 @@ public class UsersControllerDDBB {
 
 	// TODO: No me gusta declarar esto como publico
 	public static int currentUserId;
+	
+	private static Encryption crypt = new Encryption();
 
-	public static void usersLogin(String nombre, String contrasena) {
+	public static void usersLogin(String name, String passwd) {
 		Connection conx = ConnectionDDBB.connectBBDD();
 		Statement stmt;
 		ResultSet result;
+		
+		String tempHashedPassd = crypt.Encrypt(passwd);
 
-		String loginQuery = "SELECT user_id, name, passwd FROM users WHERE name='" + nombre + "' AND passwd='"
-				+ contrasena + "';";
+		String loginQuery = "SELECT user_id, name, passwd FROM users WHERE name='" + name + "' AND passwd='"
+				+ tempHashedPassd + "';";
 
 		try {
 			stmt = conx.createStatement();
@@ -46,12 +50,12 @@ public class UsersControllerDDBB {
 
 	// TODO: Cambiar de "permit" a otra cosa diferente que tenga una mejor
 	// nomenglatura
-	public static boolean usersRegister(String nombre, String contrasena, boolean permiso) {
+	public static boolean usersRegister(String name, String passwd, boolean isAdmin) {
 		Connection conx = ConnectionDDBB.connectBBDD();
 
-		String rolConv = permiso ? "admin" : "normalUser";
+		String rolConv = isAdmin ? "admin" : "normalUser";
 
-		String regQuery = "INSERT INTO users (name, passwd, isAdmin) VALUES('" + nombre + "','" + contrasena + "','"
+		String regQuery = "INSERT INTO users (name, passwd, isAdmin) VALUES('" + name + "','" + crypt.Encrypt(passwd) + "','"
 				+ rolConv + "');";
 
 		try {

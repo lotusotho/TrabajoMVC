@@ -34,23 +34,24 @@ CREATE TABLE IF NOT EXISTS `characters` (
   PRIMARY KEY (`char_id`),
   UNIQUE KEY `name` (`name`),
   KEY `FK_characters_users` (`user_id`),
-  CONSTRAINT `FK_characters_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK_characters_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Here we save the WoW character properties';
 
--- Volcando datos para la tabla gestwow.characters: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gestwow.characters: ~1 rows (aproximadamente)
 
 -- Volcando estructura para tabla gestwow.users
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int(4) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
-  `passwd` varchar(20) NOT NULL,
-  `permit` varchar(10) NOT NULL,
+  `passwd` char(64) NOT NULL DEFAULT '',
+  `isAdmin` varchar(10) NOT NULL,
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Here we save the users properties';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Here we save the users properties';
 
--- Volcando datos para la tabla gestwow.users: ~1 rows (aproximadamente)
-INSERT INTO `users` (`user_id`, `name`, `passwd`, `permit`) VALUES
-	(0001, 'test1', 'con1', 'admin');
+-- Volcando datos para la tabla gestwow.users: ~2 rows (aproximadamente)
+INSERT INTO `users` (`user_id`, `name`, `passwd`, `isAdmin`) VALUES
+	(0001, 'test1', '3b1d7e9a7c37141350fb473fa099b8b18030cde1909f363e3758e52d4ea1a7b4', 'admin'),
+	(0002, 'test2', '5a7d362627a891441ee34012b087915f03a6958c1062fe4cf01de24abecee053', 'normalUser');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
