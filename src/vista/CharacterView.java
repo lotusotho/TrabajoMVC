@@ -98,5 +98,15 @@ public class CharacterView extends JFrame {
 		lblPanelDelUsuario.setBackground(Color.BLACK);
 		lblPanelDelUsuario.setBounds(511, 43, 305, 35);
 		contentPane.add(lblPanelDelUsuario);
+		
+		JButton btnGenerateCsv = new JButton("Generar CSV");
+		btnGenerateCsv.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FunctionsHandler.CreateCSV();
+			}
+		});
+		btnGenerateCsv.setFont(new Font("Verdana", Font.PLAIN, 15));
+		btnGenerateCsv.setBounds(1039, 292, 214, 61);
+		contentPane.add(btnGenerateCsv);
 	}
 }

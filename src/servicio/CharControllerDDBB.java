@@ -1,5 +1,6 @@
 package servicio;
 
+import java.io.FileWriter;
 import java.sql.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -117,15 +118,42 @@ public class CharControllerDDBB {
 	
 	public static void DeleteLastCharacterDB() {
 		Connection conx = FunctionsHandler.ConnectDDBB();
-		String allQuery = "DELETE FROM characters ORDER BY name DESC;";
+		String delQuery = "DELETE FROM characters ORDER BY name DESC;";
 		
 		try {
-			Statement stmt = conx.prepareStatement(allQuery);
-			stmt.execute(allQuery);
+			Statement stmt = conx.prepareStatement(delQuery);
+			stmt.execute(delQuery);
 			
 			} catch(SQLException e) {
 				e.printStackTrace();
 			}
+	}
+	
+	public static void GenerateCSV() {
+		Connection conx = FunctionsHandler.ConnectDDBB();
+		String allQuery = "SELECT * from characters ORDER BY name ASC;";
+		String path = "src/characters.csv";		
+		
+		try {
+			Statement stmt = conx.prepareStatement(allQuery);
+			ResultSet rst = stmt.executeQuery(allQuery);			
+			
+			FileWriter wrt = new FileWriter(path);
+			wrt.write("char_id;user_id;name;race;faction;title;life;runicpower;strength;stamina\n");
+			
+			while(rst.next()) {
+				wrt.write(rst.getInt(1) + ";" + rst.getInt(2) + ";" + rst.getString(3) + ";" + rst.getString(4)
+				+ ";" + rst.getString(5) + ";" + rst.getString(6) + ";" + rst.getString(7) + ";" + rst.getString(8)
+				+ ";" + rst.getDouble(9) + rst.getDouble(10));
+			}
+			
+			wrt.close();
+			JOptionPane.showMessageDialog(null, "El fichero se ha creado con exito");
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Ha habido un error creando el fichero");
+		}
 	}
 	// TODO: Borrar mas tarde si no acabo usando
 //	public static String[] GetCharactersNames() {

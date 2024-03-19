@@ -41,6 +41,14 @@ public class FunctionsHandler {
 		}
 	}
 	
+	public static void CreateCSV() {
+		try {
+			CharControllerDDBB.GenerateCSV();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static String[] GetAllCharacters() {
 		return CharControllerDDBB.ShowAllCharacters();
 	}
