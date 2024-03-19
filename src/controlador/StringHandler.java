@@ -22,6 +22,12 @@ public class StringHandler {
 		case "charDelete":
 			JOptionPane.showMessageDialog(null, "El personaje a sido borrado satisfactoriamente");
 			break;
+		case "createCSVOK":
+			JOptionPane.showMessageDialog(null, "El fichero se ha creado con exito");
+			break;
+		case "createCSVKO":
+			JOptionPane.showMessageDialog(null, "Ha habido un error creando el fichero");
+			break;
 		}
 	}
 }

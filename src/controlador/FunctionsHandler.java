@@ -45,18 +45,20 @@ public class FunctionsHandler {
 	public static void CreateCSV() {
 		try {
 			CharControllerDDBB.GenerateCSV();
+			StringHandler.MessageHandler("createCSVOK");
 		} catch(Exception e) {
 			e.printStackTrace();
+			StringHandler.MessageHandler("createCSVKO");
 		}
 	}
 	
 	public static String[] GetAllCharacters() {
-		return CharControllerDDBB.ShowAllCharacters();
+		return CharControllerDDBB.ShowAllColumns();
 	}
 	
-	public static void ViewCharactersTable(DefaultTableModel dtm) {
+	public static void ViewCharactersTable(JTable jtable) {
 		try {
-			CharControllerDDBB.GetDataDB(dtm);
+			CharControllerDDBB.ShowAllRows(jtable);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -69,6 +71,14 @@ public class FunctionsHandler {
 			if(jtable.getModel().getRowCount() > 0) {
 				((DefaultTableModel)jtable.getModel()).removeRow(jtable.getModel().getRowCount() - 1);
 			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void ClearTable(JTable jtable) {
+		try {
+			((DefaultTableModel)jtable.getModel()).setRowCount(0);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

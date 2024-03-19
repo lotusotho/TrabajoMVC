@@ -31,7 +31,7 @@ public class UsersRegister extends JFrame {
 	private JTextField passTextField;
 
 	public UsersRegister() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(1080, 20, 720, 1000);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.LIGHT_GRAY);
