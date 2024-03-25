@@ -1,12 +1,18 @@
 package servicio;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.sql.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 import java.sql.ResultSetMetaData;
 
 import javax.swing.JOptionPane;
@@ -24,7 +30,17 @@ import modelo.Hero;
 
 public class CharControllerDDBB {
 	private static boolean oneShotTable = false;
-	private static int latestUserId = 0;
+	
+	private static List<String> getRecordFromLine(String line) {
+	    List<String> values = new ArrayList<String>();
+	    try (Scanner rowScanner = new Scanner(line)) {
+	        rowScanner.useDelimiter(";");
+	        while (rowScanner.hasNext()) {
+	            values.add(rowScanner.next());
+	        }
+	    }
+	    return values;
+	}
 
 	public static void InsertCharacter(Hero heroObj) {
 		Connection conx = ConnectionDDBB.connectBBDD();
@@ -152,17 +168,59 @@ public class CharControllerDDBB {
 			ResultSet rst = stmt.executeQuery(allQuery);
 
 			FileWriter wrt = new FileWriter(path);
-			wrt.write("char_id;user_id;name;race;faction;title;life;runicpower;strength;stamina\n");
 
 			while (rst.next()) {
-				wrt.write(rst.getInt(1) + ";" + rst.getInt(2) + ";" + rst.getString(3) + ";" + rst.getString(4) + ";"
-						+ rst.getString(5) + ";" + rst.getString(6) + ";" + rst.getString(7) + ";" + rst.getString(8)
-						+ ";" + rst.getDouble(9) + rst.getDouble(10));
+				wrt.write(rst.getString(3) + ";" + rst.getString(4) + ";"
+						+ rst.getString(5) + ";" + rst.getString(6) + ";" + rst.getDouble(7) + ";" + rst.getDouble(8)
+						+ ";" + rst.getDouble(9) + ";" + rst.getDouble(10) + "\n");
 			}
 
 			wrt.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	// TODO: Implementar acceso a BBDD
+	
+	public static void ReadCSV() {
+		Connection conx = FunctionsHandler.ConnectDDBB();
+		
+		List<List<String>> features = new ArrayList<>(10);
+		
+		String path = "src/characters.csv";
+		
+//		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+//		    String line;
+//		    
+//		    while ((line = br.readLine()) != null) {
+//		        String[] values = line.split(";");
+//		        features.add(Arrays.asList(values));
+//		    }
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		
+		try (Scanner scanner = new Scanner(new File(path))) {
+		    while (scanner.hasNextLine()) {
+		        features.add(getRecordFromLine(scanner.nextLine()));
+		    }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// TODO: hacer que funcione con todas las filas
+		for(int i = 0; i < features.size(); i++) {
+			String insertQuery = "INSERT INTO characters (user_id, name, race, faction, title, life, runicpower, strength, stamina) "
+					+ "VALUES('" + UsersControllerDDBB.currentUserId + "','" + features.get(i).get(0) + "','" + features.get(i).get(1)
+					+ "','" + features.get(i).get(2) + "','" + features.get(i).get(3) + "','" + features.get(i).get(4) + "','"
+					+ features.get(i).get(5) + "','" + features.get(i).get(6) + "','" + features.get(i).get(7) + "');";
+			
+			try {
+				conx.prepareStatement(insertQuery).execute();
+			} catch (Exception e) {
+				StringHandler.ErrorHandler(e.toString());
+			}
 		}
 	}
 	// TODO: Borrar mas tarde si no acabo usando

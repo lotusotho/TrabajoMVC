@@ -37,7 +37,7 @@ public class CharacterView extends JFrame {
 		contentPane.setLayout(null);
 		
 		tableScrollPane = new JScrollPane();
-		tableScrollPane.setBounds(285, 104, 744, 500);
+		tableScrollPane.setBounds(205, 104, 744, 500);
 		contentPane.add(tableScrollPane);
 		
 		
@@ -73,7 +73,7 @@ public class CharacterView extends JFrame {
 		});
 		
 		btnViewChars.setFont(new Font("Verdana", Font.PLAIN, 17));
-		btnViewChars.setBounds(1039, 109, 214, 61);
+		btnViewChars.setBounds(998, 104, 214, 61);
 		contentPane.add(btnViewChars);
 		
 		JButton btnDelLastRow = new JButton("Borrar Ultimo Personaje");
@@ -84,16 +84,8 @@ public class CharacterView extends JFrame {
 		});
 		
 		btnDelLastRow.setFont(new Font("Verdana", Font.PLAIN, 15));
-		btnDelLastRow.setBounds(1039, 200, 214, 61);
+		btnDelLastRow.setBounds(998, 195, 214, 61);
 		contentPane.add(btnDelLastRow);
-		
-		JLabel lblPanelDelUsuario = new JLabel("Vista de Personajes:");
-		lblPanelDelUsuario.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPanelDelUsuario.setForeground(Color.BLACK);
-		lblPanelDelUsuario.setFont(new Font("Verdana", Font.PLAIN, 28));
-		lblPanelDelUsuario.setBackground(Color.BLACK);
-		lblPanelDelUsuario.setBounds(511, 43, 305, 35);
-		contentPane.add(lblPanelDelUsuario);
 		
 		JButton btnGenerateCsv = new JButton("Generar CSV");
 		btnGenerateCsv.addActionListener(new ActionListener() {
@@ -102,7 +94,25 @@ public class CharacterView extends JFrame {
 			}
 		});
 		btnGenerateCsv.setFont(new Font("Verdana", Font.PLAIN, 15));
-		btnGenerateCsv.setBounds(1039, 292, 214, 61);
+		btnGenerateCsv.setBounds(998, 287, 214, 61);
 		contentPane.add(btnGenerateCsv);
+		
+		JButton btnPasteCSV = new JButton("Introducir CSV");
+		btnPasteCSV.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FunctionsHandler.ReadCSV();
+			}
+		});
+		btnPasteCSV.setFont(new Font("Verdana", Font.PLAIN, 15));
+		btnPasteCSV.setBounds(998, 382, 214, 61);
+		contentPane.add(btnPasteCSV);
+		
+		JLabel lblPanelDelUsuario = new JLabel("Vista de Personajes:");
+		lblPanelDelUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPanelDelUsuario.setForeground(Color.BLACK);
+		lblPanelDelUsuario.setFont(new Font("Verdana", Font.PLAIN, 28));
+		lblPanelDelUsuario.setBackground(Color.BLACK);
+		lblPanelDelUsuario.setBounds(431, 43, 305, 35);
+		contentPane.add(lblPanelDelUsuario);
 	}
 }

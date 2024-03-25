@@ -84,6 +84,14 @@ public class FunctionsHandler {
 		}
 	}
 	
+	public static void ReadCSV() {
+		try {
+			CharControllerDDBB.ReadCSV();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	// Vista Panels
 	public static void UserRegisterPanel(boolean visible) {
 		try {
