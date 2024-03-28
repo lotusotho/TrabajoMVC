@@ -25,18 +25,17 @@ public class UsersControllerDDBB {
 	private static Encryption crypt = new Encryption();
 
 	public static void usersLogin(String name, String passwd) {
-		Connection conx = ConnectionDDBB.connectBBDD();
-		Statement stmt;
-		ResultSet result;
-		
-		String tempHashedPassd = crypt.Encrypt(passwd);
-
-		String loginQuery = "SELECT user_id, name, passwd FROM users WHERE name='" + name + "' AND passwd='"
-				+ tempHashedPassd + "';";
-
 		try {
-			stmt = conx.createStatement();
-			result = stmt.executeQuery(loginQuery);
+			Connection conx = ConnectionDDBB.connectBBDD();
+			
+			String tempHashedPassd = crypt.Encrypt(passwd);
+			
+			String loginQuery = "SELECT user_id, name, passwd FROM users WHERE name='" + name + "' AND passwd='"
+					+ tempHashedPassd + "';";
+			
+			Statement stmt = conx.createStatement();
+			
+			ResultSet result = stmt.executeQuery(loginQuery);
 
 			if (result.next()) {
 				FunctionsHandler.UserManagementPanel(true);
@@ -51,10 +50,6 @@ public class UsersControllerDDBB {
 	}
 
 	public static boolean usersRegister(String name, String passwd, boolean isAdmin) {
-
-
-//		String regQuery = "INSERT INTO users (name, passwd, isAdmin) VALUES('" + name + "','" + crypt.Encrypt(passwd) + "','"
-//				+ rolConv + "');";
 		try {
 			Connection conx = ConnectionDDBB.connectBBDD();
 			

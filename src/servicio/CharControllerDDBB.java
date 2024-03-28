@@ -34,6 +34,7 @@ public class CharControllerDDBB {
 	
 	private static List<String> getRecordFromLine(String line) {
 	    List<String> values = new ArrayList<String>();
+	    
 	    try (Scanner rowScanner = new Scanner(line)) {
 	        rowScanner.useDelimiter(";");
 	        while (rowScanner.hasNext()) {
@@ -44,12 +45,6 @@ public class CharControllerDDBB {
 	}
 
 	public static void InsertCharacter(Hero heroObj) {
-		
-//		String insertQuery = "INSERT INTO characters (user_id, name, race, faction, title, life, runicpower, strength, stamina) "
-//				+ "VALUES('" + UsersControllerDDBB.currentUserId + "','" + heroObj.getName() + "','" + heroObj.getRace()
-//				+ "','" + heroObj.getFaction() + "','" + heroObj.getTitle() + "','" + heroObj.getLife() + "','"
-//				+ heroObj.getRunicPower() + "','" + heroObj.getStrength() + "','" + heroObj.getStamina() + "');";
-
 		try {
 			Connection conx = ConnectionDDBB.connectBBDD();
 			String insertQuery = "INSERT INTO characters (user_id, name, race, faction, title, life, runicpower, strength, stamina) "
@@ -84,27 +79,27 @@ public class CharControllerDDBB {
 
 		try {
 			conx.prepareStatement(deleteQuery).execute();
+			conx.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public static void ShowAllRows(JTable jtable) {
-
-		Connection conx = FunctionsHandler.ConnectDDBB();
-
-		boolean isAdmin = UsersControllerDDBB.isUserAdmin();
-
-		String allQueryUser = "SELECT * FROM characters WHERE user_id=" + UsersControllerDDBB.currentUserId
-				+ " ORDER BY name ASC;";
-
-		String allQuery = "SELECT * FROM characters ORDER BY name ASC;";
-
-		if (((DefaultTableModel) jtable.getModel()).getRowCount() > 0) {
-			FunctionsHandler.ClearTable(jtable);
-		}
-
 		try {
+			Connection conx = FunctionsHandler.ConnectDDBB();
+			
+			boolean isAdmin = UsersControllerDDBB.isUserAdmin();
+			
+			String allQueryUser = "SELECT * FROM characters WHERE user_id=" + UsersControllerDDBB.currentUserId
+					+ " ORDER BY name ASC;";
+			
+			String allQuery = "SELECT * FROM characters ORDER BY name ASC;";
+			
+			if (((DefaultTableModel) jtable.getModel()).getRowCount() > 0) {
+				FunctionsHandler.ClearTable(jtable);
+			}
+			
 			Statement stmt = conx.prepareStatement(isAdmin ? allQuery : allQueryUser);
 			ResultSet result = stmt.executeQuery(isAdmin ? allQuery : allQueryUser);
 
@@ -135,17 +130,17 @@ public class CharControllerDDBB {
 	}
 
 	public static String[] ShowAllColumns() {
-		String[] charArr = new String[0];
-
-		Connection conx = FunctionsHandler.ConnectDDBB();
-
-		boolean isAdmin = UsersControllerDDBB.isUserAdmin();
-
-		String allQueryUser = "SELECT * FROM characters WHERE user_id='" + UsersControllerDDBB.currentUserId + "';";
-
-		String allQuery = "SELECT * FROM characters;";
-
 		try {
+			String[] charArr = new String[0];
+			
+			Connection conx = FunctionsHandler.ConnectDDBB();
+			
+			boolean isAdmin = UsersControllerDDBB.isUserAdmin();
+			
+			String allQueryUser = "SELECT * FROM characters WHERE user_id='" + UsersControllerDDBB.currentUserId + "';";
+			
+			String allQuery = "SELECT * FROM characters;";
+
 			Statement stmt = conx.prepareStatement(isAdmin ? allQuery : allQueryUser);
 			ResultSet result = stmt.executeQuery(isAdmin ? allQuery : allQueryUser);
 
@@ -165,12 +160,15 @@ public class CharControllerDDBB {
 	}
 
 	public static void DeleteLastCharacterDB() {
-		Connection conx = FunctionsHandler.ConnectDDBB();
-		String delQuery = "DELETE FROM characters ORDER BY name DESC;";
 
 		try {
+			Connection conx = FunctionsHandler.ConnectDDBB();
+			String delQuery = "DELETE FROM characters ORDER BY name DESC;";
+
 			Statement stmt = conx.prepareStatement(delQuery);
 			stmt.execute(delQuery);
+			
+			stmt.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -195,30 +193,18 @@ public class CharControllerDDBB {
 			}
 
 			wrt.close();
+			stmt.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	// TODO: Implementar acceso a BBDD
 	
 	public static void ReadCSV() {
 		
 		List<List<String>> features = new ArrayList<>(10);
 		
 		String path = "src/characters.csv";
-		
-//		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-//		    String line;
-//		    
-//		    while ((line = br.readLine()) != null) {
-//		        String[] values = line.split(";");
-//		        features.add(Arrays.asList(values));
-//		    }
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		
+
 		try (Scanner scanner = new Scanner(new File(path))) {
 		    while (scanner.hasNextLine()) {
 		        features.add(getRecordFromLine(scanner.nextLine()));
@@ -226,8 +212,7 @@ public class CharControllerDDBB {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		// TODO: hacer que funcione con todas las filas
+	
 		for(int i = 0; i < features.size(); i++) {
 			
 			try {
@@ -258,36 +243,4 @@ public class CharControllerDDBB {
 			}
 		}
 	}
-	// TODO: Borrar mas tarde si no acabo usando
-//	public static String[] GetCharactersNames() {
-//		Connection conx = ConexionDDBB.connectBBDD();
-//		
-//		Statement stmt;
-//		ResultSet result;
-//		
-//		String getNameQuery = "SELECT name FROM characters;";
-//		
-//		try {
-//			stmt = conx.createStatement();
-//			
-//			result = stmt.executeQuery(getNameQuery);
-//			
-//			return finalResult;
-//		} catch(SQLException e) {
-//			e.printStackTrace();
-//			return new String[0];
-//		}
-//	}
-//	
-//	public static boolean CompareCharactersName(String name) {
-//		String[] charNames = GetCharactersNames();
-//		
-//		for(int i = 0; i < charNames.length; i++) {
-//			if(charNames[i] == name) {
-//				return true;
-//			}
-//		}
-//		
-//		return false;
-//	}
 }
