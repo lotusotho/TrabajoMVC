@@ -11,12 +11,12 @@ public class Encryption {
 	 * @param passwd
 	 * @return
 	 */
-	public String Encrypt(String passwd) {
+	public static String Encrypt(String passwd) {
 		MessageDigest md;
 		try {
 			md = MessageDigest.getInstance("SHA-256");
 			byte[] encHash = md.digest(passwd.getBytes(StandardCharsets.UTF_8));
-			return this.bytesToHex(encHash);
+			return bytesToHex(encHash);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -25,7 +25,7 @@ public class Encryption {
 		return "Error";		
 	}
 	
-	private String bytesToHex(byte[] hash) {
+	private static String bytesToHex(byte[] hash) {
 		StringBuilder hexString = new StringBuilder(2 * hash.length);
 		
 		for(int i = 0; i < hash.length; i++) {

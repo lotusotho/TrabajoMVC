@@ -21,14 +21,12 @@ public class UsersControllerDDBB {
 
 	// TODO: No me gusta declarar esto como publico
 	public static int currentUserId;
-	
-	private static Encryption crypt = new Encryption();
 
 	public static void usersLogin(String name, String passwd) {
 		try {
 			Connection conx = ConnectionDDBB.connectBBDD();
 			
-			String tempHashedPassd = crypt.Encrypt(passwd);
+			String tempHashedPassd = Encryption.Encrypt(passwd);
 			
 			String loginQuery = "SELECT user_id, name, passwd FROM users WHERE name='" + name + "' AND passwd='"
 					+ tempHashedPassd + "';";
@@ -60,7 +58,7 @@ public class UsersControllerDDBB {
 			PreparedStatement preStmt = conx.prepareStatement(regQuery);
 			
 			preStmt.setString(1, name);
-			preStmt.setString(2, crypt.Encrypt(passwd));
+			preStmt.setString(2, Encryption.Encrypt(passwd));
 			preStmt.setString(3, rolConv);
 			
 			preStmt.execute();
