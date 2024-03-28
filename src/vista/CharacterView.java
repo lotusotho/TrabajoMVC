@@ -11,7 +11,11 @@ import controlador.FunctionsHandler;
 
 import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
+
 import javax.swing.SwingConstants;
 import javax.swing.JTable;
 import javax.swing.JButton;
@@ -29,7 +33,15 @@ public class CharacterView extends JFrame {
 
 	public CharacterView() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 1280, 720);
+		
+		Image iconImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/img/wowIcon.png"));
+		setIconImage(iconImg);
+		
+		setBounds(0, 0, 1280, 720);
+		
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -114,5 +126,14 @@ public class CharacterView extends JFrame {
 		lblPanelDelUsuario.setBackground(Color.BLACK);
 		lblPanelDelUsuario.setBounds(431, 43, 305, 35);
 		contentPane.add(lblPanelDelUsuario);
+		
+		JButton btnBack = new JButton("Volver");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FunctionsHandler.UserManagementPanel(true);
+			}
+		});
+		btnBack.setBounds(10, 11, 89, 23);
+		contentPane.add(btnBack);
 	}
 }

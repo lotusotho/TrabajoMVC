@@ -7,6 +7,8 @@ import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
+import controlador.FunctionsHandler;
+import controlador.StringHandler;
 import vista.UsersPanel;
 
 /**
@@ -35,12 +37,11 @@ public class UsersControllerDDBB {
 			stmt = conx.createStatement();
 			result = stmt.executeQuery(loginQuery);
 
-			// Intentar basico mediante la base de datos
 			if (result.next()) {
-				new UsersPanel().setVisible(true);
+				FunctionsHandler.UserManagementPanel(true);
 				currentUserId = result.getInt("user_id");
 			} else {
-				JOptionPane.showMessageDialog(null, result.next());
+				StringHandler.MessageHandler("userLoginKO");
 			}
 
 		} catch (SQLException e) {
@@ -48,8 +49,6 @@ public class UsersControllerDDBB {
 		}
 	}
 
-	// TODO: Cambiar de "permit" a otra cosa diferente que tenga una mejor
-	// nomenglatura
 	public static boolean usersRegister(String name, String passwd, boolean isAdmin) {
 		Connection conx = ConnectionDDBB.connectBBDD();
 
@@ -60,9 +59,11 @@ public class UsersControllerDDBB {
 
 		try {
 			conx.prepareStatement(regQuery).execute();
+			StringHandler.MessageHandler("userRegOK");
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			StringHandler.MessageHandler("userRegKO");
 			return false;
 		}
 	}

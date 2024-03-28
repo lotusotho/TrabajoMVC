@@ -2,7 +2,7 @@ package main;
 
 import java.awt.EventQueue;
 
-import vista.UsersLogin;
+import controlador.FunctionsHandler;
 
 /**
  * Comenzamos el programa desde Main
@@ -16,8 +16,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UsersLogin frame = new UsersLogin();
-					frame.setVisible(true);
+					FunctionsHandler.UserLoginPanel(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

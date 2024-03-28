@@ -4,19 +4,24 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
 import controlador.FunctionsHandler;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
 import java.awt.Label;
 import javax.swing.JButton;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Panel;
+import java.awt.Toolkit;
+
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import java.awt.event.ActionListener;
@@ -41,7 +46,15 @@ public class UsersLogin extends JFrame {
 	public UsersLogin() {
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 1280, 720);
+		
+		Image iconImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/img/wowIcon.png"));
+		setIconImage(iconImg);
+		
+		setBounds(0, 0, 900, 506);
+		
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -50,13 +63,14 @@ public class UsersLogin extends JFrame {
 		
 		JLabel lblLoginTitle = new JLabel("Introduce tus datos:");
 		lblLoginTitle.setForeground(Color.WHITE);
-		lblLoginTitle.setBounds(497, 83, 292, 35);
+		lblLoginTitle.setBounds(315, 35, 292, 35);
 		lblLoginTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblLoginTitle);
 		lblLoginTitle.setFont(new Font("Verdana", Font.PLAIN, 28));
 		
 		panelFormUsers = new JPanel();
-		panelFormUsers.setBounds(442, 182, 385, 164);
+		panelFormUsers.setBorder(UIManager.getBorder("TableHeader.cellBorder"));
+		panelFormUsers.setBounds(261, 135, 385, 164);
 		panelFormUsers.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
 		panelFormUsers.setForeground(UIManager.getColor(Color.BLUE));
 		contentPane.add(panelFormUsers);
@@ -79,13 +93,13 @@ public class UsersLogin extends JFrame {
 		panelFormUsers.add(userTextField);
 		userTextField.setColumns(10);
 		
-		passTextField = new JTextField();
+		passTextField = new JPasswordField();
 		passTextField.setBounds(195, 97, 143, 29);
 		panelFormUsers.add(passTextField);
 		passTextField.setColumns(10);
 		
 		JButton btnUserLogin = new JButton("Entrar");
-		btnUserLogin.setBounds(575, 377, 136, 42);
+		btnUserLogin.setBounds(394, 330, 136, 42);
 		btnUserLogin.setFont(new Font("Verdana", Font.PLAIN, 17));
 		btnUserLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -95,7 +109,7 @@ public class UsersLogin extends JFrame {
 		contentPane.add(btnUserLogin);
 		
 		JButton btnUserRegister = new JButton("Registrarse");
-		btnUserRegister.setBounds(575, 441, 136, 42);
+		btnUserRegister.setBounds(394, 394, 136, 42);
 		btnUserRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FunctionsHandler.UserRegisterPanel(true);
@@ -104,9 +118,9 @@ public class UsersLogin extends JFrame {
 		btnUserRegister.setFont(new Font("Verdana", Font.PLAIN, 17));
 		contentPane.add(btnUserRegister);
 		
-		JLabel lblBGImage = new JLabel("");
-		lblBGImage.setIcon(new ImageIcon(UsersLogin.class.getResource("/img/bgLogin.png")));
-		lblBGImage.setBounds(1, 1, 1280, 720);
-		contentPane.add(lblBGImage);
+		JLabel bgImage = new JLabel("");
+		bgImage.setIcon(new ImageIcon(UsersLogin.class.getResource("/img/bgLogin.png")));
+		bgImage.setBounds(0, 0, 900, 506);
+		contentPane.add(bgImage);
 	}
 }

@@ -9,7 +9,11 @@ import modelo.Hero;
 
 import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
+
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
@@ -36,13 +40,31 @@ public class CharacterCreation extends JFrame {
 	
 	public CharacterCreation() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 1280, 720);
+		
+		Image iconImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/img/wowIcon.png"));
+		setIconImage(iconImg);
+
+		setBounds(0, 0, 1280, 720);
+		
+		
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(224, 242, 243));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+				
+				JButton btnBack = new JButton("Volver");
+				btnBack.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						FunctionsHandler.UserManagementPanel(true);
+					}
+				});
+				btnBack.setBounds(10, 11, 89, 23);
+				contentPane.add(btnBack);
 		
 				JButton btnCreateChar = new JButton("Crear Personaje");
 				btnCreateChar.setFont(new Font("Tahoma", Font.PLAIN, 19));

@@ -1,19 +1,27 @@
 package controlador;
 
+import java.awt.Window;
 import java.sql.Connection;
+import java.util.ArrayList;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import modelo.Hero;
+import modelo.User;
 import servicio.UsersControllerDDBB;
 import vista.CharacterCreation;
 import vista.CharacterView;
 import vista.UsersRegister;
+import vista.UsersLogin;
+import vista.UsersPanel;
 import servicio.CharControllerDDBB;
 import servicio.ConnectionDDBB;
 
 public class FunctionsHandler {
+	private static ArrayList<JFrame> panels = new ArrayList<JFrame>();
 	// DDBB Stuff
 	public static Connection ConnectDDBB() {
 		return ConnectionDDBB.connectBBDD();
@@ -79,6 +87,7 @@ public class FunctionsHandler {
 	public static void ClearTable(JTable jtable) {
 		try {
 			((DefaultTableModel)jtable.getModel()).setRowCount(0);
+			CharControllerDDBB.ShowAllRows(jtable);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -93,8 +102,28 @@ public class FunctionsHandler {
 	}
 	
 	// Vista Panels
+	private static void CloseAllWindows() {
+		System.gc();
+		
+		for(Window window : Window.getWindows()) {
+			window.dispose();
+		}
+	}
+	
+	public static void UserLoginPanel(boolean visible) {
+		try {
+			CloseAllWindows();
+			UsersLogin usersLogin = new UsersLogin();
+			usersLogin.setVisible(visible);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void UserRegisterPanel(boolean visible) {
 		try {
+			CloseAllWindows();
 			UsersRegister userReg = new UsersRegister();
 			userReg.setVisible(visible);
 		} catch (Exception e) {
@@ -103,8 +132,19 @@ public class FunctionsHandler {
 		}
 	}
 	
+	public static void UserManagementPanel(boolean visible) {
+		try {
+			CloseAllWindows();
+			UsersPanel usersPanel = new UsersPanel();
+			usersPanel.setVisible(visible);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void CharacterCreationPanel(boolean visible) {
 		try {
+			CloseAllWindows();
 			CharacterCreation charCreation = new CharacterCreation();
 			charCreation.setVisible(visible);
 		} catch (Exception e) {
@@ -115,6 +155,7 @@ public class FunctionsHandler {
 	
 	public static void CharacterManagementPanel(boolean visible) {
 		try {
+			CloseAllWindows();
 			CharacterView charView = new CharacterView();
 			charView.setVisible(visible);
 			
@@ -123,4 +164,5 @@ public class FunctionsHandler {
 			e.printStackTrace();
 		}
 	}
+	
 }
