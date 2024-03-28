@@ -1,6 +1,7 @@
 package servicio;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -50,15 +51,26 @@ public class UsersControllerDDBB {
 	}
 
 	public static boolean usersRegister(String name, String passwd, boolean isAdmin) {
-		Connection conx = ConnectionDDBB.connectBBDD();
 
-		String rolConv = isAdmin ? "admin" : "normalUser";
 
-		String regQuery = "INSERT INTO users (name, passwd, isAdmin) VALUES('" + name + "','" + crypt.Encrypt(passwd) + "','"
-				+ rolConv + "');";
-
+//		String regQuery = "INSERT INTO users (name, passwd, isAdmin) VALUES('" + name + "','" + crypt.Encrypt(passwd) + "','"
+//				+ rolConv + "');";
 		try {
-			conx.prepareStatement(regQuery).execute();
+			Connection conx = ConnectionDDBB.connectBBDD();
+			
+			String rolConv = isAdmin ? "admin" : "normalUser";
+			
+			String regQuery = "INSERT INTO users (name, passwd, isAdmin) VALUES(?, ?, ?);";
+			
+			PreparedStatement preStmt = conx.prepareStatement(regQuery);
+			
+			preStmt.setString(1, name);
+			preStmt.setString(2, crypt.Encrypt(passwd));
+			preStmt.setString(3, rolConv);
+			
+			preStmt.execute();
+			preStmt.close();
+			
 			StringHandler.MessageHandler("userRegOK");
 			return true;
 		} catch (SQLException e) {

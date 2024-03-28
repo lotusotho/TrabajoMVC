@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.sql.Array;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -43,15 +44,33 @@ public class CharControllerDDBB {
 	}
 
 	public static void InsertCharacter(Hero heroObj) {
-		Connection conx = ConnectionDDBB.connectBBDD();
-
-		String insertQuery = "INSERT INTO characters (user_id, name, race, faction, title, life, runicpower, strength, stamina) "
-				+ "VALUES('" + UsersControllerDDBB.currentUserId + "','" + heroObj.getName() + "','" + heroObj.getRace()
-				+ "','" + heroObj.getFaction() + "','" + heroObj.getTitle() + "','" + heroObj.getLife() + "','"
-				+ heroObj.getRunicPower() + "','" + heroObj.getStrength() + "','" + heroObj.getStamina() + "');";
+		
+//		String insertQuery = "INSERT INTO characters (user_id, name, race, faction, title, life, runicpower, strength, stamina) "
+//				+ "VALUES('" + UsersControllerDDBB.currentUserId + "','" + heroObj.getName() + "','" + heroObj.getRace()
+//				+ "','" + heroObj.getFaction() + "','" + heroObj.getTitle() + "','" + heroObj.getLife() + "','"
+//				+ heroObj.getRunicPower() + "','" + heroObj.getStrength() + "','" + heroObj.getStamina() + "');";
 
 		try {
-			conx.prepareStatement(insertQuery).execute();
+			Connection conx = ConnectionDDBB.connectBBDD();
+			String insertQuery = "INSERT INTO characters (user_id, name, race, faction, title, life, runicpower, strength, stamina) "
+					+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+			
+			PreparedStatement preStmt = conx.prepareStatement(insertQuery);
+			
+			preStmt.setInt(1, UsersControllerDDBB.currentUserId);
+			preStmt.setString(2, heroObj.getName());
+			preStmt.setString(3, heroObj.getRace());
+			preStmt.setString(4, heroObj.getFaction());
+			preStmt.setString(5, heroObj.getTitle());
+			preStmt.setDouble(6, heroObj.getLife());
+			preStmt.setDouble(7, heroObj.getRunicPower());
+			preStmt.setDouble(8, heroObj.getStrength());
+			preStmt.setDouble(9, heroObj.getStamina());
+			
+			preStmt.execute();
+			
+			preStmt.close();
+			
 		} catch (SQLException e) {
 			StringHandler.ErrorHandler(e.toString());
 			e.printStackTrace();
@@ -184,7 +203,6 @@ public class CharControllerDDBB {
 	// TODO: Implementar acceso a BBDD
 	
 	public static void ReadCSV() {
-		Connection conx = FunctionsHandler.ConnectDDBB();
 		
 		List<List<String>> features = new ArrayList<>(10);
 		
@@ -211,13 +229,30 @@ public class CharControllerDDBB {
 		
 		// TODO: hacer que funcione con todas las filas
 		for(int i = 0; i < features.size(); i++) {
-			String insertQuery = "INSERT INTO characters (user_id, name, race, faction, title, life, runicpower, strength, stamina) "
-					+ "VALUES('" + UsersControllerDDBB.currentUserId + "','" + features.get(i).get(0) + "','" + features.get(i).get(1)
-					+ "','" + features.get(i).get(2) + "','" + features.get(i).get(3) + "','" + features.get(i).get(4) + "','"
-					+ features.get(i).get(5) + "','" + features.get(i).get(6) + "','" + features.get(i).get(7) + "');";
 			
 			try {
-				conx.prepareStatement(insertQuery).execute();
+				Connection conx = FunctionsHandler.ConnectDDBB();
+				
+				String insertQuery = "INSERT INTO characters (user_id, name, race, faction, title, life, runicpower, strength, stamina) "
+						+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+
+				conx.prepareStatement(insertQuery);
+				
+				PreparedStatement preStmt = conx.prepareStatement(insertQuery);
+				
+				preStmt.setInt(1, UsersControllerDDBB.currentUserId);
+				preStmt.setString(2, features.get(i).get(0));
+				preStmt.setString(3, features.get(i).get(1));
+				preStmt.setString(4, features.get(i).get(2));
+				preStmt.setString(5, features.get(i).get(3));
+				preStmt.setDouble(6, Double.parseDouble(features.get(i).get(4)));
+				preStmt.setDouble(7, Double.parseDouble(features.get(i).get(5)));
+				preStmt.setDouble(8, Double.parseDouble(features.get(i).get(6)));
+				preStmt.setDouble(8, Double.parseDouble(features.get(i).get(7)));
+				
+				preStmt.execute();
+				
+				preStmt.close();
 			} catch (Exception e) {
 				StringHandler.ErrorHandler(e.toString());
 			}
