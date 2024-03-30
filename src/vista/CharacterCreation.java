@@ -60,7 +60,7 @@ public class CharacterCreation extends JFrame {
 				JButton btnBack = new JButton("Volver");
 				btnBack.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						FunctionsHandler.UserManagementPanel(true);
+						FunctionsHandler.UsersControlPanel(true);
 					}
 				});
 				btnBack.setBounds(10, 11, 89, 23);

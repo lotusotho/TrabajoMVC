@@ -5,8 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Arrays;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import controlador.FunctionsHandler;
 import controlador.StringHandler;
@@ -36,8 +39,8 @@ public class UsersControllerDDBB {
 			ResultSet result = stmt.executeQuery(loginQuery);
 
 			if (result.next()) {
-				FunctionsHandler.UserManagementPanel(true);
 				currentUserId = result.getInt("user_id");
+				FunctionsHandler.UsersControlPanel(true);
 			} else {
 				StringHandler.MessageHandler("userLoginKO");
 			}
@@ -78,7 +81,7 @@ public class UsersControllerDDBB {
 	 * Checkea si el usuario actual es admin o no
 	 * @return
 	 */
-	public static boolean isUserAdmin() {
+	public static boolean isCurrentUserAdmin() {
 		Connection conx = ConnectionDDBB.connectBBDD();
 
 		String adminQuery = "SELECT isAdmin from users WHERE user_id="+ currentUserId +";";
@@ -96,6 +99,63 @@ public class UsersControllerDDBB {
 		}
 		
 		return false;
+	}
+	
+	// UsersView
+	public static void ShowAllRows(JTable jtable) {
+		try {
+			Connection conx = FunctionsHandler.ConnectDDBB();
+			
+			String allQuery = "SELECT * FROM users ORDER BY name ASC;";
+			
+			Statement stmt = conx.prepareStatement(allQuery);
+			ResultSet result = stmt.executeQuery(allQuery);
+
+			String user_id, name, passwd, admin;
+
+			while (result.next()) {
+				user_id = result.getString(1);
+				name = result.getString(2);
+				passwd = result.getString(3);
+				admin = result.getString(4);
+
+				String[] rows = { user_id, name, passwd, admin };
+				System.out.println(Arrays.toString(rows));
+				((DefaultTableModel) jtable.getModel()).addRow(rows);
+			}
+			
+			conx.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void DeleteLastUserDB() {
+
+		try {
+			Connection conx = FunctionsHandler.ConnectDDBB();
+			String selQuery = "SELECT user_id FROM users ORDER BY name DESC LIMIT 1;";
+
+			Statement stmt = conx.prepareStatement(selQuery);
+			ResultSet result = stmt.executeQuery(selQuery);
+			
+			while(result.next()) {
+				if(result.getInt(1) != currentUserId) {
+					String delQuery = "DELETE FROM users ORDER BY name DESC LIMIT 1;";
+					Statement delStmt = conx.prepareStatement(delQuery);
+					delStmt.executeQuery(delQuery);
+					delStmt.close();
+				} else {
+					StringHandler.MessageHandler("NoDeleteCurrentUser");
+				}
+			}
+			
+			stmt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

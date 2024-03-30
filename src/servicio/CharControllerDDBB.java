@@ -89,16 +89,12 @@ public class CharControllerDDBB {
 		try {
 			Connection conx = FunctionsHandler.ConnectDDBB();
 			
-			boolean isAdmin = UsersControllerDDBB.isUserAdmin();
+			boolean isAdmin = UsersControllerDDBB.isCurrentUserAdmin();
 			
 			String allQueryUser = "SELECT * FROM characters WHERE user_id=" + UsersControllerDDBB.currentUserId
 					+ " ORDER BY name ASC;";
 			
 			String allQuery = "SELECT * FROM characters ORDER BY name ASC;";
-			
-			if (((DefaultTableModel) jtable.getModel()).getRowCount() > 0) {
-				FunctionsHandler.ClearTable(jtable);
-			}
 			
 			Statement stmt = conx.prepareStatement(isAdmin ? allQuery : allQueryUser);
 			ResultSet result = stmt.executeQuery(isAdmin ? allQuery : allQueryUser);
@@ -135,7 +131,7 @@ public class CharControllerDDBB {
 			
 			Connection conx = FunctionsHandler.ConnectDDBB();
 			
-			boolean isAdmin = UsersControllerDDBB.isUserAdmin();
+			boolean isAdmin = UsersControllerDDBB.isCurrentUserAdmin();
 			
 			String allQueryUser = "SELECT * FROM characters WHERE user_id='" + UsersControllerDDBB.currentUserId + "';";
 			
@@ -163,7 +159,7 @@ public class CharControllerDDBB {
 
 		try {
 			Connection conx = FunctionsHandler.ConnectDDBB();
-			String delQuery = "DELETE FROM characters ORDER BY name DESC;";
+			String delQuery = "DELETE FROM characters ORDER BY name DESC LIMIT 1;";
 
 			Statement stmt = conx.prepareStatement(delQuery);
 			stmt.execute(delQuery);

@@ -24,14 +24,14 @@ import java.awt.event.ActionEvent;
 import javax.swing.UIManager;
 import javax.swing.JScrollPane;
 
-public class CharacterView extends JFrame {
+public class UsersView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable charTable;
 	private JScrollPane tableScrollPane;
 
-	public CharacterView() {
+	public UsersView() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		Image iconImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/img/wowIcon.png"));
@@ -57,30 +57,17 @@ public class CharacterView extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"Char Id", "User Id", "Nombre", "Raza", "Faccion", "Titulo", "Vida", "Poder Runico", "Fuerza", "Estamina"
+				"Id Usuario", "Nombre", "Contraseña", "Es Admin"
 			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false, false, false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
+		));
 		tableScrollPane.setViewportView(charTable);
 		charTable.setBorder(UIManager.getBorder("CheckBox.border"));
 		charTable.setForeground(new Color(0, 0, 0));
 		
-		JButton btnViewChars = new JButton("Ver Personajes");
+		JButton btnViewChars = new JButton("Ver Usuarios");
 		btnViewChars.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.ViewCharactersTable(charTable);
+				FunctionsHandler.ViewUsersTable(charTable);
 			}
 		});
 		
@@ -88,10 +75,10 @@ public class CharacterView extends JFrame {
 		btnViewChars.setBounds(998, 104, 214, 61);
 		contentPane.add(btnViewChars);
 		
-		JButton btnDelLastRow = new JButton("Borrar Ultimo Personaje");
+		JButton btnDelLastRow = new JButton("Borrar Último Usuario");
 		btnDelLastRow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.DeleteLastCharacter(charTable);
+				FunctionsHandler.DeleteLastUser(charTable);
 			}
 		});
 		
@@ -99,27 +86,7 @@ public class CharacterView extends JFrame {
 		btnDelLastRow.setBounds(998, 195, 214, 61);
 		contentPane.add(btnDelLastRow);
 		
-		JButton btnGenerateCsv = new JButton("Generar CSV");
-		btnGenerateCsv.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.CreateCSV();
-			}
-		});
-		btnGenerateCsv.setFont(new Font("Verdana", Font.PLAIN, 15));
-		btnGenerateCsv.setBounds(998, 287, 214, 61);
-		contentPane.add(btnGenerateCsv);
-		
-		JButton btnPasteCSV = new JButton("Introducir CSV");
-		btnPasteCSV.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.ReadCSV();
-			}
-		});
-		btnPasteCSV.setFont(new Font("Verdana", Font.PLAIN, 15));
-		btnPasteCSV.setBounds(998, 382, 214, 61);
-		contentPane.add(btnPasteCSV);
-		
-		JLabel lblPanelDelUsuario = new JLabel("Vista de Personajes:");
+		JLabel lblPanelDelUsuario = new JLabel("Vista de Usuarios:");
 		lblPanelDelUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPanelDelUsuario.setForeground(Color.BLACK);
 		lblPanelDelUsuario.setFont(new Font("Verdana", Font.PLAIN, 28));

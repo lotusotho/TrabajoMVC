@@ -68,14 +68,14 @@ public class UsersPanel extends JFrame {
 		});
 		contentPane.add(btnCreateChar);
 		
-		JButton btnAdminChars = new JButton("Admin Personajes");
+		JButton btnAdminChars = new JButton("Admin. Personajes");
 		btnAdminChars.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FunctionsHandler.CharacterManagementPanel(true);
 			}
 		});
 		btnAdminChars.setFont(new Font("Verdana", Font.PLAIN, 17));
-		btnAdminChars.setBounds(229, 247, 236, 80);
+		btnAdminChars.setBounds(229, 234, 236, 80);
 		contentPane.add(btnAdminChars);
 		
 		JButton btnBack = new JButton("Volver");
@@ -86,5 +86,17 @@ public class UsersPanel extends JFrame {
 		});
 		btnBack.setBounds(10, 11, 89, 23);
 		contentPane.add(btnBack);
+		
+		if(FunctionsHandler.isCurrentUserAdmin()) {
+			JButton btnAdminUsers = new JButton("Admin. Usuarios");
+			btnAdminUsers.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					FunctionsHandler.UsersManagementPanel(true);
+				}
+			});
+			btnAdminUsers.setFont(new Font("Verdana", Font.PLAIN, 17));
+			btnAdminUsers.setBounds(229, 344, 236, 80);
+			contentPane.add(btnAdminUsers);
+		}
 	}
 }

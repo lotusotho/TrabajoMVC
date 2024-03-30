@@ -45,6 +45,9 @@ public class StringHandler {
 		case "userRegKO":
 			JOptionPane.showMessageDialog(null, "Ha habido un error registrando en usuario");
 			break;
+		case "NoDeleteCurrentUser":
+			JOptionPane.showMessageDialog(null, "No se puede borrar al usuario que está actualmente en la sesión");
+			break;
 		}
 	}
 }
