@@ -204,39 +204,40 @@ public class CharControllerDDBB {
 		try (Scanner scanner = new Scanner(new File(path))) {
 		    while (scanner.hasNextLine()) {
 		        features.add(getRecordFromLine(scanner.nextLine()));
+
+		        for(int i = 0; i < features.size(); i++) {
+		        	
+		        	try {
+		        		Connection conx = FunctionsHandler.ConnectDDBB();
+		        		
+		        		String insertQuery = "INSERT INTO characters (user_id, name, race, faction, title, life, runicpower, strength, stamina) "
+		        				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+		        		
+		        		conx.prepareStatement(insertQuery);
+		        		
+		        		PreparedStatement preStmt = conx.prepareStatement(insertQuery);
+		        		
+		        		preStmt.setInt(1, UsersControllerDDBB.currentUserId);
+		        		preStmt.setString(2, features.get(i).get(0));
+		        		preStmt.setString(3, features.get(i).get(1));
+		        		preStmt.setString(4, features.get(i).get(2));
+		        		preStmt.setString(5, features.get(i).get(3));
+		        		preStmt.setDouble(6, Double.parseDouble(features.get(i).get(4)));
+		        		preStmt.setDouble(7, Double.parseDouble(features.get(i).get(5)));
+		        		preStmt.setDouble(8, Double.parseDouble(features.get(i).get(6)));
+		        		preStmt.setDouble(9, Double.parseDouble(features.get(i).get(7)));
+		        		
+		        		preStmt.execute();
+		        		
+		        		preStmt.close();
+		        	} catch (Exception e) {
+		        		StringHandler.ErrorHandler(e.toString());
+		        	}
+		        }
 		    }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	
-		for(int i = 0; i < features.size(); i++) {
-			
-			try {
-				Connection conx = FunctionsHandler.ConnectDDBB();
-				
-				String insertQuery = "INSERT INTO characters (user_id, name, race, faction, title, life, runicpower, strength, stamina) "
-						+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
-
-				conx.prepareStatement(insertQuery);
-				
-				PreparedStatement preStmt = conx.prepareStatement(insertQuery);
-				
-				preStmt.setInt(1, UsersControllerDDBB.currentUserId);
-				preStmt.setString(2, features.get(i).get(0));
-				preStmt.setString(3, features.get(i).get(1));
-				preStmt.setString(4, features.get(i).get(2));
-				preStmt.setString(5, features.get(i).get(3));
-				preStmt.setDouble(6, Double.parseDouble(features.get(i).get(4)));
-				preStmt.setDouble(7, Double.parseDouble(features.get(i).get(5)));
-				preStmt.setDouble(8, Double.parseDouble(features.get(i).get(6)));
-				preStmt.setDouble(8, Double.parseDouble(features.get(i).get(7)));
-				
-				preStmt.execute();
-				
-				preStmt.close();
-			} catch (Exception e) {
-				StringHandler.ErrorHandler(e.toString());
-			}
-		}
 	}
 }
