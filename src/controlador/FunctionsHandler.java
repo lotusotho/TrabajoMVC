@@ -18,6 +18,7 @@ import vista.UsersRegister;
 import vista.UsersView;
 import vista.UsersLogin;
 import vista.UsersPanel;
+import vista.UsersRecover;
 import servicio.CharControllerDDBB;
 import servicio.ConnectionDDBB;
 
@@ -144,5 +145,11 @@ public class FunctionsHandler {
 		CloseAllWindows();
 		UsersView userView = new UsersView();
 		userView.setVisible(visible);
+	}
+	
+	public static void UsersRecoverPanel(boolean visible) {
+		CloseAllWindows();
+		UsersRecover usersRecover = new UsersRecover();
+		usersRecover.setVisible(visible);
 	}
 }

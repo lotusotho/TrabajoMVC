@@ -40,9 +40,6 @@ public class UsersLogin extends JFrame {
 	private JTextField passTextField;
 	private JPanel panelFormUsers;
 
-	/**
-	 * Create the frame.
-	 */
 	public UsersLogin() {
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -61,6 +58,16 @@ public class UsersLogin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JButton btnUserRecover = new JButton("Contraseña Olvidada");
+		btnUserRecover.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FunctionsHandler.UsersRecoverPanel(true);
+			}
+		});
+		btnUserRecover.setFont(new Font("Verdana", Font.PLAIN, 14));
+		btnUserRecover.setBounds(360, 402, 199, 42);
+		contentPane.add(btnUserRecover);
+		
 		JLabel lblLoginTitle = new JLabel("Introduce tus datos:");
 		lblLoginTitle.setForeground(Color.WHITE);
 		lblLoginTitle.setBounds(315, 35, 292, 35);
@@ -70,7 +77,7 @@ public class UsersLogin extends JFrame {
 		
 		panelFormUsers = new JPanel();
 		panelFormUsers.setBorder(UIManager.getBorder("TableHeader.cellBorder"));
-		panelFormUsers.setBounds(261, 135, 385, 164);
+		panelFormUsers.setBounds(260, 94, 385, 164);
 		panelFormUsers.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
 		panelFormUsers.setForeground(UIManager.getColor(Color.BLUE));
 		contentPane.add(panelFormUsers);
@@ -99,7 +106,7 @@ public class UsersLogin extends JFrame {
 		passTextField.setColumns(10);
 		
 		JButton btnUserLogin = new JButton("Entrar");
-		btnUserLogin.setBounds(394, 330, 136, 42);
+		btnUserLogin.setBounds(391, 278, 136, 42);
 		btnUserLogin.setFont(new Font("Verdana", Font.PLAIN, 17));
 		btnUserLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -109,7 +116,7 @@ public class UsersLogin extends JFrame {
 		contentPane.add(btnUserLogin);
 		
 		JButton btnUserRegister = new JButton("Registrarse");
-		btnUserRegister.setBounds(394, 394, 136, 42);
+		btnUserRegister.setBounds(391, 342, 136, 42);
 		btnUserRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FunctionsHandler.UserRegisterPanel(true);
