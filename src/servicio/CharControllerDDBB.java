@@ -142,15 +142,20 @@ public class CharControllerDDBB {
 	}
 
 	public static void DeleteLastCharacterDB() {
-
 		try {
 			Connection conx = FunctionsHandler.ConnectDDBB();
-			String delQuery = "DELETE FROM characters ORDER BY name DESC LIMIT 1;";
+			String selectQuery = "SELECT user_id FROM characters ORDER BY name DESC LIMIT 1;";
+			PreparedStatement prepStmt = conx.prepareStatement(selectQuery);
+			ResultSet result = prepStmt.executeQuery();
 
-			Statement stmt = conx.prepareStatement(delQuery);
-			stmt.execute(delQuery);
-			
-			stmt.close();
+			if (result.next()) {
+				String delQuery = "DELETE FROM characters WHERE user_id=? LIMIT 1;";
+				PreparedStatement delStmt = conx.prepareStatement(delQuery);
+				delStmt.setInt(1, result.getInt(1));
+				delStmt.execute();
+			}
+
+			conx.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -208,16 +213,17 @@ public class CharControllerDDBB {
 		        		preStmt.setString(3, features.get(i).get(1));
 		        		preStmt.setString(4, features.get(i).get(2));
 		        		preStmt.setString(5, features.get(i).get(3));
-		        		preStmt.setBigDecimal(6, BigDecimal.valueOf(Double.parseDouble((features.get(i).get(4)))));
-		        		preStmt.setInt(7, Integer.parseInt((features.get(i).get(5))));
-		        		preStmt.setBigDecimal(8, BigDecimal.valueOf(Double.parseDouble((features.get(i).get(6)))));
-		        		preStmt.setBigDecimal(9, BigDecimal.valueOf(Double.parseDouble((features.get(i).get(7)))));
+		        		preStmt.setString(6, features.get(i).get(4));
+		        		preStmt.setString(7, features.get(i).get(5));
+		        		preStmt.setString(8, features.get(i).get(6));
+		        		preStmt.setString(9, features.get(i).get(7));
 		        		
 		        		preStmt.execute();
 		        		
 		        		preStmt.close();
 		        	} catch (Exception e) {
 		        		StringHandler.ErrorHandler(e.toString());
+		        		e.printStackTrace();
 		        	}
 		        }
 		    }
