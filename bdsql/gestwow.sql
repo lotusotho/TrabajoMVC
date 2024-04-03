@@ -16,7 +16,7 @@
 
 
 -- Volcando estructura de base de datos para gestwow
-CREATE DATABASE IF NOT EXISTS `gestwow` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+CREATE DATABASE IF NOT EXISTS `gestwow` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci */;
 USE `gestwow`;
 
 -- Volcando estructura para tabla gestwow.characters
@@ -27,17 +27,19 @@ CREATE TABLE IF NOT EXISTS `characters` (
   `race` varchar(10) NOT NULL,
   `faction` varchar(10) NOT NULL,
   `title` varchar(25) NOT NULL,
-  `life` double NOT NULL DEFAULT 0,
-  `runicpower` double NOT NULL DEFAULT 0,
-  `strength` double NOT NULL DEFAULT 0,
-  `stamina` double NOT NULL DEFAULT 0,
+  `life` decimal(8,2) NOT NULL DEFAULT 0.00,
+  `runicpower` int(11) NOT NULL DEFAULT 0,
+  `strength` decimal(8,2) NOT NULL DEFAULT 0.00,
+  `stamina` decimal(8,2) NOT NULL DEFAULT 0.00,
   PRIMARY KEY (`char_id`),
   UNIQUE KEY `name` (`name`),
   KEY `FK_characters_users` (`user_id`),
   CONSTRAINT `FK_characters_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Here we save the WoW character properties';
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Here we save the WoW character properties';
 
 -- Volcando datos para la tabla gestwow.characters: ~1 rows (aproximadamente)
+INSERT INTO `characters` (`char_id`, `user_id`, `name`, `race`, `faction`, `title`, `life`, `runicpower`, `strength`, `stamina`) VALUES
+	(23, 0013, 'testcharacter', 'race', 'faction', 'title', 1212.12, 2121, 1212.12, 1212.12);
 
 -- Volcando estructura para tabla gestwow.users
 CREATE TABLE IF NOT EXISTS `users` (
@@ -46,12 +48,11 @@ CREATE TABLE IF NOT EXISTS `users` (
   `passwd` char(64) NOT NULL DEFAULT '',
   `isAdmin` varchar(10) NOT NULL,
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Here we save the users properties';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Here we save the users properties';
 
--- Volcando datos para la tabla gestwow.users: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla gestwow.users: ~1 rows (aproximadamente)
 INSERT INTO `users` (`user_id`, `name`, `passwd`, `isAdmin`) VALUES
-	(0001, 'test1', '3b1d7e9a7c37141350fb473fa099b8b18030cde1909f363e3758e52d4ea1a7b4', 'admin'),
-	(0002, 'test2', '5a7d362627a891441ee34012b087915f03a6958c1062fe4cf01de24abecee053', 'normalUser');
+	(0013, 'test1', '3b1d7e9a7c37141350fb473fa099b8b18030cde1909f363e3758e52d4ea1a7b4', 'admin');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

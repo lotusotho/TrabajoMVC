@@ -1,5 +1,7 @@
 package modelo;
 
+import java.math.BigDecimal;
+
 /**
  * Bean del heroe
  */
@@ -10,13 +12,13 @@ public class Hero {
     private String race;
     private String faction;
     private String title;
-    private double life;
+    private BigDecimal life;
     private int runicPower;
-    private double strength;
-    private double stamina;
+    private BigDecimal strength;
+    private BigDecimal stamina;
 
-    public Hero(String name, String race, String faction, String title, double life, int runicPower,
-            double strength, double stamina) {
+    public Hero(String name, String race, String faction, String title, BigDecimal life, int runicPower,
+    		BigDecimal strength, BigDecimal stamina) {
         this.name = name;
         this.race = race;
         this.faction = faction;
@@ -67,11 +69,11 @@ public class Hero {
 		this.title = title;
 	}
 
-	public double getLife() {
+	public BigDecimal getLife() {
 		return life;
 	}
 
-	public void setLife(double life) {
+	public void setLife(BigDecimal life) {
 		this.life = life;
 	}
 
@@ -83,19 +85,19 @@ public class Hero {
 		this.runicPower = runicPower;
 	}
 
-	public double getStrength() {
+	public BigDecimal getStrength() {
 		return strength;
 	}
 
-	public void setStrength(double strength) {
+	public void setStrength(BigDecimal strength) {
 		this.strength = strength;
 	}
 
-	public double getStamina() {
+	public BigDecimal getStamina() {
 		return stamina;
 	}
 
-	public void setStamina(double stamina) {
+	public void setStamina(BigDecimal stamina) {
 		this.stamina = stamina;
 	}
 

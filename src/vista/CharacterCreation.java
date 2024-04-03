@@ -20,6 +20,8 @@ import javax.swing.UIManager;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 /**
@@ -72,9 +74,22 @@ public class CharacterCreation extends JFrame {
 				contentPane.add(btnCreateChar);
 				btnCreateChar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						ArrayList<JTextField> allTextFields = new ArrayList<JTextField>();
+						
+						allTextFields.add(NameTextField);
+						allTextFields.add(RaceTextField);
+						allTextFields.add(FactionTextField);
+						allTextFields.add(TitleTextField);
+						allTextFields.add(LifeTextField);
+						allTextFields.add(RunicPTextField);
+						allTextFields.add(StrTextField);
+						allTextFields.add(StmTextField);
+						
+						
 						Hero tempHero = new Hero(NameTextField.getText(), RaceTextField.getText(), 
-								FactionTextField.getText(), TitleTextField.getText(), Double.parseDouble(LifeTextField.getText()), 
-								Integer.parseInt(RunicPTextField.getText()), Double.parseDouble(StrTextField.getText()), Double.parseDouble(StmTextField.getText()));
+								FactionTextField.getText(), TitleTextField.getText(), BigDecimal.valueOf(Double.parseDouble(LifeTextField.getText())), 
+								Integer.parseInt(RunicPTextField.getText()), BigDecimal.valueOf(Double.parseDouble(StrTextField.getText())), 
+								BigDecimal.valueOf(Double.parseDouble(StmTextField.getText())));
 						
 						FunctionsHandler.InsertCharacter(tempHero);
 					}

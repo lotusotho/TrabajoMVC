@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.math.BigDecimal;
 import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -55,10 +56,10 @@ public class CharControllerDDBB {
 			preStmt.setString(3, heroObj.getRace());
 			preStmt.setString(4, heroObj.getFaction());
 			preStmt.setString(5, heroObj.getTitle());
-			preStmt.setDouble(6, heroObj.getLife());
-			preStmt.setDouble(7, heroObj.getRunicPower());
-			preStmt.setDouble(8, heroObj.getStrength());
-			preStmt.setDouble(9, heroObj.getStamina());
+			preStmt.setBigDecimal(6, heroObj.getLife());
+			preStmt.setInt(7, heroObj.getRunicPower());
+			preStmt.setBigDecimal(8, heroObj.getStrength());
+			preStmt.setBigDecimal(9, heroObj.getStamina());
 			
 			preStmt.execute();
 			
@@ -207,10 +208,10 @@ public class CharControllerDDBB {
 		        		preStmt.setString(3, features.get(i).get(1));
 		        		preStmt.setString(4, features.get(i).get(2));
 		        		preStmt.setString(5, features.get(i).get(3));
-		        		preStmt.setDouble(6, Double.parseDouble(features.get(i).get(4)));
-		        		preStmt.setDouble(7, Double.parseDouble(features.get(i).get(5)));
-		        		preStmt.setDouble(8, Double.parseDouble(features.get(i).get(6)));
-		        		preStmt.setDouble(9, Double.parseDouble(features.get(i).get(7)));
+		        		preStmt.setBigDecimal(6, BigDecimal.valueOf(Double.parseDouble((features.get(i).get(4)))));
+		        		preStmt.setInt(7, Integer.parseInt((features.get(i).get(5))));
+		        		preStmt.setBigDecimal(8, BigDecimal.valueOf(Double.parseDouble((features.get(i).get(6)))));
+		        		preStmt.setBigDecimal(9, BigDecimal.valueOf(Double.parseDouble((features.get(i).get(7)))));
 		        		
 		        		preStmt.execute();
 		        		
