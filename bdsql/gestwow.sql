@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `characters` (
   `faction` varchar(10) NOT NULL,
   `title` varchar(25) NOT NULL,
   `life` decimal(8,2) NOT NULL DEFAULT 0.00,
-  `runicpower` int(11) NOT NULL DEFAULT 0,
+  `runicpower` int(8) NOT NULL DEFAULT 0,
   `strength` decimal(8,2) NOT NULL DEFAULT 0.00,
   `stamina` decimal(8,2) NOT NULL DEFAULT 0.00,
   PRIMARY KEY (`char_id`),
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`user_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Here we save the users properties';
 
--- Volcando datos para la tabla gestwow.users: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla gestwow.users: ~2 rows (aproximadamente)
 INSERT INTO `users` (`user_id`, `name`, `passwd`, `isAdmin`) VALUES
 	(0013, 'test1', '3b1d7e9a7c37141350fb473fa099b8b18030cde1909f363e3758e52d4ea1a7b4', 'admin');
 
