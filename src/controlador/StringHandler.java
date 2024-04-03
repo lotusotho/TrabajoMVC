@@ -48,6 +48,12 @@ public class StringHandler {
 		case "NoDeleteCurrentUser":
 			JOptionPane.showMessageDialog(null, "No se puede borrar al usuario que está actualmente en la sesión");
 			break;
+		case "passChangeOK":
+			JOptionPane.showMessageDialog(null, "La contraseña se ha cambiado correctamente");
+			break;
+		case "passChangeKO":
+			JOptionPane.showMessageDialog(null, "El usuario o contraseña establecidos no son correctos");
+			break;
 		}
 	}
 }

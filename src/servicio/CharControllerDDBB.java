@@ -30,8 +30,6 @@ import modelo.Hero;
  */
 
 public class CharControllerDDBB {
-	private static boolean oneShotTable = false;
-	
 	private static List<String> getRecordFromLine(String line) {
 	    List<String> values = new ArrayList<String>();
 	    
@@ -68,19 +66,6 @@ public class CharControllerDDBB {
 			
 		} catch (SQLException e) {
 			StringHandler.ErrorHandler(e.toString());
-			e.printStackTrace();
-		}
-	}
-
-	public static void DeleteCharacter(String name) {
-		Connection conx = FunctionsHandler.ConnectDDBB();
-
-		String deleteQuery = "DELETE FROM characters WHERE name='" + name + "';";
-
-		try {
-			conx.prepareStatement(deleteQuery).execute();
-			conx.close();
-		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}

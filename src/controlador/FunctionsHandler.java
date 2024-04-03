@@ -33,11 +33,6 @@ public class FunctionsHandler {
 		StringHandler.MessageHandler("charCreate");
 	};
 
-	public static void DeleteCharacter(String name) {
-		CharControllerDDBB.DeleteCharacter(name);
-		StringHandler.MessageHandler("charDelete");
-	}
-
 	public static void UsersLogin(String name, String passwd) {
 		UsersControllerDDBB.usersLogin(name, passwd);
 	}
@@ -100,6 +95,10 @@ public class FunctionsHandler {
 		UsersControllerDDBB.DeleteLastUserDB();
 
 		((DefaultTableModel) jtable.getModel()).removeRow(jtable.getModel().getRowCount() - 1);
+	}
+	
+	public static void RecoverPassUser(String oldPasswd, String newPasswd, String name) {
+		UsersControllerDDBB.RecoverPassUser(oldPasswd, newPasswd, name);
 	}
 
 	// Vista Panels

@@ -35,7 +35,7 @@ public class UsersRecover extends JFrame {
 	private JPanel contentPane;
 	private JTextField userTextField;
 	private JTextField oldPassTextField;
-	private JPasswordField newPassTextField;
+	private JTextField newPassTextField;
 
 	public UsersRecover() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -114,7 +114,7 @@ public class UsersRecover extends JFrame {
 		lblNewPassTitle.setBounds(57, 144, 183, 24);
 		panelFormUsers.add(lblNewPassTitle);
 		
-		newPassTextField = new JPasswordField();
+		newPassTextField = new JTextField();
 		newPassTextField.setColumns(10);
 		newPassTextField.setBounds(250, 139, 143, 29);
 		panelFormUsers.add(newPassTextField);
@@ -124,7 +124,7 @@ public class UsersRecover extends JFrame {
 		btnRegistrar.setBounds(258, 361, 189, 42);
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				FunctionsHandler.RecoverPassUser(oldPassTextField.getText(), newPassTextField.getText(), userTextField.getText());
 			}
 		});
 		contentPane.add(btnRegistrar);
