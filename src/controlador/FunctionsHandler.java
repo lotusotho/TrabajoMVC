@@ -44,12 +44,7 @@ public class FunctionsHandler {
 	}
 
 	public static void UsersRegister(String name, String passwd, boolean adminCheck) {
-		try {
-			UsersControllerDDBB.usersRegister(name, passwd, adminCheck);
-		} catch (Exception e) {
-			// TODO: Cambiar a StringHandler
-			e.printStackTrace();
-		}
+		UsersControllerDDBB.usersRegister(name, passwd, adminCheck);
 	}
 
 	public static void CreateCSV() {
@@ -67,76 +62,45 @@ public class FunctionsHandler {
 	}
 
 	public static void ViewCharactersTable(JTable jtable) {
-		try {
-			if (((DefaultTableModel) jtable.getModel()).getRowCount() > 0) {
-				ClearTable(jtable);
-			}
-
-			CharControllerDDBB.ShowAllRows(jtable);
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (((DefaultTableModel) jtable.getModel()).getRowCount() > 0) {
+			ClearTable(jtable);
 		}
+
+		CharControllerDDBB.ShowAllRows(jtable);
 	}
 
 	public static void DeleteLastCharacter(JTable jtable) {
-		try {
-			CharControllerDDBB.DeleteLastCharacterDB();
+		CharControllerDDBB.DeleteLastCharacterDB();
 
-			((DefaultTableModel) jtable.getModel()).removeRow(jtable.getModel().getRowCount() - 1);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		((DefaultTableModel) jtable.getModel()).removeRow(jtable.getModel().getRowCount() - 1);
 	}
 
 	public static void ClearTable(JTable jtable) {
-		try {
-			((DefaultTableModel) jtable.getModel()).setRowCount(0);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		((DefaultTableModel) jtable.getModel()).setRowCount(0);
 	}
 
 	public static void ReadCSV() {
-		try {
-			CharControllerDDBB.ReadCSV();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		CharControllerDDBB.ReadCSV();
 	}
-	
+
 	public static boolean isCurrentUserAdmin() {
-		try {
-			return UsersControllerDDBB.isCurrentUserAdmin();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return false;
+		return UsersControllerDDBB.isCurrentUserAdmin();
 	}
-	
+
 	// UsersView
-	
+
 	public static void ViewUsersTable(JTable jtable) {
-		try {
-			if (((DefaultTableModel) jtable.getModel()).getRowCount() > 0) {
-				ClearTable(jtable);
-			}
-
-			UsersControllerDDBB.ShowAllRows(jtable);
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (((DefaultTableModel) jtable.getModel()).getRowCount() > 0) {
+			ClearTable(jtable);
 		}
+
+		UsersControllerDDBB.ShowAllRows(jtable);
 	}
-	
-	public static void DeleteLastUser(JTable jtable) {
-		try {
-			UsersControllerDDBB.DeleteLastUserDB();
 
-			((DefaultTableModel) jtable.getModel()).removeRow(jtable.getModel().getRowCount() - 1);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public static void DeleteLastUser(JTable jtable) {
+		UsersControllerDDBB.DeleteLastUserDB();
+
+		((DefaultTableModel) jtable.getModel()).removeRow(jtable.getModel().getRowCount() - 1);
 	}
 
 	// Vista Panels
@@ -149,68 +113,38 @@ public class FunctionsHandler {
 	}
 
 	public static void UserLoginPanel(boolean visible) {
-		try {
-			CloseAllWindows();
-			UsersLogin usersLogin = new UsersLogin();
-			usersLogin.setVisible(visible);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		CloseAllWindows();
+		UsersLogin usersLogin = new UsersLogin();
+		usersLogin.setVisible(visible);
 	}
 
 	public static void UserRegisterPanel(boolean visible) {
-		try {
-			CloseAllWindows();
-			UsersRegister userReg = new UsersRegister();
-			userReg.setVisible(visible);
-		} catch (Exception e) {
-			// TODO: Cambiar a StringHandler
-			e.printStackTrace();
-		}
+		CloseAllWindows();
+		UsersRegister userReg = new UsersRegister();
+		userReg.setVisible(visible);
 	}
 
 	public static void UsersControlPanel(boolean visible) {
-		try {
-			CloseAllWindows();
-			UsersPanel usersPanel = new UsersPanel();
-			usersPanel.setVisible(visible);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		CloseAllWindows();
+		UsersPanel usersPanel = new UsersPanel();
+		usersPanel.setVisible(visible);
 	}
 
 	public static void CharacterCreationPanel(boolean visible) {
-		try {
-			CloseAllWindows();
-			CharacterCreation charCreation = new CharacterCreation();
-			charCreation.setVisible(visible);
-		} catch (Exception e) {
-			// TODO: Cambiar a StringHandler
-			e.printStackTrace();
-		}
+		CloseAllWindows();
+		CharacterCreation charCreation = new CharacterCreation();
+		charCreation.setVisible(visible);
 	}
 
 	public static void CharacterManagementPanel(boolean visible) {
-		try {
-			CloseAllWindows();
-			CharacterView charView = new CharacterView();
-			charView.setVisible(visible);
-
-		} catch (Exception e) {
-			// TODO: Cambiar a StringHandler
-			e.printStackTrace();
-		}
+		CloseAllWindows();
+		CharacterView charView = new CharacterView();
+		charView.setVisible(visible);
 	}
-	
+
 	public static void UsersManagementPanel(boolean visible) {
-		try {
-			CloseAllWindows();
-			UsersView userView = new UsersView();
-			userView.setVisible(visible);
-		} catch (Exception e) {
-			// TODO: Cambiar a StringHandler
-			e.printStackTrace();
-		}
+		CloseAllWindows();
+		UsersView userView = new UsersView();
+		userView.setVisible(visible);
 	}
 }
