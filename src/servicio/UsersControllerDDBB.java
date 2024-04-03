@@ -192,6 +192,8 @@ public class UsersControllerDDBB {
 				result.close();
 			} else {
 				StringHandler.MessageHandler("passChangeKO");
+				
+				prepStmt.close();
 			}
 		} catch (SQLException e) {
 			StringHandler.MessageHandler("passChangeKO");
