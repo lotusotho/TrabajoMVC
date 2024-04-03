@@ -3,5 +3,9 @@
 Trabajo del tercer trimestre de 1º DAW
 
 ## Roadmap:
+- Make UsersRecover functionality, two checks:
+	- [] Username typed exists
+	- [] Username matches the old password typed
+	- Then typed username's password changed for encrypted new username password
 - Change characters table floating values from DOUBLE to DECIMAL
 - Check TODOs inside code
