@@ -22,8 +22,6 @@ import servicio.CharControllerDDBB;
 import servicio.ConnectionDDBB;
 
 public class FunctionsHandler {
-	private static ArrayList<JFrame> panels = new ArrayList<JFrame>();
-
 	// DDBB Stuff
 	public static Connection ConnectDDBB() {
 		return ConnectionDDBB.connectBBDD();
