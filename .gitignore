@@ -61,6 +61,3 @@ local.properties
 
 # Ignore class files
 *.class
-
-# Ignore .csv until further notice
-*.csv
