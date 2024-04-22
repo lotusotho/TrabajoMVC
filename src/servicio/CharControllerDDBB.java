@@ -51,7 +51,7 @@ public class CharControllerDDBB {
 			
 			PreparedStatement preStmt = conx.prepareStatement(insertQuery);
 			
-			preStmt.setInt(1, UsersControllerDDBB.currentUserId);
+			preStmt.setInt(1, UsersControllerDDBB.getCurrentUserId());
 			preStmt.setString(2, heroObj.getName());
 			preStmt.setString(3, heroObj.getRace());
 			preStmt.setString(4, heroObj.getFaction());
@@ -77,7 +77,7 @@ public class CharControllerDDBB {
 			
 			boolean isAdmin = UsersControllerDDBB.isCurrentUserAdmin();
 			
-			String allQueryUser = "SELECT * FROM characters WHERE user_id=" + UsersControllerDDBB.currentUserId
+			String allQueryUser = "SELECT * FROM characters WHERE user_id=" + UsersControllerDDBB.getCurrentUserId()
 					+ " ORDER BY name ASC;";
 			
 			String allQuery = "SELECT * FROM characters ORDER BY name ASC;";
@@ -119,7 +119,7 @@ public class CharControllerDDBB {
 			
 			boolean isAdmin = UsersControllerDDBB.isCurrentUserAdmin();
 			
-			String allQueryUser = "SELECT * FROM characters WHERE user_id='" + UsersControllerDDBB.currentUserId + "';";
+			String allQueryUser = "SELECT * FROM characters WHERE user_id='" + UsersControllerDDBB.getCurrentUserId() + "';";
 			
 			String allQuery = "SELECT * FROM characters;";
 
@@ -198,36 +198,32 @@ public class CharControllerDDBB {
 
 		        for(int i = 0; i < features.size(); i++) {
 		        	
-		        	try {
-		        		Connection conx = FunctionsHandler.ConnectDDBB();
-		        		
-		        		String insertQuery = "INSERT INTO characters (user_id, name, race, faction, title, life, runicpower, strength, stamina) "
-		        				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
-		        		
-		        		conx.prepareStatement(insertQuery);
-		        		
-		        		PreparedStatement preStmt = conx.prepareStatement(insertQuery);
-		        		
-		        		preStmt.setInt(1, UsersControllerDDBB.currentUserId);
-		        		preStmt.setString(2, features.get(i).get(0));
-		        		preStmt.setString(3, features.get(i).get(1));
-		        		preStmt.setString(4, features.get(i).get(2));
-		        		preStmt.setString(5, features.get(i).get(3));
-		        		preStmt.setString(6, features.get(i).get(4));
-		        		preStmt.setString(7, features.get(i).get(5));
-		        		preStmt.setString(8, features.get(i).get(6));
-		        		preStmt.setString(9, features.get(i).get(7));
-		        		
-		        		preStmt.execute();
-		        		
-		        		preStmt.close();
-		        	} catch (Exception e) {
-		        		StringHandler.ErrorHandler(e.toString());
-		        		e.printStackTrace();
-		        	}
+		        	Connection conx = FunctionsHandler.ConnectDDBB();
+	        		
+	        		String insertQuery = "INSERT INTO characters (user_id, name, race, faction, title, life, runicpower, strength, stamina) "
+	        				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+	        		
+	        		conx.prepareStatement(insertQuery);
+	        		
+	        		PreparedStatement preStmt = conx.prepareStatement(insertQuery);
+	        		
+	        		preStmt.setInt(1, UsersControllerDDBB.getCurrentUserId());
+	        		preStmt.setString(2, features.get(i).get(0));
+	        		preStmt.setString(3, features.get(i).get(1));
+	        		preStmt.setString(4, features.get(i).get(2));
+	        		preStmt.setString(5, features.get(i).get(3));
+	        		preStmt.setString(6, features.get(i).get(4));
+	        		preStmt.setString(7, features.get(i).get(5));
+	        		preStmt.setString(8, features.get(i).get(6));
+	        		preStmt.setString(9, features.get(i).get(7));
+	        		
+	        		preStmt.execute();
+	        		
+	        		preStmt.close();
 		        }
 		    }
 		} catch (Exception e) {
+			StringHandler.ErrorHandler(e.toString());
 			e.printStackTrace();
 		}
 	

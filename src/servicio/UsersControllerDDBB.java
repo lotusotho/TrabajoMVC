@@ -23,7 +23,7 @@ import vista.UsersPanel;
 public class UsersControllerDDBB {
 
 	// TODO: No me gusta declarar esto como publico
-	public static int currentUserId;
+	private static int currentUserId;
 
 	public static void usersLogin(String name, String passwd) {
 		try {
@@ -40,7 +40,7 @@ public class UsersControllerDDBB {
 			ResultSet result = prepStmt.executeQuery();
 
 			if (result.next()) {
-				currentUserId = result.getInt("user_id");
+				setCurrentUserid(result.getInt("user_id"));
 				FunctionsHandler.UsersControlPanel(true);
 			} else {
 				StringHandler.MessageHandler("userLoginKO");
@@ -91,7 +91,7 @@ public class UsersControllerDDBB {
 
 		try {
 			PreparedStatement prepStmt = conx.prepareStatement(adminQuery);
-			prepStmt.setInt(1, currentUserId);
+			prepStmt.setInt(1, getCurrentUserId());
 			
 			ResultSet result = prepStmt.executeQuery();
 
@@ -148,7 +148,7 @@ public class UsersControllerDDBB {
 			ResultSet result = stmt.executeQuery(selQuery);
 
 			while (result.next()) {
-				if (result.getInt(1) != currentUserId) {
+				if (result.getInt(1) != getCurrentUserId()) {
 					String delQuery = "DELETE FROM users ORDER BY name DESC LIMIT 1;";
 					Statement delStmt = conx.prepareStatement(delQuery);
 					delStmt.executeQuery(delQuery);
@@ -199,6 +199,14 @@ public class UsersControllerDDBB {
 			StringHandler.MessageHandler("passChangeKO");
 			e.printStackTrace();
 		}
+	}
+	
+	public static int getCurrentUserId() {
+		return currentUserId;
+	}
+	
+	public static void setCurrentUserid(int userId) {
+		currentUserId = userId;
 	}
 
 }
