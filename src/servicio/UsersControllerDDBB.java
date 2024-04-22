@@ -22,7 +22,6 @@ import vista.UsersPanel;
 
 public class UsersControllerDDBB {
 
-	// TODO: No me gusta declarar esto como publico
 	private static int currentUserId;
 
 	public static void usersLogin(String name, String passwd) {
