@@ -2,25 +2,21 @@ package controlador;
 
 import java.awt.Window;
 import java.sql.Connection;
-import java.util.ArrayList;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import modelo.Hero;
-import modelo.User;
+import servicio.CharControllerDDBB;
+import servicio.ConnectionDDBB;
 import servicio.UsersControllerDDBB;
 import vista.CharacterCreation;
 import vista.CharacterView;
-import vista.UsersRegister;
-import vista.UsersView;
 import vista.UsersLogin;
 import vista.UsersPanel;
 import vista.UsersRecover;
-import servicio.CharControllerDDBB;
-import servicio.ConnectionDDBB;
+import vista.UsersRegister;
+import vista.UsersView;
 
 public class FunctionsHandler {
 	// DDBB Stuff
@@ -31,7 +27,7 @@ public class FunctionsHandler {
 	public static void InsertCharacter(Hero hero) {
 		CharControllerDDBB.InsertCharacter(hero);
 		StringHandler.MessageHandler("charCreate");
-	};
+	}
 
 	public static void UsersLogin(String name, String passwd) {
 		UsersControllerDDBB.usersLogin(name, passwd);
@@ -96,7 +92,7 @@ public class FunctionsHandler {
 
 		((DefaultTableModel) jtable.getModel()).removeRow(jtable.getModel().getRowCount() - 1);
 	}
-	
+
 	public static void RecoverPassUser(String oldPasswd, String newPasswd, String name) {
 		UsersControllerDDBB.RecoverPassUser(oldPasswd, newPasswd, name);
 	}
@@ -145,7 +141,7 @@ public class FunctionsHandler {
 		UsersView userView = new UsersView();
 		userView.setVisible(visible);
 	}
-	
+
 	public static void UsersRecoverPanel(boolean visible) {
 		CloseAllWindows();
 		UsersRecover usersRecover = new UsersRecover();

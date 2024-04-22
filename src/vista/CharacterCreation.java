@@ -1,28 +1,28 @@
 package vista;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import controlador.FunctionsHandler;
-import modelo.Hero;
-
-import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
-
-import javax.swing.SwingConstants;
-import javax.swing.ImageIcon;
-import javax.swing.UIManager;
-import javax.swing.JTextField;
-import javax.swing.JButton;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.awt.event.ActionEvent;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.WindowConstants;
+import javax.swing.border.EmptyBorder;
+
+import controlador.FunctionsHandler;
+import modelo.Hero;
 
 /**
  * Interfaz de la creacion de personajes
@@ -41,7 +41,7 @@ public class CharacterCreation extends JFrame {
 	private JTextField StmTextField;
 
 	public CharacterCreation() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
 		Image iconImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/img/wowIcon.png"));
 		setIconImage(iconImg);
@@ -60,6 +60,7 @@ public class CharacterCreation extends JFrame {
 
 		JButton btnBack = new JButton("Volver");
 		btnBack.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				FunctionsHandler.UsersControlPanel(true);
 			}
@@ -72,6 +73,7 @@ public class CharacterCreation extends JFrame {
 		btnCreateChar.setBounds(542, 457, 187, 53);
 		contentPane.add(btnCreateChar);
 		btnCreateChar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				Hero tempHero = new Hero(NameTextField.getText(), RaceTextField.getText(), FactionTextField.getText(),
 						TitleTextField.getText(), BigDecimal.valueOf(Double.parseDouble(LifeTextField.getText())),
@@ -81,7 +83,7 @@ public class CharacterCreation extends JFrame {
 
 				FunctionsHandler.InsertCharacter(tempHero);
 
-				ArrayList<JTextField> allTextFields = new ArrayList<JTextField>();
+				ArrayList<JTextField> allTextFields = new ArrayList<>();
 
 				allTextFields.add(NameTextField);
 				allTextFields.add(RaceTextField);

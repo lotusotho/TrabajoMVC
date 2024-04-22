@@ -17,7 +17,7 @@ public class StringHandler {
 			JOptionPane.showMessageDialog(null, "Ese nombre de personaje ya existe, por favor, introduce otro");
 		}
 	}
-	
+
 	/**
 	 * Usamos esta funcion para detectar el mensaje que debemos monstrar en pantalla a partir de un codigo de tipo String
 	 * @param message

@@ -2,8 +2,8 @@ package servicio;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
 
@@ -13,7 +13,6 @@ import javax.swing.table.DefaultTableModel;
 
 import controlador.FunctionsHandler;
 import controlador.StringHandler;
-import vista.UsersPanel;
 
 /**
  * Aqui definimos las funciones necesarias para gestionar la base de datos de la
@@ -44,7 +43,7 @@ public class UsersControllerDDBB {
 			} else {
 				StringHandler.MessageHandler("userLoginKO");
 			}
-			
+
 			prepStmt.close();
 
 		} catch (SQLException e) {
@@ -80,7 +79,7 @@ public class UsersControllerDDBB {
 
 	/**
 	 * Checkea si el usuario actual es admin o no
-	 * 
+	 *
 	 * @return
 	 */
 	public static boolean isCurrentUserAdmin() {
@@ -91,13 +90,13 @@ public class UsersControllerDDBB {
 		try {
 			PreparedStatement prepStmt = conx.prepareStatement(adminQuery);
 			prepStmt.setInt(1, getCurrentUserId());
-			
+
 			ResultSet result = prepStmt.executeQuery();
 
 			while (result.next()) {
 				return "admin".equals(result.getString(1));
 			}
-			
+
 			prepStmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -170,7 +169,7 @@ public class UsersControllerDDBB {
 			String selQuery = "SELECT name, passwd FROM users WHERE name=?;";
 
 			PreparedStatement prepStmt = conx.prepareStatement(selQuery);
-			
+
 			prepStmt.setString(1, name);
 
 			ResultSet result = prepStmt.executeQuery();
@@ -183,7 +182,7 @@ public class UsersControllerDDBB {
 				prepStmt2.setString(2, name);
 
 				prepStmt2.execute();
-				
+
 				prepStmt2.close();
 				prepStmt.close();
 
@@ -191,7 +190,7 @@ public class UsersControllerDDBB {
 				result.close();
 			} else {
 				StringHandler.MessageHandler("passChangeKO");
-				
+
 				prepStmt.close();
 			}
 		} catch (SQLException e) {
@@ -199,11 +198,11 @@ public class UsersControllerDDBB {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static int getCurrentUserId() {
 		return currentUserId;
 	}
-	
+
 	public static void setCurrentUserid(int userId) {
 		currentUserId = userId;
 	}

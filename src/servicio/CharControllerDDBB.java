@@ -1,11 +1,7 @@
 package servicio;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
-import java.math.BigDecimal;
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,9 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.sql.ResultSetMetaData;
 
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -32,8 +26,8 @@ import modelo.Hero;
 
 public class CharControllerDDBB {
 	private static List<String> getRecordFromLine(String line) {
-	    List<String> values = new ArrayList<String>();
-	    
+	    List<String> values = new ArrayList<>();
+
 	    try (Scanner rowScanner = new Scanner(line)) {
 	        rowScanner.useDelimiter(";");
 	        while (rowScanner.hasNext()) {
@@ -48,9 +42,9 @@ public class CharControllerDDBB {
 			Connection conx = ConnectionDDBB.connectBBDD();
 			String insertQuery = "INSERT INTO characters (user_id, name, race, faction, title, life, runicpower, strength, stamina) "
 					+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
-			
+
 			PreparedStatement preStmt = conx.prepareStatement(insertQuery);
-			
+
 			preStmt.setInt(1, UsersControllerDDBB.getCurrentUserId());
 			preStmt.setString(2, heroObj.getName());
 			preStmt.setString(3, heroObj.getRace());
@@ -60,11 +54,11 @@ public class CharControllerDDBB {
 			preStmt.setInt(7, heroObj.getRunicPower());
 			preStmt.setBigDecimal(8, heroObj.getStrength());
 			preStmt.setBigDecimal(9, heroObj.getStamina());
-			
+
 			preStmt.execute();
-			
+
 			preStmt.close();
-			
+
 		} catch (SQLException e) {
 			StringHandler.ErrorHandler(e.toString());
 			e.printStackTrace();
@@ -74,14 +68,14 @@ public class CharControllerDDBB {
 	public static void ShowAllRows(JTable jtable) {
 		try {
 			Connection conx = FunctionsHandler.ConnectDDBB();
-			
+
 			boolean isAdmin = UsersControllerDDBB.isCurrentUserAdmin();
-			
+
 			String allQueryUser = "SELECT * FROM characters WHERE user_id=" + UsersControllerDDBB.getCurrentUserId()
 					+ " ORDER BY name ASC;";
-			
+
 			String allQuery = "SELECT * FROM characters ORDER BY name ASC;";
-			
+
 			Statement stmt = conx.prepareStatement(isAdmin ? allQuery : allQueryUser);
 			ResultSet result = stmt.executeQuery(isAdmin ? allQuery : allQueryUser);
 
@@ -103,7 +97,7 @@ public class CharControllerDDBB {
 				System.out.println(Arrays.toString(rows));
 				((DefaultTableModel) jtable.getModel()).addRow(rows);
 			}
-			
+
 			conx.close();
 
 		} catch (SQLException e) {
@@ -114,13 +108,13 @@ public class CharControllerDDBB {
 	public static String[] ShowAllColumns() {
 		try {
 			String[] charArr = new String[0];
-			
+
 			Connection conx = FunctionsHandler.ConnectDDBB();
-			
+
 			boolean isAdmin = UsersControllerDDBB.isCurrentUserAdmin();
-			
+
 			String allQueryUser = "SELECT * FROM characters WHERE user_id='" + UsersControllerDDBB.getCurrentUserId() + "';";
-			
+
 			String allQuery = "SELECT * FROM characters;";
 
 			Statement stmt = conx.prepareStatement(isAdmin ? allQuery : allQueryUser);
@@ -185,40 +179,40 @@ public class CharControllerDDBB {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void ReadCSV() {
-		
+
 		List<List<String>> features = new ArrayList<>(10);
-		
+
 		String path = "src/characters.csv";
 
 		try (Scanner scanner = new Scanner(new File(path))) {
 		    while (scanner.hasNextLine()) {
 		        features.add(getRecordFromLine(scanner.nextLine()));
 
-		        for(int i = 0; i < features.size(); i++) {
-		        	
+		        for (List<String> feature : features) {
+
 		        	Connection conx = FunctionsHandler.ConnectDDBB();
-	        		
+
 	        		String insertQuery = "INSERT INTO characters (user_id, name, race, faction, title, life, runicpower, strength, stamina) "
 	        				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
-	        		
+
 	        		conx.prepareStatement(insertQuery);
-	        		
+
 	        		PreparedStatement preStmt = conx.prepareStatement(insertQuery);
-	        		
+
 	        		preStmt.setInt(1, UsersControllerDDBB.getCurrentUserId());
-	        		preStmt.setString(2, features.get(i).get(0));
-	        		preStmt.setString(3, features.get(i).get(1));
-	        		preStmt.setString(4, features.get(i).get(2));
-	        		preStmt.setString(5, features.get(i).get(3));
-	        		preStmt.setString(6, features.get(i).get(4));
-	        		preStmt.setString(7, features.get(i).get(5));
-	        		preStmt.setString(8, features.get(i).get(6));
-	        		preStmt.setString(9, features.get(i).get(7));
-	        		
+	        		preStmt.setString(2, feature.get(0));
+	        		preStmt.setString(3, feature.get(1));
+	        		preStmt.setString(4, feature.get(2));
+	        		preStmt.setString(5, feature.get(3));
+	        		preStmt.setString(6, feature.get(4));
+	        		preStmt.setString(7, feature.get(5));
+	        		preStmt.setString(8, feature.get(6));
+	        		preStmt.setString(9, feature.get(7));
+
 	        		preStmt.execute();
-	        		
+
 	        		preStmt.close();
 		        }
 		    }
@@ -226,6 +220,6 @@ public class CharControllerDDBB {
 			StringHandler.ErrorHandler(e.toString());
 			e.printStackTrace();
 		}
-	
+
 	}
 }

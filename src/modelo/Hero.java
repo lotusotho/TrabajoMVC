@@ -28,11 +28,11 @@ public class Hero {
         this.strength = strength;
         this.stamina = stamina;
     }
-    
+
     public int getId() {
     	return this.id;
     }
-    
+
     public void setId(int id) {
     	this.id = id;
     }

@@ -15,7 +15,7 @@ public class ConnectionDDBB {
 	private final static String tmz = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	private final static String bbddURL = "jdbc:mysql://localhost:3306/" + bbdd + tmz;
 	private static Connection conx;
-	
+
 	public static Connection connectBBDD() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -25,7 +25,7 @@ public class ConnectionDDBB {
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return conx;
 	}
 }
