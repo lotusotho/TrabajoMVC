@@ -28,6 +28,7 @@ public class UsersPanel extends JFrame {
 	private JPanel contentPane;
 
 	public UsersPanel() {
+		setResizable(false);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
 		Image iconImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/img/wowIcon.png"));

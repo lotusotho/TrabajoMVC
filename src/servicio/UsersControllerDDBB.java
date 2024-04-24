@@ -142,14 +142,14 @@ public class UsersControllerDDBB {
 			Connection conx = FunctionsHandler.ConnectDDBB();
 			String selQuery = "SELECT user_id FROM users ORDER BY name DESC LIMIT 1;";
 
-			Statement stmt = conx.prepareStatement(selQuery);
+			PreparedStatement stmt = conx.prepareStatement(selQuery);
 			ResultSet result = stmt.executeQuery(selQuery);
 
 			while (result.next()) {
 				if (result.getInt(1) != getCurrentUserId()) {
 					String delQuery = "DELETE FROM users ORDER BY name DESC LIMIT 1;";
-					Statement delStmt = conx.prepareStatement(delQuery);
-					delStmt.executeQuery(delQuery);
+					PreparedStatement delStmt = conx.prepareStatement(delQuery);
+					delStmt.execute();
 					delStmt.close();
 				} else {
 					StringHandler.MessageHandler("NoDeleteCurrentUser");

@@ -30,6 +30,7 @@ public class CharacterView extends JFrame {
 	private JScrollPane tableScrollPane;
 
 	public CharacterView() {
+		setResizable(false);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
 		Image iconImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/img/wowIcon.png"));

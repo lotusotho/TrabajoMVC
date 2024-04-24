@@ -41,6 +41,7 @@ public class CharacterCreation extends JFrame {
 	private JTextField StmTextField;
 
 	public CharacterCreation() {
+		setResizable(false);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
 		Image iconImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/img/wowIcon.png"));

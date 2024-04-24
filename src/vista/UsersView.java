@@ -30,6 +30,7 @@ public class UsersView extends JFrame {
 	private JScrollPane tableScrollPane;
 
 	public UsersView() {
+		setResizable(false);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
 		Image iconImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/img/wowIcon.png"));

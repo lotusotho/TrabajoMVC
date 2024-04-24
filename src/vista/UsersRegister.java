@@ -34,6 +34,7 @@ public class UsersRegister extends JFrame {
 	private JTextField passTextField;
 
 	public UsersRegister() {
+		setResizable(false);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
 		Image iconImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/img/wowIcon.png"));

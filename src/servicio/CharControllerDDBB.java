@@ -1,7 +1,11 @@
 package servicio;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -189,34 +193,35 @@ public class CharControllerDDBB {
 		try (Scanner scanner = new Scanner(new File(path))) {
 		    while (scanner.hasNextLine()) {
 		        features.add(getRecordFromLine(scanner.nextLine()));
-
-		        for (List<String> feature : features) {
-
-		        	Connection conx = FunctionsHandler.ConnectDDBB();
-
-	        		String insertQuery = "INSERT INTO characters (user_id, name, race, faction, title, life, runicpower, strength, stamina) "
-	        				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
-
-	        		conx.prepareStatement(insertQuery);
-
-	        		PreparedStatement preStmt = conx.prepareStatement(insertQuery);
-
-	        		preStmt.setInt(1, UsersControllerDDBB.getCurrentUserId());
-	        		preStmt.setString(2, feature.get(0));
-	        		preStmt.setString(3, feature.get(1));
-	        		preStmt.setString(4, feature.get(2));
-	        		preStmt.setString(5, feature.get(3));
-	        		preStmt.setString(6, feature.get(4));
-	        		preStmt.setString(7, feature.get(5));
-	        		preStmt.setString(8, feature.get(6));
-	        		preStmt.setString(9, feature.get(7));
-
-	        		preStmt.execute();
-
-	        		preStmt.close();
-		        }
 		    }
-		} catch (Exception e) {
+		    
+		    for (List<String> feature : features) {
+
+	        	Connection conx = FunctionsHandler.ConnectDDBB();
+
+        		String insertQuery = "INSERT INTO characters (user_id, name, race, faction, title, life, runicpower, strength, stamina) "
+        				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+
+        		conx.prepareStatement(insertQuery);
+
+        		PreparedStatement preStmt = conx.prepareStatement(insertQuery);
+
+        		preStmt.setInt(1, UsersControllerDDBB.getCurrentUserId());
+        		preStmt.setString(2, feature.get(0));
+        		preStmt.setString(3, feature.get(1));
+        		preStmt.setString(4, feature.get(2));
+        		preStmt.setString(5, feature.get(3));
+        		preStmt.setString(6, feature.get(4));
+        		preStmt.setString(7, feature.get(5));
+        		preStmt.setString(8, feature.get(6));
+        		preStmt.setString(9, feature.get(7));
+
+        		preStmt.execute();
+
+        		preStmt.close();
+	        }
+		    
+		} catch (SQLException | IOException e) {
 			StringHandler.ErrorHandler(e.toString());
 			e.printStackTrace();
 		}

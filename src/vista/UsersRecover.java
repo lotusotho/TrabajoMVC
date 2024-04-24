@@ -34,6 +34,7 @@ public class UsersRecover extends JFrame {
 	private JTextField newPassTextField;
 
 	public UsersRecover() {
+		setResizable(false);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
 		Image iconImg = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/img/wowIcon.png"));

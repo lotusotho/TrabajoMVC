@@ -35,6 +35,7 @@ public class UsersLogin extends JFrame {
 	private JPanel panelFormUsers;
 
 	public UsersLogin() {
+		setResizable(false);
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
