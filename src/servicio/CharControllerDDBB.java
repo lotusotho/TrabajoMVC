@@ -44,6 +44,7 @@ public class CharControllerDDBB {
 	public static void InsertCharacter(Hero heroObj) {
 		try {
 			Connection conx = ConnectionDDBB.connectBBDD();
+			
 			String insertQuery = "INSERT INTO characters (user_id, name, race, faction, title, life, runicpower, strength, stamina) "
 					+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
@@ -62,6 +63,7 @@ public class CharControllerDDBB {
 			preStmt.execute();
 
 			preStmt.close();
+			conx.close();
 
 		} catch (SQLException e) {
 			StringHandler.ErrorHandler(e.toString());
@@ -102,6 +104,7 @@ public class CharControllerDDBB {
 				((DefaultTableModel) jtable.getModel()).addRow(rows);
 			}
 
+			stmt.close();
 			conx.close();
 
 		} catch (SQLException e) {
@@ -129,6 +132,8 @@ public class CharControllerDDBB {
 					charArr[i] = result.getString(i);
 				}
 			}
+			
+			stmt.close();
 			conx.close();
 
 			return charArr;
@@ -153,6 +158,7 @@ public class CharControllerDDBB {
 				delStmt.execute();
 			}
 
+			prepStmt.close();
 			conx.close();
 
 		} catch (SQLException e) {
@@ -179,6 +185,8 @@ public class CharControllerDDBB {
 
 			wrt.close();
 			stmt.close();
+			conx.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -219,6 +227,7 @@ public class CharControllerDDBB {
         		preStmt.execute();
 
         		preStmt.close();
+        		conx.close();
 	        }
 		    
 		} catch (SQLException | IOException e) {

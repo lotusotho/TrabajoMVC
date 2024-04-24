@@ -45,6 +45,7 @@ public class UsersControllerDDBB {
 			}
 
 			prepStmt.close();
+			conx.close();
 
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
@@ -66,7 +67,9 @@ public class UsersControllerDDBB {
 			preStmt.setString(3, rolConv);
 
 			preStmt.execute();
+			
 			preStmt.close();
+			conx.close();
 
 			StringHandler.MessageHandler("userRegOK");
 			return true;
@@ -98,6 +101,7 @@ public class UsersControllerDDBB {
 			}
 
 			prepStmt.close();
+			conx.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -129,6 +133,7 @@ public class UsersControllerDDBB {
 				((DefaultTableModel) jtable.getModel()).addRow(rows);
 			}
 
+			stmt.close();
 			conx.close();
 
 		} catch (SQLException e) {
@@ -157,6 +162,7 @@ public class UsersControllerDDBB {
 			}
 
 			stmt.close();
+			conx.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -192,6 +198,7 @@ public class UsersControllerDDBB {
 				StringHandler.MessageHandler("passChangeKO");
 
 				prepStmt.close();
+				conx.close();
 			}
 		} catch (SQLException e) {
 			StringHandler.MessageHandler("passChangeKO");
