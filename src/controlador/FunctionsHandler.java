@@ -6,10 +6,10 @@ import java.sql.Connection;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import modelo.CharControllerDDBB;
-import modelo.ConnectionDDBB;
-import modelo.Hero;
-import modelo.UsersControllerDDBB;
+import servicio.CharControllerDDBB;
+import servicio.ConnectionDDBB;
+import servicio.Hero;
+import servicio.UsersControllerDDBB;
 import vista.CharacterCreation;
 import vista.CharacterView;
 import vista.UsersLogin;

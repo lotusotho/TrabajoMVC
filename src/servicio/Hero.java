@@ -1,4 +1,4 @@
-package modelo;
+package servicio;
 
 import java.math.BigDecimal;
 

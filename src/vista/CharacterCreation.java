@@ -22,7 +22,7 @@ import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import controlador.FunctionsHandler;
-import modelo.Hero;
+import servicio.Hero;
 
 /**
  * Interfaz de la creacion de personajes

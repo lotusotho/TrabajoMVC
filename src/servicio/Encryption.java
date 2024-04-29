@@ -1,4 +1,4 @@
-package modelo;
+package servicio;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
