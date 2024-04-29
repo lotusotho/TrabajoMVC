@@ -9,15 +9,15 @@ import java.math.BigDecimal;
 public class Hero {
 	private int id;
     private String name;
-    private String race;
-    private String faction;
+    private int race;
+    private boolean faction;
     private String title;
     private BigDecimal life;
     private int runicPower;
     private BigDecimal strength;
     private BigDecimal stamina;
 
-    public Hero(String name, String race, String faction, String title, BigDecimal life, int runicPower,
+    public Hero(String name, int race, boolean faction, String title, BigDecimal life, int runicPower,
     		BigDecimal strength, BigDecimal stamina) {
         this.name = name;
         this.race = race;
@@ -45,19 +45,19 @@ public class Hero {
 		this.name = name;
 	}
 
-	public String getRace() {
+	public int getRace() {
 		return race;
 	}
 
-	public void setRace(String race) {
+	public void setRace(int race) {
 		this.race = race;
 	}
 
-	public String getFaction() {
+	public boolean getFaction() {
 		return faction;
 	}
 
-	public void setFaction(String faction) {
+	public void setFaction(boolean faction) {
 		this.faction = faction;
 	}
 

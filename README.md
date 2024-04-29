@@ -9,3 +9,4 @@ Trabajo del tercer trimestre de 1º DAW
 	- Then typed username's password is changed for new encrypted username password
 - Change characters table floating values from DOUBLE to DECIMAL
 - Check TODOs inside code
+- Update code for the new DB structure

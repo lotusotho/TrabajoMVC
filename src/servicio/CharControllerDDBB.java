@@ -51,8 +51,8 @@ public class CharControllerDDBB {
 
 			preStmt.setInt(1, UsersControllerDDBB.getCurrentUserId());
 			preStmt.setString(2, heroObj.getName());
-			preStmt.setString(3, heroObj.getRace());
-			preStmt.setString(4, heroObj.getFaction());
+			preStmt.setInt(3, heroObj.getRace());
+			preStmt.setBoolean(4, heroObj.getFaction());
 			preStmt.setString(5, heroObj.getTitle());
 			preStmt.setBigDecimal(6, heroObj.getLife());
 			preStmt.setInt(7, heroObj.getRunicPower());
