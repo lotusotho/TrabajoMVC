@@ -23,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 import controlador.FunctionsHandler;
 
 public class CharacterView extends JFrame {
+	
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -82,7 +83,8 @@ public class CharacterView extends JFrame {
 		btnViewChars.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.ViewCharactersTable(charTable);
+				FunctionsHandler functionsHandler = new FunctionsHandler();
+				functionsHandler.ViewCharactersTable(charTable);
 			}
 		});
 
@@ -94,7 +96,8 @@ public class CharacterView extends JFrame {
 		btnDelLastRow.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.DeleteLastCharacter(charTable);
+				FunctionsHandler functionsHandler = new FunctionsHandler();
+				functionsHandler.DeleteLastCharacter(charTable);
 			}
 		});
 
@@ -106,7 +109,8 @@ public class CharacterView extends JFrame {
 		btnGenerateCsv.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.CreateCSV();
+				FunctionsHandler functionsHandler = new FunctionsHandler();
+				functionsHandler.CreateCSV();
 			}
 		});
 		btnGenerateCsv.setFont(new Font("Verdana", Font.PLAIN, 15));
@@ -117,7 +121,8 @@ public class CharacterView extends JFrame {
 		btnPasteCSV.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.ReadCSV();
+				FunctionsHandler functionsHandler = new FunctionsHandler();
+				functionsHandler.ReadCSV();
 			}
 		});
 		btnPasteCSV.setFont(new Font("Verdana", Font.PLAIN, 15));
@@ -136,7 +141,8 @@ public class CharacterView extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.UsersControlPanel(true);
+				FunctionsHandler functionsHandler = new FunctionsHandler();
+				functionsHandler.UsersControlPanel(true);
 			}
 		});
 		btnBack.setBounds(10, 11, 89, 23);

@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -26,7 +25,8 @@ import vista.StringHandler;
  */
 
 public class CharControllerDDBB {
-	private static List<String> getRecordFromLine(String line) {
+
+	private List<String> getRecordFromLine(String line) {
 	    List<String> values = new ArrayList<>();
 
 	    try (Scanner rowScanner = new Scanner(line)) {
@@ -38,7 +38,7 @@ public class CharControllerDDBB {
 	    return values;
 	}
 
-	public static void InsertCharacter(Hero heroObj) {
+	public void InsertCharacter(Hero heroObj) {
 		try {
 			Connection conx = ConnectionDDBB.connectBBDD();
 
@@ -47,8 +47,10 @@ public class CharControllerDDBB {
 					+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
 			PreparedStatement preStmt = conx.prepareStatement(insertQuery);
+			
+			UsersControllerDDBB usersControllerDDBB = new UsersControllerDDBB();
 
-			preStmt.setInt(1, UsersControllerDDBB.getCurrentUserId());
+			preStmt.setInt(1, usersControllerDDBB.getCurrentUserId());
 			preStmt.setString(2, heroObj.getName());
 			preStmt.setInt(3, heroObj.getRace_id());
 			preStmt.setBoolean(4, heroObj.getFaction_id());
@@ -65,22 +67,27 @@ public class CharControllerDDBB {
 			conx.close();
 
 		} catch (SQLException e) {
-			StringHandler.ErrorHandler(e.toString());
+			StringHandler stringHandler = new StringHandler();
+			stringHandler.ErrorHandler(e.toString());
 			e.printStackTrace();
 		}
 	}
 
-	public static void ShowAllRows(JTable jtable) {
+	public void ShowAllRows(JTable jtable) {
 		try {
 			Connection conx = FunctionsHandler.ConnectDDBB();
+			
+			UsersControllerDDBB usersControllerDDBB = new UsersControllerDDBB();
+			
+			StringHandler stringHandler = new StringHandler();
 
-			boolean isAdmin = UsersControllerDDBB.isCurrentUserAdmin();
+			boolean isAdmin = usersControllerDDBB.isCurrentUserAdmin();
 
 			String allQueryUser = "SELECT name, r.raceName, c.className, f.factionName, title, life, "
 					+ "runicpower, strength, stamina FROM hero h "
 					+ "LEFT JOIN race r on h.race_ID = r.ID "
 					+ "LEFT JOIN heroClass c on h.class_ID = c.ID "
-					+ "LEFT JOIN faction f on h.faction_ID = f.ID where user_id=" + UsersControllerDDBB.getCurrentUserId() + " ORDER BY name ASC;";
+					+ "LEFT JOIN faction f on h.faction_ID = f.ID where user_id=" + usersControllerDDBB.getCurrentUserId() + " ORDER BY name ASC;";
 
 			String allQuery = "SELECT name, r.raceName, c.className, f.factionName, title, life, "
 					+ "runicpower, strength, stamina FROM hero h "
@@ -95,7 +102,7 @@ public class CharControllerDDBB {
 
 			while (result.next()) {
 				if(result.wasNull()) {
-					StringHandler.MessageHandler("noChars");
+					stringHandler.MessageHandler("noChars");
 				} else {
 					name = result.getString(1);
 					race = result.getString(2);
@@ -121,7 +128,7 @@ public class CharControllerDDBB {
 		}
 	}
 
-//	public static String[] ShowAllColumns() {
+//	public String[] ShowAllColumns() {
 //		try {
 //			String[] charArr = new String[0];
 //
@@ -135,7 +142,7 @@ public class CharControllerDDBB {
 //
 //			Statement stmt = conx.prepareStatement(isAdmin ? allQuery : allQueryUser);
 //			ResultSet result = stmt.executeQuery(isAdmin ? allQuery : allQueryUser);
-//			
+//
 //			if(result.next()) {
 //				for (int i = 0; i < result.getMetaData().getColumnCount(); i++) {
 //					charArr[i] = result.getMetaData().getColumnName(i);
@@ -153,7 +160,7 @@ public class CharControllerDDBB {
 //
 //	}
 
-	public static void DeleteLastCharacterDB() {
+	public void DeleteLastCharacterDB() {
 		try {
 			Connection conx = FunctionsHandler.ConnectDDBB();
 			String selectQuery = "SELECT user_id FROM hero ORDER BY name DESC LIMIT 1;";
@@ -175,7 +182,7 @@ public class CharControllerDDBB {
 		}
 	}
 
-	public static ArrayList<String> GetCharacterFRC(int selector) {
+	public ArrayList<String> GetCharacterFRC(int selector) {
 		try {
 			ArrayList<String> factions = new ArrayList<>();
 
@@ -208,7 +215,7 @@ public class CharControllerDDBB {
 		}
 	}
 
-	public static void GenerateCSV() {
+	public void GenerateCSV() {
 		Connection conx = FunctionsHandler.ConnectDDBB();
 
 		String allQuery = "SELECT * FROM hero;";
@@ -220,7 +227,7 @@ public class CharControllerDDBB {
 			ResultSet rst = stmt.executeQuery(allQuery);
 
 			FileWriter wrt = new FileWriter(path);
-			
+
 //			for (int i = 0; i < rst.getMetaData().getColumnCount(); i++) {
 //				wrt.write(rst.getMetaData().getColumnName(i));
 //			}
@@ -240,7 +247,10 @@ public class CharControllerDDBB {
 		}
 	}
 
-	public static void ReadCSV() {
+	public void ReadCSV() {
+		UsersControllerDDBB usersControllerDDBB = new UsersControllerDDBB();
+		
+		StringHandler stringHandler = new StringHandler();
 
 		List<List<String>> features = new ArrayList<>(10);
 
@@ -264,7 +274,7 @@ public class CharControllerDDBB {
         		PreparedStatement preStmt = conx.prepareStatement(insertQuery);
 
         		preStmt.setInt(1, Integer.parseInt(feature.get(0)));
-        		preStmt.setInt(2, UsersControllerDDBB.getCurrentUserId());
+        		preStmt.setInt(2, usersControllerDDBB.getCurrentUserId());
         		preStmt.setString(3, feature.get(2));
         		preStmt.setInt(4, Integer.parseInt(feature.get(3)));
         		preStmt.setInt(5, Integer.parseInt(feature.get(4)));
@@ -282,7 +292,7 @@ public class CharControllerDDBB {
 	        }
 
 		} catch (SQLException | IOException e) {
-			StringHandler.ErrorHandler(e.toString());
+			stringHandler.ErrorHandler(e.toString());
 			e.printStackTrace();
 		}
 

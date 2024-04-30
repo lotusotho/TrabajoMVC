@@ -11,7 +11,7 @@ public class Encryption {
 	 * @param passwd
 	 * @return
 	 */
-	public static String Encrypt(String passwd) {
+	public String Encrypt(String passwd) {
 		MessageDigest md;
 		try {
 			md = MessageDigest.getInstance("SHA-256");
@@ -25,7 +25,7 @@ public class Encryption {
 		return "Error";
 	}
 
-	private static String bytesToHex(byte[] hash) {
+	private String bytesToHex(byte[] hash) {
 		StringBuilder hexString = new StringBuilder(2 * hash.length);
 
 		for (byte element : hash) {

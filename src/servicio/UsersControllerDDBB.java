@@ -21,13 +21,15 @@ import vista.StringHandler;
 
 public class UsersControllerDDBB {
 
-	private static int currentUserId;
+	private int currentUserId;
 
-	public static void usersLogin(String name, String passwd) {
+	public void usersLogin(String name, String passwd) {
 		try {
 			Connection conx = ConnectionDDBB.connectBBDD();
+			
+			Encryption encryption = new Encryption();
 
-			String tempHashedPassd = Encryption.Encrypt(passwd);
+			String tempHashedPassd = encryption.Encrypt(passwd);
 
 			String loginQuery = "SELECT user_id, name, passwd FROM user WHERE name=? AND passwd=?;";
 
@@ -39,9 +41,11 @@ public class UsersControllerDDBB {
 
 			if (result.next()) {
 				setCurrentUserid(result.getInt("user_id"));
-				FunctionsHandler.UsersControlPanel(true);
+				FunctionsHandler functionsHandler = new FunctionsHandler();
+				functionsHandler.UsersControlPanel(true);
 			} else {
-				StringHandler.MessageHandler("userLoginKO");
+				StringHandler stringHandler = new StringHandler();
+				stringHandler.MessageHandler("userLoginKO");
 			}
 
 			prepStmt.close();
@@ -52,7 +56,7 @@ public class UsersControllerDDBB {
 		}
 	}
 
-	public static boolean usersRegister(String name, String passwd, boolean isAdmin) {
+	public boolean usersRegister(String name, String passwd, boolean isAdmin) {
 		try {
 			Connection conx = ConnectionDDBB.connectBBDD();
 
@@ -60,8 +64,10 @@ public class UsersControllerDDBB {
 
 			PreparedStatement preStmt = conx.prepareStatement(regQuery);
 
+			Encryption encryption = new Encryption();
+			
 			preStmt.setString(1, name);
-			preStmt.setString(2, Encryption.Encrypt(passwd));
+			preStmt.setString(2, encryption.Encrypt(passwd));
 			preStmt.setBoolean(3, isAdmin);
 
 			preStmt.execute();
@@ -69,11 +75,14 @@ public class UsersControllerDDBB {
 			preStmt.close();
 			conx.close();
 
-			StringHandler.MessageHandler("userRegOK");
+			StringHandler stringHandler = new StringHandler();
+			stringHandler.MessageHandler("userRegOK");
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			StringHandler.MessageHandler("userRegKO");
+			
+			StringHandler stringHandler2 = new StringHandler();
+			stringHandler2.MessageHandler("userRegKO");
 			return false;
 		}
 	}
@@ -83,7 +92,7 @@ public class UsersControllerDDBB {
 	 *
 	 * @return
 	 */
-	public static boolean isCurrentUserAdmin() {
+	public boolean isCurrentUserAdmin() {
 		Connection conx = ConnectionDDBB.connectBBDD();
 
 		String adminQuery = "SELECT isAdmin FROM user WHERE user_id=?;";
@@ -109,7 +118,7 @@ public class UsersControllerDDBB {
 	}
 
 	// UsersView
-	public static void ShowAllRows(JTable jtable) {
+	public void ShowAllRows(JTable jtable) {
 		try {
 			Connection conx = FunctionsHandler.ConnectDDBB();
 
@@ -139,7 +148,7 @@ public class UsersControllerDDBB {
 		}
 	}
 
-	public static void DeleteLastUserDB() {
+	public void DeleteLastUserDB() {
 
 		try {
 			Connection conx = FunctionsHandler.ConnectDDBB();
@@ -155,7 +164,8 @@ public class UsersControllerDDBB {
 					delStmt.execute();
 					delStmt.close();
 				} else {
-					StringHandler.MessageHandler("NoDeleteCurrentUser");
+					StringHandler stringHandler = new StringHandler();
+					stringHandler.MessageHandler("NoDeleteCurrentUser");
 				}
 			}
 
@@ -167,7 +177,7 @@ public class UsersControllerDDBB {
 		}
 	}
 
-	public static void RecoverPassUser(String oldPasswd, String newPasswd, String name) {
+	public void RecoverPassUser(String oldPasswd, String newPasswd, String name) {
 		try {
 			Connection conx = FunctionsHandler.ConnectDDBB();
 			String selQuery = "SELECT name, passwd FROM user WHERE name=?;";
@@ -177,12 +187,15 @@ public class UsersControllerDDBB {
 			prepStmt.setString(1, name);
 
 			ResultSet result = prepStmt.executeQuery();
+			
+			Encryption encryption = new Encryption();
+			StringHandler stringHandler = new StringHandler();
 
-			if (result.next() && result.getString(2).equals(Encryption.Encrypt(oldPasswd))) {
+			if (result.next() && result.getString(2).equals(encryption.Encrypt(oldPasswd))) {
 				String updateQuery = "UPDATE user SET passwd=? WHERE name=?;";
 
 				PreparedStatement prepStmt2 = conx.prepareStatement(updateQuery);
-				prepStmt2.setString(1, Encryption.Encrypt(newPasswd));
+				prepStmt2.setString(1, encryption.Encrypt(newPasswd));
 				prepStmt2.setString(2, name);
 
 				prepStmt2.execute();
@@ -190,25 +203,26 @@ public class UsersControllerDDBB {
 				prepStmt2.close();
 				prepStmt.close();
 
-				StringHandler.MessageHandler("passChangeOK");
+				stringHandler.MessageHandler("passChangeOK");
 				result.close();
 			} else {
-				StringHandler.MessageHandler("passChangeKO");
+				stringHandler.MessageHandler("passChangeKO");
 
 				prepStmt.close();
 				conx.close();
 			}
 		} catch (SQLException e) {
-			StringHandler.MessageHandler("passChangeKO");
+			StringHandler stringHandler2 = new StringHandler();
+			stringHandler2.MessageHandler("passChangeKO");
 			e.printStackTrace();
 		}
 	}
 
-	public static int getCurrentUserId() {
+	public int getCurrentUserId() {
 		return currentUserId;
 	}
 
-	public static void setCurrentUserid(int userId) {
+	public void setCurrentUserid(int userId) {
 		currentUserId = userId;
 	}
 

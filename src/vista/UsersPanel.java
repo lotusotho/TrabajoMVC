@@ -23,6 +23,7 @@ import controlador.FunctionsHandler;
  */
 
 public class UsersPanel extends JFrame {
+	
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -44,6 +45,8 @@ public class UsersPanel extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		FunctionsHandler functionsHandler = new FunctionsHandler();
 
 		JLabel lblPanelDelUsuario = new JLabel("Panel del usuario:");
 		lblPanelDelUsuario.setBounds(199, 32, 305, 35);
@@ -63,7 +66,7 @@ public class UsersPanel extends JFrame {
 		btnCreateChar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.CharacterCreationPanel(true);
+				functionsHandler.CharacterCreationPanel(true);
 			}
 		});
 		contentPane.add(btnCreateChar);
@@ -72,7 +75,7 @@ public class UsersPanel extends JFrame {
 		btnAdminChars.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.CharacterManagementPanel(true);
+				functionsHandler.CharacterManagementPanel(true);
 			}
 		});
 		btnAdminChars.setFont(new Font("Verdana", Font.PLAIN, 17));
@@ -83,18 +86,18 @@ public class UsersPanel extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.UserLoginPanel(true);
+				functionsHandler.UserLoginPanel(true);
 			}
 		});
 		btnBack.setBounds(10, 11, 89, 23);
 		contentPane.add(btnBack);
 
-		if(FunctionsHandler.isCurrentUserAdmin()) {
+		if(functionsHandler.isCurrentUserAdmin()) {
 			JButton btnAdminUsers = new JButton("Admin. Usuarios");
 			btnAdminUsers.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					FunctionsHandler.UsersManagementPanel(true);
+					functionsHandler.UsersManagementPanel(true);
 				}
 			});
 			btnAdminUsers.setFont(new Font("Verdana", Font.PLAIN, 17));

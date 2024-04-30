@@ -27,6 +27,7 @@ import controlador.FunctionsHandler;
  */
 
 public class UsersLogin extends JFrame {
+	
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -57,7 +58,8 @@ public class UsersLogin extends JFrame {
 		btnUserRecover.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.UsersRecoverPanel(true);
+				FunctionsHandler functionsHandler = new FunctionsHandler();
+				functionsHandler.UsersRecoverPanel(true);
 			}
 		});
 		btnUserRecover.setFont(new Font("Verdana", Font.PLAIN, 14));
@@ -107,7 +109,8 @@ public class UsersLogin extends JFrame {
 		btnUserLogin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.UsersLogin(userTextField.getText(), passTextField.getText());
+				FunctionsHandler functionsHandler = new FunctionsHandler();
+				functionsHandler.UsersLogin(userTextField.getText(), passTextField.getText());
 			}
 		});
 		contentPane.add(btnUserLogin);
@@ -117,7 +120,8 @@ public class UsersLogin extends JFrame {
 		btnUserRegister.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.UserRegisterPanel(true);
+				FunctionsHandler functionsHandler = new FunctionsHandler();
+				functionsHandler.UserRegisterPanel(true);
 			}
 		});
 		btnUserRegister.setFont(new Font("Verdana", Font.PLAIN, 17));

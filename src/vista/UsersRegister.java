@@ -28,6 +28,7 @@ import controlador.FunctionsHandler;
  */
 
 public class UsersRegister extends JFrame {
+	
 
 	private JPanel contentPane;
 	private JTextField userTextField;
@@ -56,7 +57,8 @@ public class UsersRegister extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.UserLoginPanel(true);
+				FunctionsHandler functionsHandler = new FunctionsHandler();
+				functionsHandler.UserLoginPanel(true);
 			}
 		});
 		btnBack.setBounds(20, 21, 89, 23);
@@ -117,7 +119,8 @@ public class UsersRegister extends JFrame {
 		btnRegistrar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.UsersRegister(userTextField.getText(), passTextField.getText(), adminCheckBox.isSelected());
+				FunctionsHandler functionsHandler = new FunctionsHandler();
+				functionsHandler.UsersRegister(userTextField.getText(), passTextField.getText(), adminCheckBox.isSelected());
 			}
 		});
 		contentPane.add(btnRegistrar);

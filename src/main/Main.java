@@ -17,7 +17,8 @@ public class Main {
 			@Override
 			public void run() {
 				try {
-					FunctionsHandler.UserLoginPanel(true);
+					FunctionsHandler functionsHandler = new FunctionsHandler();
+					functionsHandler.UserLoginPanel(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

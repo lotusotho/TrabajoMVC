@@ -31,6 +31,7 @@ import servicio.Hero;
  */
 
 public class CharacterCreation extends JFrame {
+	
 
 	private JPanel contentPane;
 	private JTextField NameTextField;
@@ -54,6 +55,8 @@ public class CharacterCreation extends JFrame {
 
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+		
+		FunctionsHandler functionsHandler = new FunctionsHandler();
 
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(224, 242, 243));
@@ -66,7 +69,7 @@ public class CharacterCreation extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.UsersControlPanel(true);
+				functionsHandler.UsersControlPanel(true);
 			}
 		});
 
@@ -83,7 +86,7 @@ public class CharacterCreation extends JFrame {
 		lblTtulo_1.setBounds(22, 11, 105, 24);
 		panelFormClass.add(lblTtulo_1);
 
-		classComboBox.setModel(new DefaultComboBoxModel(FunctionsHandler.GetFactions(3).toArray()));
+		classComboBox.setModel(new DefaultComboBoxModel(functionsHandler.GetFactions(3).toArray()));
 		classComboBox.setMaximumRowCount(13);
 		classComboBox.setBounds(155, 16, 146, 22);
 		panelFormClass.add(classComboBox);
@@ -104,7 +107,7 @@ public class CharacterCreation extends JFrame {
 						BigDecimal.valueOf(Double.parseDouble(StrTextField.getText())),
 						BigDecimal.valueOf(Double.parseDouble(StmTextField.getText())));
 
-				FunctionsHandler.InsertCharacter(tempHero);
+				functionsHandler.InsertCharacter(tempHero);
 
 				ArrayList<JTextField> allTextFields = new ArrayList<>();
 
@@ -227,7 +230,7 @@ public class CharacterCreation extends JFrame {
 		lblFaccin.setBounds(22, 11, 105, 24);
 		panelFormFaction.add(lblFaccin);
 
-		factionComboBox.setModel(new DefaultComboBoxModel(FunctionsHandler.GetFactions(1).toArray()));
+		factionComboBox.setModel(new DefaultComboBoxModel(functionsHandler.GetFactions(1).toArray()));
 		factionComboBox.setMaximumRowCount(2);
 		factionComboBox.setBounds(157, 11, 146, 22);
 		panelFormFaction.add(factionComboBox);
@@ -245,7 +248,7 @@ public class CharacterCreation extends JFrame {
 		lblRaza.setBounds(22, 11, 105, 24);
 		panelFormRace.add(lblRaza);
 
-		raceComboBox.setModel(new DefaultComboBoxModel(FunctionsHandler.GetFactions(2).toArray()));
+		raceComboBox.setModel(new DefaultComboBoxModel(functionsHandler.GetFactions(2).toArray()));
 		raceComboBox.setMaximumRowCount(14);
 		raceComboBox.setBounds(160, 16, 146, 22);
 		panelFormRace.add(raceComboBox);

@@ -27,6 +27,7 @@ import controlador.FunctionsHandler;
  */
 
 public class UsersRecover extends JFrame {
+	
 
 	private JPanel contentPane;
 	private JTextField userTextField;
@@ -56,7 +57,8 @@ public class UsersRecover extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.UserLoginPanel(true);
+				FunctionsHandler functionsHandler = new FunctionsHandler();
+				functionsHandler.UserLoginPanel(true);
 			}
 		});
 		btnBack.setBounds(20, 21, 89, 23);
@@ -123,7 +125,8 @@ public class UsersRecover extends JFrame {
 		btnRegistrar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.RecoverPassUser(oldPassTextField.getText(), newPassTextField.getText(), userTextField.getText());
+				FunctionsHandler functionsHandler = new FunctionsHandler();
+				functionsHandler.RecoverPassUser(oldPassTextField.getText(), newPassTextField.getText(), userTextField.getText());
 			}
 		});
 		contentPane.add(btnRegistrar);

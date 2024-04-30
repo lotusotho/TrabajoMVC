@@ -23,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 import controlador.FunctionsHandler;
 
 public class UsersView extends JFrame {
+	
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -67,7 +68,8 @@ public class UsersView extends JFrame {
 		btnViewChars.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.ViewUsersTable(charTable);
+				FunctionsHandler functionsHandler = new FunctionsHandler();
+				functionsHandler.ViewUsersTable(charTable);
 			}
 		});
 
@@ -79,7 +81,8 @@ public class UsersView extends JFrame {
 		btnDelLastRow.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.DeleteLastUser(charTable);
+				FunctionsHandler functionsHandler = new FunctionsHandler();
+				functionsHandler.DeleteLastUser(charTable);
 			}
 		});
 
@@ -99,7 +102,8 @@ public class UsersView extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FunctionsHandler.UsersControlPanel(true);
+				FunctionsHandler functionsHandler = new FunctionsHandler();
+				functionsHandler.UsersControlPanel(true);
 			}
 		});
 		btnBack.setBounds(10, 11, 89, 23);
