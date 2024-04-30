@@ -86,7 +86,7 @@ public class UsersControllerDDBB {
 	public static boolean isCurrentUserAdmin() {
 		Connection conx = ConnectionDDBB.connectBBDD();
 
-		String adminQuery = "SELECT isAdmin from user WHERE user_id=?;";
+		String adminQuery = "SELECT isAdmin FROM user WHERE user_id=?;";
 
 		try {
 			PreparedStatement prepStmt = conx.prepareStatement(adminQuery);

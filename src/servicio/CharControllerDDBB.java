@@ -79,13 +79,13 @@ public class CharControllerDDBB {
 			boolean isAdmin = UsersControllerDDBB.isCurrentUserAdmin();
 
 			String allQueryUser = "SELECT char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
-					+ "runicpower, strength, stamina from hero h "
+					+ "runicpower, strength, stamina FROM hero h "
 					+ "LEFT JOIN race r on h.race_ID = r.ID "
 					+ "LEFT JOIN heroClass c on h.class_ID = c.ID "
 					+ "LEFT JOIN faction f on h.faction_ID = f.ID where user_id=" + UsersControllerDDBB.getCurrentUserId() + " ORDER BY name ASC;";
 
 			String allQuery = "SELECT char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
-					+ "runicpower, strength, stamina from hero h "
+					+ "runicpower, strength, stamina FROM hero h "
 					+ "LEFT JOIN race r on h.race_ID = r.ID "
 					+ "LEFT JOIN heroClass c on h.class_ID = c.ID "
 					+ "LEFT JOIN faction f on h.faction_ID = f.ID ORDER BY name ASC;";
@@ -133,13 +133,13 @@ public class CharControllerDDBB {
 			boolean isAdmin = UsersControllerDDBB.isCurrentUserAdmin();
 			
 			String allQueryUser = "SELECT char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
-					+ "runicpower, strength, stamina from hero h "
+					+ "runicpower, strength, stamina FROM hero h "
 					+ "LEFT JOIN race r on h.race_ID = r.ID "
 					+ "LEFT JOIN heroClass c on h.class_ID = c.ID "
 					+ "LEFT JOIN faction f on h.faction_ID = f.ID where user_id=" + UsersControllerDDBB.getCurrentUserId() + ";";
 			
 			String allQuery = "SELECT char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
-					+ "runicpower, strength, stamina from hero h "
+					+ "runicpower, strength, stamina FROM hero h "
 					+ "LEFT JOIN race r on h.race_ID = r.ID "
 					+ "LEFT JOIN heroClass c on h.class_ID = c.ID "
 					+ "LEFT JOIN faction f on h.faction_ID = f.ID;";
@@ -195,11 +195,11 @@ public class CharControllerDDBB {
 			String selectQuery = "";
 			
 			if(selector == 1) {
-				selectQuery = "SELECT factionName from faction;";
+				selectQuery = "SELECT factionName FROM faction;";
 			} else if(selector == 2) {
-				selectQuery = "SELECT raceName from race;";
+				selectQuery = "SELECT raceName FROM race;";
 			} else if(selector == 3) {
-				selectQuery = "SELECT className from heroclass;";
+				selectQuery = "SELECT className FROM heroclass;";
 			}
 			
 			PreparedStatement prepStmt = conx.prepareStatement(selectQuery);
@@ -222,11 +222,7 @@ public class CharControllerDDBB {
 	public static void GenerateCSV() {
 		Connection conx = FunctionsHandler.ConnectDDBB();
 		
-		String allQuery = "SELECT char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
-				+ "runicpower, strength, stamina from hero h "
-				+ "LEFT JOIN race r on h.race_ID = r.ID "
-				+ "LEFT JOIN heroClass c on h.class_ID = c.ID "
-				+ "LEFT JOIN faction f on h.faction_ID = f.ID ORDER BY name ASC;";
+		String allQuery = "SELECT * FROM hero;";
 		
 		String path = "src/hero.csv";
 
@@ -237,9 +233,9 @@ public class CharControllerDDBB {
 			FileWriter wrt = new FileWriter(path);
 
 			while (rst.next()) {
-				wrt.write(rst.getString(3) + ";" + rst.getString(4) + ";"
-						+ rst.getString(5) + ";" + rst.getString(6) + ";" + rst.getDouble(7) + ";" + rst.getDouble(8)
-						+ ";" + rst.getDouble(9) + ";" + rst.getDouble(10) + "\n");
+				wrt.write(rst.getInt(1) + ";" + rst.getInt(2) + ";" + rst.getString(3) + ";" + rst.getInt(4) + ";"
+						+ rst.getInt(5) + ";" + rst.getInt(6) + ";" + rst.getString(7) + ";" + rst.getBigDecimal(8)
+						+ ";" + rst.getInt(9) + ";" + rst.getBigDecimal(10) + ";" + rst.getBigDecimal(11) + "\n");
 			}
 
 			wrt.close();
@@ -266,24 +262,25 @@ public class CharControllerDDBB {
 
 	        	Connection conx = FunctionsHandler.ConnectDDBB();
 
-	        	String insertQuery = "INSERT INTO hero (user_id, name, race_id, faction_id, heroClass_id, title, "
+	        	String insertQuery = "INSERT INTO hero (char_id ,user_id, name, race_id, faction_id, class_id, title, "
 						+ "life, runicpower, strength, stamina) "
-						+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+						+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         		conx.prepareStatement(insertQuery);
 
         		PreparedStatement preStmt = conx.prepareStatement(insertQuery);
 
-        		preStmt.setInt(1, UsersControllerDDBB.getCurrentUserId());
-        		preStmt.setString(2, feature.get(0));
-        		preStmt.setString(3, feature.get(1));
-        		preStmt.setInt(4, Integer.parseInt(feature.get(2)));
-        		preStmt.setInt(5, Integer.parseInt(feature.get(3)));
-        		preStmt.setInt(6, Integer.parseInt(feature.get(4)));
-        		preStmt.setString(6, feature.get(4));
-        		preStmt.setString(7, feature.get(5));
-        		preStmt.setString(8, feature.get(6));
-        		preStmt.setString(9, feature.get(7));
+        		preStmt.setInt(1, Integer.parseInt(feature.get(0)));
+        		preStmt.setInt(2, UsersControllerDDBB.getCurrentUserId());
+        		preStmt.setString(3, feature.get(2));
+        		preStmt.setInt(4, Integer.parseInt(feature.get(3)));
+        		preStmt.setInt(5, Integer.parseInt(feature.get(4)));
+        		preStmt.setInt(6, Integer.parseInt(feature.get(5)));
+        		preStmt.setString(7, feature.get(6));
+        		preStmt.setString(8, feature.get(7));
+        		preStmt.setString(9, feature.get(8));
+        		preStmt.setString(10, feature.get(9));
+        		preStmt.setString(11, feature.get(10));
 
         		preStmt.execute();
 
