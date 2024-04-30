@@ -47,7 +47,7 @@ public class CharControllerDDBB {
 					+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
 			PreparedStatement preStmt = conx.prepareStatement(insertQuery);
-			
+
 			UsersControllerDDBB usersControllerDDBB = new UsersControllerDDBB();
 
 			preStmt.setInt(1, usersControllerDDBB.getCurrentUserId());
@@ -76,9 +76,9 @@ public class CharControllerDDBB {
 	public void ShowAllRows(JTable jtable) {
 		try {
 			Connection conx = FunctionsHandler.ConnectDDBB();
-			
+
 			UsersControllerDDBB usersControllerDDBB = new UsersControllerDDBB();
-			
+
 			StringHandler stringHandler = new StringHandler();
 
 			boolean isAdmin = usersControllerDDBB.isCurrentUserAdmin();
@@ -249,7 +249,7 @@ public class CharControllerDDBB {
 
 	public void ReadCSV() {
 		UsersControllerDDBB usersControllerDDBB = new UsersControllerDDBB();
-		
+
 		StringHandler stringHandler = new StringHandler();
 
 		List<List<String>> features = new ArrayList<>(10);

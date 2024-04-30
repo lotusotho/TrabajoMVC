@@ -28,7 +28,7 @@ import controlador.FunctionsHandler;
  */
 
 public class UsersRegister extends JFrame {
-	
+
 
 	private JPanel contentPane;
 	private JTextField userTextField;

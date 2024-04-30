@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
 import controlador.FunctionsHandler;
 
 public class UsersView extends JFrame {
-	
+
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;

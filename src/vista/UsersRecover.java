@@ -27,7 +27,7 @@ import controlador.FunctionsHandler;
  */
 
 public class UsersRecover extends JFrame {
-	
+
 
 	private JPanel contentPane;
 	private JTextField userTextField;

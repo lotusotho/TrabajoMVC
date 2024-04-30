@@ -26,7 +26,7 @@ public class UsersControllerDDBB {
 	public void usersLogin(String name, String passwd) {
 		try {
 			Connection conx = ConnectionDDBB.connectBBDD();
-			
+
 			Encryption encryption = new Encryption();
 
 			String tempHashedPassd = encryption.Encrypt(passwd);
@@ -65,7 +65,7 @@ public class UsersControllerDDBB {
 			PreparedStatement preStmt = conx.prepareStatement(regQuery);
 
 			Encryption encryption = new Encryption();
-			
+
 			preStmt.setString(1, name);
 			preStmt.setString(2, encryption.Encrypt(passwd));
 			preStmt.setBoolean(3, isAdmin);
@@ -80,7 +80,7 @@ public class UsersControllerDDBB {
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
+
 			StringHandler stringHandler2 = new StringHandler();
 			stringHandler2.MessageHandler("userRegKO");
 			return false;
@@ -187,7 +187,7 @@ public class UsersControllerDDBB {
 			prepStmt.setString(1, name);
 
 			ResultSet result = prepStmt.executeQuery();
-			
+
 			Encryption encryption = new Encryption();
 			StringHandler stringHandler = new StringHandler();
 

@@ -21,7 +21,7 @@ import vista.UsersRegister;
 import vista.UsersView;
 
 public class FunctionsHandler {
-	
+
 	// DDBB Stuff
 	public static Connection ConnectDDBB() {
 		return ConnectionDDBB.connectBBDD();

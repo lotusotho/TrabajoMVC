@@ -23,7 +23,7 @@ import controlador.FunctionsHandler;
  */
 
 public class UsersPanel extends JFrame {
-	
+
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -45,7 +45,7 @@ public class UsersPanel extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		FunctionsHandler functionsHandler = new FunctionsHandler();
 
 		JLabel lblPanelDelUsuario = new JLabel("Panel del usuario:");
