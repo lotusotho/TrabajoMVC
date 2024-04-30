@@ -98,7 +98,7 @@ public class CharacterCreation extends JFrame {
 		btnCreateChar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Hero tempHero = new Hero(NameTextField.getText(), raceComboBox.getSelectedIndex() + 1, factionComboBox.getSelectedIndex() + 1,
+				Hero tempHero = new Hero(NameTextField.getText(), raceComboBox.getSelectedIndex() + 1, factionComboBox.getSelectedIndex() == 1 ? true : false,
 						classComboBox.getSelectedIndex() + 1, TitleTextField.getText(), 
 						BigDecimal.valueOf(Double.parseDouble(LifeTextField.getText())),
 						Integer.parseInt(RunicPTextField.getText()),

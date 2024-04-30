@@ -20,7 +20,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.FunctionsHandler;
-import controlador.StringHandler;
+import vista.StringHandler;
 
 /**
  * Aqui definimos las funciones necesarias para gestionar la base de datos de la
@@ -53,7 +53,7 @@ public class CharControllerDDBB {
 			preStmt.setInt(1, UsersControllerDDBB.getCurrentUserId());
 			preStmt.setString(2, heroObj.getName());
 			preStmt.setInt(3, heroObj.getRace_id());
-			preStmt.setInt(4, heroObj.getFaction_id());
+			preStmt.setBoolean(4, heroObj.getFaction_id());
 			preStmt.setInt(5, heroObj.getHeroClass_id());
 			preStmt.setString(6, heroObj.getTitle());
 			preStmt.setBigDecimal(7, heroObj.getLife());
@@ -84,32 +84,36 @@ public class CharControllerDDBB {
 					+ "LEFT JOIN heroClass c on h.class_ID = c.ID "
 					+ "LEFT JOIN faction f on h.faction_ID = f.ID where user_id=" + UsersControllerDDBB.getCurrentUserId() + " ORDER BY name ASC;";
 
-			String allQuery = "SELECT * FROM hero ORDER BY name ASC;";
+			String allQuery = "SELECT char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
+					+ "runicpower, strength, stamina from hero h "
+					+ "LEFT JOIN race r on h.race_ID = r.ID "
+					+ "LEFT JOIN heroClass c on h.class_ID = c.ID "
+					+ "LEFT JOIN faction f on h.faction_ID = f.ID ORDER BY name ASC;";
 
 			Statement stmt = conx.prepareStatement(isAdmin ? allQuery : allQueryUser);
 			ResultSet result = stmt.executeQuery(isAdmin ? allQuery : allQueryUser);
 
-			String char_id, user_id, name, race, faction, title, life, rpower, strength, stamina;
-			
-			if(!result.next()) {
-				StringHandler.MessageHandler("noChars");
-			}
+			String char_id, user_id, name, race, faction, title, life, rpower, strength, stamina;			
 
 			while (result.next()) {
-				char_id = result.getString(1);
-				user_id = result.getString(2);
-				name = result.getString(3);
-				race = result.getString(4);
-				faction = result.getString(5);
-				title = result.getString(6);
-				life = result.getString(7);
-				rpower = result.getString(8);
-				strength = result.getString(9);
-				stamina = result.getString(10);
+				if(result.wasNull()) {
+					StringHandler.MessageHandler("noChars");
+				} else {
+					char_id = result.getString(1);
+					user_id = result.getString(2);
+					name = result.getString(3);
+					race = result.getString(4);
+					faction = result.getString(5);
+					title = result.getString(6);
+					life = result.getString(7);
+					rpower = result.getString(8);
+					strength = result.getString(9);
+					stamina = result.getString(10);
 
-				String[] rows = { char_id, user_id, name, race, faction, title, life, rpower, strength, stamina };
-				System.out.println(Arrays.toString(rows));
-				((DefaultTableModel) jtable.getModel()).addRow(rows);
+					String[] rows = { char_id, user_id, name, race, faction, title, life, rpower, strength, stamina };
+					System.out.println(Arrays.toString(rows));
+					((DefaultTableModel) jtable.getModel()).addRow(rows);
+				}
 			}
 
 			stmt.close();

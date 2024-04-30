@@ -13,6 +13,7 @@ import servicio.Hero;
 import servicio.UsersControllerDDBB;
 import vista.CharacterCreation;
 import vista.CharacterView;
+import vista.StringHandler;
 import vista.UsersLogin;
 import vista.UsersPanel;
 import vista.UsersRecover;

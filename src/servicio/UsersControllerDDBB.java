@@ -12,7 +12,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.FunctionsHandler;
-import controlador.StringHandler;
+import vista.StringHandler;
 
 /**
  * Aqui definimos las funciones necesarias para gestionar la base de datos de la

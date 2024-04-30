@@ -10,7 +10,7 @@ public class Hero {
 	private int id;
     private String name;
     private int race_id;
-    private int faction_id;
+    private boolean faction_id;
     private int heroClass_id;
     private String title;
     private BigDecimal life;
@@ -18,7 +18,7 @@ public class Hero {
     private BigDecimal strength;
     private BigDecimal stamina;
 
-    public Hero(String name, int race, int faction, int heroClass_id, String title, BigDecimal life, int runicPower,
+    public Hero(String name, int race, boolean faction, int heroClass_id, String title, BigDecimal life, int runicPower,
     		BigDecimal strength, BigDecimal stamina) {
         this.name = name;
         this.race_id = race;
@@ -55,11 +55,11 @@ public class Hero {
 		this.race_id = race_id;
 	}
 
-	public int getFaction_id() {
+	public boolean getFaction_id() {
 		return faction_id;
 	}
 
-	public void setFaction_id(int faction_id) {
+	public void setFaction_id(boolean faction_id) {
 		this.faction_id = faction_id;
 	}
 
