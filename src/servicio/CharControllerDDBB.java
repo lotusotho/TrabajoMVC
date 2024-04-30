@@ -78,11 +78,11 @@ public class CharControllerDDBB {
 
 			boolean isAdmin = UsersControllerDDBB.isCurrentUserAdmin();
 
-			String allQueryUser = "select char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
+			String allQueryUser = "SELECT char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
 					+ "runicpower, strength, stamina from hero h "
-					+ "left join race r on h.race_ID = r.ID "
-					+ "left join heroClass c on h.class_ID = c.ID "
-					+ "left join faction f on h.faction_ID = f.ID where user_id=" + UsersControllerDDBB.getCurrentUserId() + " order by name asc;";
+					+ "LEFT JOIN race r on h.race_ID = r.ID "
+					+ "LEFT JOIN heroClass c on h.class_ID = c.ID "
+					+ "LEFT JOIN faction f on h.faction_ID = f.ID where user_id=" + UsersControllerDDBB.getCurrentUserId() + " ORDER BY name ASC;";
 
 			String allQuery = "SELECT * FROM hero ORDER BY name ASC;";
 
@@ -128,17 +128,17 @@ public class CharControllerDDBB {
 
 			boolean isAdmin = UsersControllerDDBB.isCurrentUserAdmin();
 			
-			String allQueryUser = "select char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
+			String allQueryUser = "SELECT char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
 					+ "runicpower, strength, stamina from hero h "
-					+ "left join race r on h.race_ID = r.ID "
-					+ "left join heroClass c on h.class_ID = c.ID "
-					+ "left join faction f on h.faction_ID = f.ID where user_id=" + UsersControllerDDBB.getCurrentUserId() + ";";
+					+ "LEFT JOIN race r on h.race_ID = r.ID "
+					+ "LEFT JOIN heroClass c on h.class_ID = c.ID "
+					+ "LEFT JOIN faction f on h.faction_ID = f.ID where user_id=" + UsersControllerDDBB.getCurrentUserId() + ";";
 			
-			String allQuery = "select char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
+			String allQuery = "SELECT char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
 					+ "runicpower, strength, stamina from hero h "
-					+ "left join race r on h.race_ID = r.ID "
-					+ "left join heroClass c on h.class_ID = c.ID "
-					+ "left join faction f on h.faction_ID = f.ID;";
+					+ "LEFT JOIN race r on h.race_ID = r.ID "
+					+ "LEFT JOIN heroClass c on h.class_ID = c.ID "
+					+ "LEFT JOIN faction f on h.faction_ID = f.ID;";
 
 			Statement stmt = conx.prepareStatement(isAdmin ? allQuery : allQueryUser);
 			ResultSet result = stmt.executeQuery(isAdmin ? allQuery : allQueryUser);
@@ -218,11 +218,11 @@ public class CharControllerDDBB {
 	public static void GenerateCSV() {
 		Connection conx = FunctionsHandler.ConnectDDBB();
 		
-		String allQuery = "select char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
+		String allQuery = "SELECT char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
 				+ "runicpower, strength, stamina from hero h "
-				+ "left join race r on h.race_ID = r.ID "
-				+ "left join heroClass c on h.class_ID = c.ID "
-				+ "left join faction f on h.faction_ID = f.ID order by name asc;";
+				+ "LEFT JOIN race r on h.race_ID = r.ID "
+				+ "LEFT JOIN heroClass c on h.class_ID = c.ID "
+				+ "LEFT JOIN faction f on h.faction_ID = f.ID ORDER BY name ASC;";
 		
 		String path = "src/hero.csv";
 
