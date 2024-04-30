@@ -29,7 +29,7 @@ public class UsersControllerDDBB {
 
 			String tempHashedPassd = Encryption.Encrypt(passwd);
 
-			String loginQuery = "SELECT user_id, name, passwd FROM users WHERE name=? AND passwd=?;";
+			String loginQuery = "SELECT user_id, name, passwd FROM user WHERE name=? AND passwd=?;";
 
 			PreparedStatement prepStmt = conx.prepareStatement(loginQuery);
 			prepStmt.setString(1, name);
@@ -56,15 +56,13 @@ public class UsersControllerDDBB {
 		try {
 			Connection conx = ConnectionDDBB.connectBBDD();
 
-			String rolConv = isAdmin ? "admin" : "normalUser";
-
-			String regQuery = "INSERT INTO users (name, passwd, isAdmin) VALUES(?, ?, ?);";
+			String regQuery = "INSERT INTO user (name, passwd, isAdmin) VALUES(?, ?, ?);";
 
 			PreparedStatement preStmt = conx.prepareStatement(regQuery);
 
 			preStmt.setString(1, name);
 			preStmt.setString(2, Encryption.Encrypt(passwd));
-			preStmt.setString(3, rolConv);
+			preStmt.setBoolean(3, isAdmin);
 
 			preStmt.execute();
 			
@@ -88,7 +86,7 @@ public class UsersControllerDDBB {
 	public static boolean isCurrentUserAdmin() {
 		Connection conx = ConnectionDDBB.connectBBDD();
 
-		String adminQuery = "SELECT isAdmin from users WHERE user_id=?;";
+		String adminQuery = "SELECT isAdmin from user WHERE user_id=?;";
 
 		try {
 			PreparedStatement prepStmt = conx.prepareStatement(adminQuery);
@@ -97,7 +95,7 @@ public class UsersControllerDDBB {
 			ResultSet result = prepStmt.executeQuery();
 
 			while (result.next()) {
-				return "admin".equals(result.getString(1));
+				return result.getBoolean(1);
 			}
 
 			prepStmt.close();
@@ -115,7 +113,7 @@ public class UsersControllerDDBB {
 		try {
 			Connection conx = FunctionsHandler.ConnectDDBB();
 
-			String allQuery = "SELECT * FROM users ORDER BY name ASC;";
+			String allQuery = "SELECT * FROM user ORDER BY name ASC;";
 
 			Statement stmt = conx.prepareStatement(allQuery);
 			ResultSet result = stmt.executeQuery(allQuery);
@@ -126,7 +124,7 @@ public class UsersControllerDDBB {
 				user_id = result.getString(1);
 				name = result.getString(2);
 				passwd = result.getString(3);
-				admin = result.getString(4);
+				admin = result.getString(4).equals("1") ? "Es Admin" : "No Es Admin";
 
 				String[] rows = { user_id, name, passwd, admin };
 				System.out.println(Arrays.toString(rows));
@@ -145,14 +143,14 @@ public class UsersControllerDDBB {
 
 		try {
 			Connection conx = FunctionsHandler.ConnectDDBB();
-			String selQuery = "SELECT user_id FROM users ORDER BY name DESC LIMIT 1;";
+			String selQuery = "SELECT user_id FROM user ORDER BY name DESC LIMIT 1;";
 
 			PreparedStatement stmt = conx.prepareStatement(selQuery);
 			ResultSet result = stmt.executeQuery(selQuery);
 
 			while (result.next()) {
 				if (result.getInt(1) != getCurrentUserId()) {
-					String delQuery = "DELETE FROM users ORDER BY name DESC LIMIT 1;";
+					String delQuery = "DELETE FROM user ORDER BY name DESC LIMIT 1;";
 					PreparedStatement delStmt = conx.prepareStatement(delQuery);
 					delStmt.execute();
 					delStmt.close();
@@ -172,7 +170,7 @@ public class UsersControllerDDBB {
 	public static void RecoverPassUser(String oldPasswd, String newPasswd, String name) {
 		try {
 			Connection conx = FunctionsHandler.ConnectDDBB();
-			String selQuery = "SELECT name, passwd FROM users WHERE name=?;";
+			String selQuery = "SELECT name, passwd FROM user WHERE name=?;";
 
 			PreparedStatement prepStmt = conx.prepareStatement(selQuery);
 
@@ -181,7 +179,7 @@ public class UsersControllerDDBB {
 			ResultSet result = prepStmt.executeQuery();
 
 			if (result.next() && result.getString(2).equals(Encryption.Encrypt(oldPasswd))) {
-				String updateQuery = "UPDATE users SET passwd=? WHERE name=?;";
+				String updateQuery = "UPDATE user SET passwd=? WHERE name=?;";
 
 				PreparedStatement prepStmt2 = conx.prepareStatement(updateQuery);
 				prepStmt2.setString(1, Encryption.Encrypt(newPasswd));

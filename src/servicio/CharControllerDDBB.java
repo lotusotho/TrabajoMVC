@@ -44,20 +44,22 @@ public class CharControllerDDBB {
 		try {
 			Connection conx = ConnectionDDBB.connectBBDD();
 			
-			String insertQuery = "INSERT INTO characters (user_id, name, race, faction, title, life, runicpower, strength, stamina) "
-					+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+			String insertQuery = "INSERT INTO hero (user_id, name, race_id, faction_id, class_id, title, "
+					+ "life, runicpower, strength, stamina) "
+					+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
 			PreparedStatement preStmt = conx.prepareStatement(insertQuery);
 
 			preStmt.setInt(1, UsersControllerDDBB.getCurrentUserId());
 			preStmt.setString(2, heroObj.getName());
-			preStmt.setInt(3, heroObj.getRace());
-			preStmt.setBoolean(4, heroObj.getFaction());
-			preStmt.setString(5, heroObj.getTitle());
-			preStmt.setBigDecimal(6, heroObj.getLife());
-			preStmt.setInt(7, heroObj.getRunicPower());
-			preStmt.setBigDecimal(8, heroObj.getStrength());
-			preStmt.setBigDecimal(9, heroObj.getStamina());
+			preStmt.setInt(3, heroObj.getRace_id());
+			preStmt.setInt(4, heroObj.getFaction_id());
+			preStmt.setInt(5, heroObj.getHeroClass_id());
+			preStmt.setString(6, heroObj.getTitle());
+			preStmt.setBigDecimal(7, heroObj.getLife());
+			preStmt.setInt(8, heroObj.getRunicPower());
+			preStmt.setBigDecimal(9, heroObj.getStrength());
+			preStmt.setBigDecimal(10, heroObj.getStamina());
 
 			preStmt.execute();
 
@@ -76,10 +78,13 @@ public class CharControllerDDBB {
 
 			boolean isAdmin = UsersControllerDDBB.isCurrentUserAdmin();
 
-			String allQueryUser = "SELECT * FROM characters WHERE user_id=" + UsersControllerDDBB.getCurrentUserId()
-					+ " ORDER BY name ASC;";
+			String allQueryUser = "select char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
+					+ "runicpower, strength, stamina from hero h "
+					+ "left join race r on h.race_ID = r.ID "
+					+ "left join heroClass c on h.class_ID = c.ID "
+					+ "left join faction f on h.faction_ID = f.ID where user_id=" + UsersControllerDDBB.getCurrentUserId() + " order by name asc;";
 
-			String allQuery = "SELECT * FROM characters ORDER BY name ASC;";
+			String allQuery = "SELECT * FROM hero ORDER BY name ASC;";
 
 			Statement stmt = conx.prepareStatement(isAdmin ? allQuery : allQueryUser);
 			ResultSet result = stmt.executeQuery(isAdmin ? allQuery : allQueryUser);
@@ -118,10 +123,18 @@ public class CharControllerDDBB {
 			Connection conx = FunctionsHandler.ConnectDDBB();
 
 			boolean isAdmin = UsersControllerDDBB.isCurrentUserAdmin();
-
-			String allQueryUser = "SELECT * FROM characters WHERE user_id='" + UsersControllerDDBB.getCurrentUserId() + "';";
-
-			String allQuery = "SELECT * FROM characters;";
+			
+			String allQueryUser = "select char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
+					+ "runicpower, strength, stamina from hero h "
+					+ "left join race r on h.race_ID = r.ID "
+					+ "left join heroClass c on h.class_ID = c.ID "
+					+ "left join faction f on h.faction_ID = f.ID where user_id=" + UsersControllerDDBB.getCurrentUserId() + ";";
+			
+			String allQuery = "select char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
+					+ "runicpower, strength, stamina from hero h "
+					+ "left join race r on h.race_ID = r.ID "
+					+ "left join heroClass c on h.class_ID = c.ID "
+					+ "left join faction f on h.faction_ID = f.ID;";
 
 			Statement stmt = conx.prepareStatement(isAdmin ? allQuery : allQueryUser);
 			ResultSet result = stmt.executeQuery(isAdmin ? allQuery : allQueryUser);
@@ -146,12 +159,12 @@ public class CharControllerDDBB {
 	public static void DeleteLastCharacterDB() {
 		try {
 			Connection conx = FunctionsHandler.ConnectDDBB();
-			String selectQuery = "SELECT user_id FROM characters ORDER BY name DESC LIMIT 1;";
+			String selectQuery = "SELECT user_id FROM hero ORDER BY name DESC LIMIT 1;";
 			PreparedStatement prepStmt = conx.prepareStatement(selectQuery);
 			ResultSet result = prepStmt.executeQuery();
 
 			if (result.next()) {
-				String delQuery = "DELETE FROM characters WHERE user_id=? LIMIT 1;";
+				String delQuery = "DELETE FROM hero WHERE user_id=? LIMIT 1;";
 				PreparedStatement delStmt = conx.prepareStatement(delQuery);
 				delStmt.setInt(1, result.getInt(1));
 				delStmt.execute();
@@ -167,8 +180,14 @@ public class CharControllerDDBB {
 
 	public static void GenerateCSV() {
 		Connection conx = FunctionsHandler.ConnectDDBB();
-		String allQuery = "SELECT * from characters ORDER BY name ASC;";
-		String path = "src/characters.csv";
+		
+		String allQuery = "select char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
+				+ "runicpower, strength, stamina from hero h "
+				+ "left join race r on h.race_ID = r.ID "
+				+ "left join heroClass c on h.class_ID = c.ID "
+				+ "left join faction f on h.faction_ID = f.ID order by name asc;";
+		
+		String path = "src/hero.csv";
 
 		try {
 			Statement stmt = conx.prepareStatement(allQuery);
@@ -195,7 +214,7 @@ public class CharControllerDDBB {
 
 		List<List<String>> features = new ArrayList<>(10);
 
-		String path = "src/characters.csv";
+		String path = "src/hero.csv";
 
 		try (Scanner scanner = new Scanner(new File(path))) {
 		    while (scanner.hasNextLine()) {
@@ -206,8 +225,9 @@ public class CharControllerDDBB {
 
 	        	Connection conx = FunctionsHandler.ConnectDDBB();
 
-        		String insertQuery = "INSERT INTO characters (user_id, name, race, faction, title, life, runicpower, strength, stamina) "
-        				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+	        	String insertQuery = "INSERT INTO hero (user_id, name, race_id, faction_id, heroClass_id, title, "
+						+ "life, runicpower, strength, stamina) "
+						+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         		conx.prepareStatement(insertQuery);
 
@@ -216,8 +236,9 @@ public class CharControllerDDBB {
         		preStmt.setInt(1, UsersControllerDDBB.getCurrentUserId());
         		preStmt.setString(2, feature.get(0));
         		preStmt.setString(3, feature.get(1));
-        		preStmt.setString(4, feature.get(2));
-        		preStmt.setString(5, feature.get(3));
+        		preStmt.setInt(4, Integer.parseInt(feature.get(2)));
+        		preStmt.setInt(5, Integer.parseInt(feature.get(3)));
+        		preStmt.setInt(6, Integer.parseInt(feature.get(4)));
         		preStmt.setString(6, feature.get(4));
         		preStmt.setString(7, feature.get(5));
         		preStmt.setString(8, feature.get(6));

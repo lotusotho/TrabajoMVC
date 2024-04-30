@@ -9,19 +9,21 @@ import java.math.BigDecimal;
 public class Hero {
 	private int id;
     private String name;
-    private int race;
-    private boolean faction;
+    private int race_id;
+    private int faction_id;
+    private int heroClass_id;
     private String title;
     private BigDecimal life;
     private int runicPower;
     private BigDecimal strength;
     private BigDecimal stamina;
 
-    public Hero(String name, int race, boolean faction, String title, BigDecimal life, int runicPower,
+    public Hero(String name, int race, int faction, int heroClass_id, String title, BigDecimal life, int runicPower,
     		BigDecimal strength, BigDecimal stamina) {
         this.name = name;
-        this.race = race;
-        this.faction = faction;
+        this.race_id = race;
+        this.faction_id = faction;
+        this.heroClass_id = heroClass_id;
         this.title = title;
         this.life = life;
         this.runicPower = runicPower;
@@ -45,20 +47,28 @@ public class Hero {
 		this.name = name;
 	}
 
-	public int getRace() {
-		return race;
+	public int getRace_id() {
+		return race_id;
 	}
 
-	public void setRace(int race) {
-		this.race = race;
+	public void setRace_id(int race_id) {
+		this.race_id = race_id;
 	}
 
-	public boolean getFaction() {
-		return faction;
+	public int getFaction_id() {
+		return faction_id;
 	}
 
-	public void setFaction(boolean faction) {
-		this.faction = faction;
+	public void setFaction_id(int faction_id) {
+		this.faction_id = faction_id;
+	}
+
+	public int getHeroClass_id() {
+		return heroClass_id;
+	}
+
+	public void setHeroClass_id(int heroClass_id) {
+		this.heroClass_id = heroClass_id;
 	}
 
 	public String getTitle() {
@@ -103,8 +113,9 @@ public class Hero {
 
 	@Override
 	public String toString() {
-		return "Heroes [id=" + id + ", name=" + name + ", race=" + race + ", faction=" + faction + ", title=" + title
-				+ ", life=" + life + ", runicPower=" + runicPower + ", strength=" + strength + ", stamina=" + stamina
-				+ "]";
+		return "Hero [id=" + id + ", name=" + name + ", race_id=" + race_id + ", faction_id=" + faction_id
+				+ ", heroClass_id=" + heroClass_id + ", title=" + title + ", life=" + life + ", runicPower="
+				+ runicPower + ", strength=" + strength + ", stamina=" + stamina + "]";
 	}
+	
 }

@@ -23,6 +23,9 @@ import javax.swing.border.EmptyBorder;
 
 import controlador.FunctionsHandler;
 import servicio.Hero;
+import javax.swing.JList;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  * Interfaz de la creacion de personajes
@@ -32,13 +35,18 @@ public class CharacterCreation extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField NameTextField;
-	private JTextField RaceTextField;
-	private JTextField FactionTextField;
 	private JTextField TitleTextField;
 	private JTextField LifeTextField;
 	private JTextField RunicPTextField;
 	private JTextField StrTextField;
 	private JTextField StmTextField;
+	private JComboBox<String> factionComboBox = new JComboBox<String>();
+	private JComboBox<String> raceComboBox = new JComboBox<String>();
+	private JComboBox<String> classComboBox = new JComboBox<String>();
+	
+	private ArrayList<String> factions = new ArrayList<String>();
+	private ArrayList<String> races = new ArrayList<String>();
+	private ArrayList<String> heroClasses = new ArrayList<String>();
 
 	public CharacterCreation() {
 		setResizable(false);
@@ -52,6 +60,37 @@ public class CharacterCreation extends JFrame {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 
+		factions.add("Alianza");
+		factions.add("Horda");
+		
+		races.add("Human");
+		races.add("Dwarf");
+		races.add("Night Elf");
+		races.add("Gnome");
+		races.add("Draenei");
+		races.add("Worgen");
+		races.add("Pandaren");
+		races.add("Dracthyr");
+		races.add("Orc");
+		races.add("Undead");
+		races.add("Troll");
+		races.add("Blood Elf");
+		races.add("Goblin");
+		
+		heroClasses.add("Warrior");
+		heroClasses.add("Paladin");
+		heroClasses.add("Hunter");
+		heroClasses.add("Rogue");
+		heroClasses.add("Priest");
+		heroClasses.add("Shaman");
+		heroClasses.add("Mage");
+		heroClasses.add("Warlock");
+		heroClasses.add("Monk");
+		heroClasses.add("Druid");
+		heroClasses.add("Demon Hunter");
+		heroClasses.add("Death Knight");
+		heroClasses.add("Evoker");
+		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(224, 242, 243));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -66,6 +105,24 @@ public class CharacterCreation extends JFrame {
 				FunctionsHandler.UsersControlPanel(true);
 			}
 		});
+		
+		JPanel panelFormClass = new JPanel();
+		panelFormClass.setLayout(null);
+		panelFormClass.setForeground((Color) null);
+		panelFormClass.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
+		panelFormClass.setBounds(118, 338, 328, 46);
+		contentPane.add(panelFormClass);
+		
+		JLabel lblTtulo_1 = new JLabel("Clase:");
+		lblTtulo_1.setHorizontalAlignment(SwingConstants.LEFT);
+		lblTtulo_1.setFont(new Font("Verdana", Font.PLAIN, 19));
+		lblTtulo_1.setBounds(22, 11, 105, 24);
+		panelFormClass.add(lblTtulo_1);
+		
+		classComboBox.setModel(new DefaultComboBoxModel(heroClasses.toArray()));
+		classComboBox.setMaximumRowCount(13);
+		classComboBox.setBounds(155, 16, 146, 22);
+		panelFormClass.add(classComboBox);
 		btnBack.setBounds(10, 11, 89, 23);
 		contentPane.add(btnBack);
 
@@ -76,8 +133,9 @@ public class CharacterCreation extends JFrame {
 		btnCreateChar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Hero tempHero = new Hero(NameTextField.getText(), RaceTextField.getText(), FactionTextField.getText(),
-						TitleTextField.getText(), BigDecimal.valueOf(Double.parseDouble(LifeTextField.getText())),
+				Hero tempHero = new Hero(NameTextField.getText(), raceComboBox.getSelectedIndex() + 1, factionComboBox.getSelectedIndex() + 1,
+						classComboBox.getSelectedIndex() + 1, TitleTextField.getText(), 
+						BigDecimal.valueOf(Double.parseDouble(LifeTextField.getText())),
 						Integer.parseInt(RunicPTextField.getText()),
 						BigDecimal.valueOf(Double.parseDouble(StrTextField.getText())),
 						BigDecimal.valueOf(Double.parseDouble(StmTextField.getText())));
@@ -87,8 +145,6 @@ public class CharacterCreation extends JFrame {
 				ArrayList<JTextField> allTextFields = new ArrayList<>();
 
 				allTextFields.add(NameTextField);
-				allTextFields.add(RaceTextField);
-				allTextFields.add(FactionTextField);
 				allTextFields.add(TitleTextField);
 				allTextFields.add(LifeTextField);
 				allTextFields.add(RunicPTextField);
@@ -97,6 +153,9 @@ public class CharacterCreation extends JFrame {
 
 				for (JTextField textField : allTextFields) {
 					textField.setText("");
+					factionComboBox.setSelectedIndex(0);
+					raceComboBox.setSelectedIndex(0);
+					classComboBox.setSelectedIndex(0);
 				}
 			}
 		});
@@ -177,7 +236,7 @@ public class CharacterCreation extends JFrame {
 		panelFormTitle.setLayout(null);
 		panelFormTitle.setForeground((Color) null);
 		panelFormTitle.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
-		panelFormTitle.setBounds(118, 338, 328, 46);
+		panelFormTitle.setBounds(118, 410, 328, 46);
 		contentPane.add(panelFormTitle);
 
 		JLabel lblTtulo = new JLabel("Título:");
@@ -191,23 +250,23 @@ public class CharacterCreation extends JFrame {
 		TitleTextField.setBounds(158, 11, 143, 29);
 		panelFormTitle.add(TitleTextField);
 
-		JPanel panelFormRace_1 = new JPanel();
-		panelFormRace_1.setLayout(null);
-		panelFormRace_1.setForeground((Color) null);
-		panelFormRace_1.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
-		panelFormRace_1.setBounds(118, 252, 328, 46);
-		contentPane.add(panelFormRace_1);
+		JPanel panelFormFaction = new JPanel();
+		panelFormFaction.setLayout(null);
+		panelFormFaction.setForeground((Color) null);
+		panelFormFaction.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
+		panelFormFaction.setBounds(118, 252, 328, 46);
+		contentPane.add(panelFormFaction);
 
 		JLabel lblFaccin = new JLabel("Facción:");
 		lblFaccin.setHorizontalAlignment(SwingConstants.LEFT);
 		lblFaccin.setFont(new Font("Verdana", Font.PLAIN, 19));
 		lblFaccin.setBounds(22, 11, 105, 24);
-		panelFormRace_1.add(lblFaccin);
-
-		FactionTextField = new JTextField();
-		FactionTextField.setColumns(10);
-		FactionTextField.setBounds(157, 13, 143, 29);
-		panelFormRace_1.add(FactionTextField);
+		panelFormFaction.add(lblFaccin);
+		
+		factionComboBox.setModel(new DefaultComboBoxModel(factions.toArray()));
+		factionComboBox.setMaximumRowCount(2);
+		factionComboBox.setBounds(157, 11, 146, 22);
+		panelFormFaction.add(factionComboBox);
 
 		JPanel panelFormRace = new JPanel();
 		panelFormRace.setLayout(null);
@@ -221,11 +280,11 @@ public class CharacterCreation extends JFrame {
 		lblRaza.setFont(new Font("Verdana", Font.PLAIN, 19));
 		lblRaza.setBounds(22, 11, 105, 24);
 		panelFormRace.add(lblRaza);
-
-		RaceTextField = new JTextField();
-		RaceTextField.setColumns(10);
-		RaceTextField.setBounds(157, 13, 143, 29);
-		panelFormRace.add(RaceTextField);
+		
+		raceComboBox.setModel(new DefaultComboBoxModel(races.toArray()));
+		raceComboBox.setMaximumRowCount(14);
+		raceComboBox.setBounds(160, 16, 146, 22);
+		panelFormRace.add(raceComboBox);
 
 		JPanel panelFormName = new JPanel();
 		panelFormName.setBounds(118, 68, 328, 46);

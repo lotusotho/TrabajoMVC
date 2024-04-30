@@ -56,18 +56,18 @@ public class CharacterView extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"Char Id", "User Id", "Nombre", "Raza", "Faccion", "Titulo", "Vida", "Poder Runico", "Fuerza", "Estamina"
+				"Nombre", "Raza", "Faccion", "Clase", "Titulo", "Vida", "Poder Runico", "Fuerza", "Estamina"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class
+				String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class
 			};
 			@Override
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
 			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false, false, false, false, false
+				false, false, false, false, false, false, false, false, false
 			};
 			@Override
 			public boolean isCellEditable(int row, int column) {
