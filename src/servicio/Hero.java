@@ -117,5 +117,5 @@ public class Hero {
 				+ ", heroClass_id=" + heroClass_id + ", title=" + title + ", life=" + life + ", runicPower="
 				+ runicPower + ", strength=" + strength + ", stamina=" + stamina + "]";
 	}
-	
+
 }

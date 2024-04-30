@@ -1,9 +1,6 @@
 package servicio;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
@@ -43,7 +40,7 @@ public class CharControllerDDBB {
 	public static void InsertCharacter(Hero heroObj) {
 		try {
 			Connection conx = ConnectionDDBB.connectBBDD();
-			
+
 			String insertQuery = "INSERT INTO hero (user_id, name, race_id, faction_id, class_id, title, "
 					+ "life, runicpower, strength, stamina) "
 					+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
@@ -93,7 +90,7 @@ public class CharControllerDDBB {
 			Statement stmt = conx.prepareStatement(isAdmin ? allQuery : allQueryUser);
 			ResultSet result = stmt.executeQuery(isAdmin ? allQuery : allQueryUser);
 
-			String char_id, user_id, name, race, faction, title, life, rpower, strength, stamina;			
+			String char_id, user_id, name, race, faction, title, life, rpower, strength, stamina;
 
 			while (result.next()) {
 				if(result.wasNull()) {
@@ -131,13 +128,13 @@ public class CharControllerDDBB {
 			Connection conx = FunctionsHandler.ConnectDDBB();
 
 			boolean isAdmin = UsersControllerDDBB.isCurrentUserAdmin();
-			
+
 			String allQueryUser = "SELECT char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
 					+ "runicpower, strength, stamina FROM hero h "
 					+ "LEFT JOIN race r on h.race_ID = r.ID "
 					+ "LEFT JOIN heroClass c on h.class_ID = c.ID "
 					+ "LEFT JOIN faction f on h.faction_ID = f.ID where user_id=" + UsersControllerDDBB.getCurrentUserId() + ";";
-			
+
 			String allQuery = "SELECT char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
 					+ "runicpower, strength, stamina FROM hero h "
 					+ "LEFT JOIN race r on h.race_ID = r.ID "
@@ -152,7 +149,7 @@ public class CharControllerDDBB {
 					charArr[i] = result.getString(i);
 				}
 			}
-			
+
 			stmt.close();
 			conx.close();
 
@@ -185,15 +182,15 @@ public class CharControllerDDBB {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static ArrayList<String> GetCharacterFRC(int selector) {
 		try {
-			ArrayList<String> factions = new ArrayList<String>();
-			
+			ArrayList<String> factions = new ArrayList<>();
+
 			Connection conx = FunctionsHandler.ConnectDDBB();
-			
+
 			String selectQuery = "";
-			
+
 			if(selector == 1) {
 				selectQuery = "SELECT factionName FROM faction;";
 			} else if(selector == 2) {
@@ -201,29 +198,29 @@ public class CharControllerDDBB {
 			} else if(selector == 3) {
 				selectQuery = "SELECT className FROM heroclass;";
 			}
-			
+
 			PreparedStatement prepStmt = conx.prepareStatement(selectQuery);
 			ResultSet result = prepStmt.executeQuery();
-			
+
 			while(result.next()) {
 				factions.add(result.getString(1));
 			}
-			
+
 			prepStmt.close();
 			conx.close();
-			
+
 			return factions;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return new ArrayList<String>();
+			return new ArrayList<>();
 		}
 	}
 
 	public static void GenerateCSV() {
 		Connection conx = FunctionsHandler.ConnectDDBB();
-		
+
 		String allQuery = "SELECT * FROM hero;";
-		
+
 		String path = "src/hero.csv";
 
 		try {
@@ -241,7 +238,7 @@ public class CharControllerDDBB {
 			wrt.close();
 			stmt.close();
 			conx.close();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -257,7 +254,7 @@ public class CharControllerDDBB {
 		    while (scanner.hasNextLine()) {
 		        features.add(getRecordFromLine(scanner.nextLine()));
 		    }
-		    
+
 		    for (List<String> feature : features) {
 
 	        	Connection conx = FunctionsHandler.ConnectDDBB();
@@ -287,7 +284,7 @@ public class CharControllerDDBB {
         		preStmt.close();
         		conx.close();
 	        }
-		    
+
 		} catch (SQLException | IOException e) {
 			StringHandler.ErrorHandler(e.toString());
 			e.printStackTrace();

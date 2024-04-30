@@ -78,7 +78,7 @@ public class FunctionsHandler {
 	public static boolean isCurrentUserAdmin() {
 		return UsersControllerDDBB.isCurrentUserAdmin();
 	}
-	
+
 	public static ArrayList<String> GetFactions(int selector){
 		return CharControllerDDBB.GetCharacterFRC(selector);
 	}

@@ -10,8 +10,10 @@ import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -23,9 +25,6 @@ import javax.swing.border.EmptyBorder;
 
 import controlador.FunctionsHandler;
 import servicio.Hero;
-import javax.swing.JList;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 
 /**
  * Interfaz de la creacion de personajes
@@ -40,9 +39,9 @@ public class CharacterCreation extends JFrame {
 	private JTextField RunicPTextField;
 	private JTextField StrTextField;
 	private JTextField StmTextField;
-	private JComboBox<String> factionComboBox = new JComboBox<String>();
-	private JComboBox<String> raceComboBox = new JComboBox<String>();
-	private JComboBox<String> classComboBox = new JComboBox<String>();
+	private JComboBox<String> factionComboBox = new JComboBox<>();
+	private JComboBox<String> raceComboBox = new JComboBox<>();
+	private JComboBox<String> classComboBox = new JComboBox<>();
 
 	public CharacterCreation() {
 		setResizable(false);
@@ -55,7 +54,7 @@ public class CharacterCreation extends JFrame {
 
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
-		
+
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(224, 242, 243));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -70,20 +69,20 @@ public class CharacterCreation extends JFrame {
 				FunctionsHandler.UsersControlPanel(true);
 			}
 		});
-		
+
 		JPanel panelFormClass = new JPanel();
 		panelFormClass.setLayout(null);
 		panelFormClass.setForeground((Color) null);
 		panelFormClass.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
 		panelFormClass.setBounds(118, 338, 328, 46);
 		contentPane.add(panelFormClass);
-		
+
 		JLabel lblTtulo_1 = new JLabel("Clase:");
 		lblTtulo_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblTtulo_1.setFont(new Font("Verdana", Font.PLAIN, 19));
 		lblTtulo_1.setBounds(22, 11, 105, 24);
 		panelFormClass.add(lblTtulo_1);
-		
+
 		classComboBox.setModel(new DefaultComboBoxModel(FunctionsHandler.GetFactions(3).toArray()));
 		classComboBox.setMaximumRowCount(13);
 		classComboBox.setBounds(155, 16, 146, 22);
@@ -99,7 +98,7 @@ public class CharacterCreation extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Hero tempHero = new Hero(NameTextField.getText(), raceComboBox.getSelectedIndex() + 1, factionComboBox.getSelectedIndex() == 1 ? true : false,
-						classComboBox.getSelectedIndex() + 1, TitleTextField.getText(), 
+						classComboBox.getSelectedIndex() + 1, TitleTextField.getText(),
 						BigDecimal.valueOf(Double.parseDouble(LifeTextField.getText())),
 						Integer.parseInt(RunicPTextField.getText()),
 						BigDecimal.valueOf(Double.parseDouble(StrTextField.getText())),
@@ -227,7 +226,7 @@ public class CharacterCreation extends JFrame {
 		lblFaccin.setFont(new Font("Verdana", Font.PLAIN, 19));
 		lblFaccin.setBounds(22, 11, 105, 24);
 		panelFormFaction.add(lblFaccin);
-		
+
 		factionComboBox.setModel(new DefaultComboBoxModel(FunctionsHandler.GetFactions(1).toArray()));
 		factionComboBox.setMaximumRowCount(2);
 		factionComboBox.setBounds(157, 11, 146, 22);
@@ -245,7 +244,7 @@ public class CharacterCreation extends JFrame {
 		lblRaza.setFont(new Font("Verdana", Font.PLAIN, 19));
 		lblRaza.setBounds(22, 11, 105, 24);
 		panelFormRace.add(lblRaza);
-		
+
 		raceComboBox.setModel(new DefaultComboBoxModel(FunctionsHandler.GetFactions(2).toArray()));
 		raceComboBox.setMaximumRowCount(14);
 		raceComboBox.setBounds(160, 16, 146, 22);

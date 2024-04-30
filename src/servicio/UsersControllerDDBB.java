@@ -65,7 +65,7 @@ public class UsersControllerDDBB {
 			preStmt.setBoolean(3, isAdmin);
 
 			preStmt.execute();
-			
+
 			preStmt.close();
 			conx.close();
 
