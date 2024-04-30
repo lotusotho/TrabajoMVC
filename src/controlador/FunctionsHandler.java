@@ -2,6 +2,7 @@ package controlador;
 
 import java.awt.Window;
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -75,6 +76,10 @@ public class FunctionsHandler {
 
 	public static boolean isCurrentUserAdmin() {
 		return UsersControllerDDBB.isCurrentUserAdmin();
+	}
+	
+	public static ArrayList<String> GetFactions(int selector){
+		return CharControllerDDBB.GetCharacterFRC(selector);
 	}
 
 	// UsersView

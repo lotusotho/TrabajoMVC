@@ -43,10 +43,6 @@ public class CharacterCreation extends JFrame {
 	private JComboBox<String> factionComboBox = new JComboBox<String>();
 	private JComboBox<String> raceComboBox = new JComboBox<String>();
 	private JComboBox<String> classComboBox = new JComboBox<String>();
-	
-	private ArrayList<String> factions = new ArrayList<String>();
-	private ArrayList<String> races = new ArrayList<String>();
-	private ArrayList<String> heroClasses = new ArrayList<String>();
 
 	public CharacterCreation() {
 		setResizable(false);
@@ -59,37 +55,6 @@ public class CharacterCreation extends JFrame {
 
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
-
-		factions.add("Alianza");
-		factions.add("Horda");
-		
-		races.add("Human");
-		races.add("Dwarf");
-		races.add("Night Elf");
-		races.add("Gnome");
-		races.add("Draenei");
-		races.add("Worgen");
-		races.add("Pandaren");
-		races.add("Dracthyr");
-		races.add("Orc");
-		races.add("Undead");
-		races.add("Troll");
-		races.add("Blood Elf");
-		races.add("Goblin");
-		
-		heroClasses.add("Warrior");
-		heroClasses.add("Paladin");
-		heroClasses.add("Hunter");
-		heroClasses.add("Rogue");
-		heroClasses.add("Priest");
-		heroClasses.add("Shaman");
-		heroClasses.add("Mage");
-		heroClasses.add("Warlock");
-		heroClasses.add("Monk");
-		heroClasses.add("Druid");
-		heroClasses.add("Demon Hunter");
-		heroClasses.add("Death Knight");
-		heroClasses.add("Evoker");
 		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(224, 242, 243));
@@ -119,7 +84,7 @@ public class CharacterCreation extends JFrame {
 		lblTtulo_1.setBounds(22, 11, 105, 24);
 		panelFormClass.add(lblTtulo_1);
 		
-		classComboBox.setModel(new DefaultComboBoxModel(heroClasses.toArray()));
+		classComboBox.setModel(new DefaultComboBoxModel(FunctionsHandler.GetFactions(3).toArray()));
 		classComboBox.setMaximumRowCount(13);
 		classComboBox.setBounds(155, 16, 146, 22);
 		panelFormClass.add(classComboBox);
@@ -263,7 +228,7 @@ public class CharacterCreation extends JFrame {
 		lblFaccin.setBounds(22, 11, 105, 24);
 		panelFormFaction.add(lblFaccin);
 		
-		factionComboBox.setModel(new DefaultComboBoxModel(factions.toArray()));
+		factionComboBox.setModel(new DefaultComboBoxModel(FunctionsHandler.GetFactions(1).toArray()));
 		factionComboBox.setMaximumRowCount(2);
 		factionComboBox.setBounds(157, 11, 146, 22);
 		panelFormFaction.add(factionComboBox);
@@ -281,7 +246,7 @@ public class CharacterCreation extends JFrame {
 		lblRaza.setBounds(22, 11, 105, 24);
 		panelFormRace.add(lblRaza);
 		
-		raceComboBox.setModel(new DefaultComboBoxModel(races.toArray()));
+		raceComboBox.setModel(new DefaultComboBoxModel(FunctionsHandler.GetFactions(2).toArray()));
 		raceComboBox.setMaximumRowCount(14);
 		raceComboBox.setBounds(160, 16, 146, 22);
 		panelFormRace.add(raceComboBox);

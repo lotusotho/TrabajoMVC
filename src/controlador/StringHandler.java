@@ -54,6 +54,9 @@ public class StringHandler {
 		case "passChangeKO":
 			JOptionPane.showMessageDialog(null, "El usuario o contraseña establecidos no son correctos");
 			break;
+		case "noChars":
+			JOptionPane.showMessageDialog(null, "Este usuario no tiene todavía ningún personaje");
+			break;
 		}
 	}
 }

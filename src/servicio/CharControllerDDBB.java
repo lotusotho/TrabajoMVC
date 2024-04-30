@@ -90,6 +90,10 @@ public class CharControllerDDBB {
 			ResultSet result = stmt.executeQuery(isAdmin ? allQuery : allQueryUser);
 
 			String char_id, user_id, name, race, faction, title, life, rpower, strength, stamina;
+			
+			if(!result.next()) {
+				StringHandler.MessageHandler("noChars");
+			}
 
 			while (result.next()) {
 				char_id = result.getString(1);
@@ -175,6 +179,39 @@ public class CharControllerDDBB {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public static ArrayList<String> GetCharacterFRC(int selector) {
+		try {
+			ArrayList<String> factions = new ArrayList<String>();
+			
+			Connection conx = FunctionsHandler.ConnectDDBB();
+			
+			String selectQuery = "";
+			
+			if(selector == 1) {
+				selectQuery = "SELECT factionName from faction;";
+			} else if(selector == 2) {
+				selectQuery = "SELECT raceName from race;";
+			} else if(selector == 3) {
+				selectQuery = "SELECT className from heroclass;";
+			}
+			
+			PreparedStatement prepStmt = conx.prepareStatement(selectQuery);
+			ResultSet result = prepStmt.executeQuery();
+			
+			while(result.next()) {
+				factions.add(result.getString(1));
+			}
+			
+			prepStmt.close();
+			conx.close();
+			
+			return factions;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new ArrayList<String>();
 		}
 	}
 
