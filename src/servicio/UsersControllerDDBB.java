@@ -81,8 +81,8 @@ public class UsersControllerDDBB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 
-			StringHandler stringHandler2 = new StringHandler();
-			stringHandler2.MessageHandler("userRegKO");
+			StringHandler stringHandler = new StringHandler();
+			stringHandler.MessageHandler("userRegKO");
 			return false;
 		}
 	}
@@ -212,8 +212,8 @@ public class UsersControllerDDBB {
 				conx.close();
 			}
 		} catch (SQLException e) {
-			StringHandler stringHandler2 = new StringHandler();
-			stringHandler2.MessageHandler("passChangeKO");
+			StringHandler stringHandler = new StringHandler();
+			stringHandler.MessageHandler("passChangeKO");
 			e.printStackTrace();
 		}
 	}
