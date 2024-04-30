@@ -54,9 +54,11 @@ CREATE TABLE IF NOT EXISTS `hero` (
   CONSTRAINT `FK_characters_class` FOREIGN KEY (`class_ID`) REFERENCES `heroclass` (`ID`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `FK_characters_race` FOREIGN KEY (`race_ID`) REFERENCES `race` (`ID`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `FK_characters_users` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Here we save the WoW character properties';
+) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Here we save the WoW character properties';
 
 -- Volcando datos para la tabla gestwow.hero: ~1 rows (aproximadamente)
+INSERT INTO `hero` (`char_id`, `user_id`, `name`, `race_ID`, `class_ID`, `faction_ID`, `title`, `life`, `runicpower`, `strength`, `stamina`) VALUES
+	(84, 0019, 'hola', 1, 0, b'1', 'hola2', 1212.00, 1212, 12121.00, 212.00);
 
 -- Volcando estructura para tabla gestwow.heroclass
 CREATE TABLE IF NOT EXISTS `heroclass` (
@@ -65,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `heroclass` (
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla gestwow.heroclass: ~13 rows (aproximadamente)
+-- Volcando datos para la tabla gestwow.heroclass: ~11 rows (aproximadamente)
 INSERT INTO `heroclass` (`ID`, `className`) VALUES
 	(0, 'Warrior'),
 	(1, 'Paladin'),
@@ -88,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `race` (
   PRIMARY KEY (`ID`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla gestwow.race: ~14 rows (aproximadamente)
+-- Volcando datos para la tabla gestwow.race: ~15 rows (aproximadamente)
 INSERT INTO `race` (`ID`, `raceName`) VALUES
 	(0, 'Human'),
 	(1, 'Dwarf'),
@@ -112,11 +114,12 @@ CREATE TABLE IF NOT EXISTS `user` (
   `passwd` char(64) NOT NULL DEFAULT '',
   `isAdmin` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Here we save the users properties';
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Here we save the users properties';
 
--- Volcando datos para la tabla gestwow.user: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla gestwow.user: ~1 rows (aproximadamente)
 INSERT INTO `user` (`user_id`, `name`, `passwd`, `isAdmin`) VALUES
-	(0019, '1', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', b'1');
+	(0019, '1', 'b221d9dbb083a7f33428d7c2a3c3198ae925614d70210e28716ccaa7cd4ddb79', b'1'),
+	(0020, 'qwe', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', b'0');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
