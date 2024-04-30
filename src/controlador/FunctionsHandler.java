@@ -49,9 +49,9 @@ public class FunctionsHandler {
 		}
 	}
 
-	public static String[] GetAllCharacters() {
-		return CharControllerDDBB.ShowAllColumns();
-	}
+//	public static String[] GetAllCharacters() {
+//		return CharControllerDDBB.ShowAllColumns();
+//	}
 
 	public static void ViewCharactersTable(JTable jtable) {
 		if (((DefaultTableModel) jtable.getModel()).getRowCount() > 0) {

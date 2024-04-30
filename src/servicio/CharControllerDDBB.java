@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -75,13 +76,13 @@ public class CharControllerDDBB {
 
 			boolean isAdmin = UsersControllerDDBB.isCurrentUserAdmin();
 
-			String allQueryUser = "SELECT char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
+			String allQueryUser = "SELECT name, r.raceName, c.className, f.factionName, title, life, "
 					+ "runicpower, strength, stamina FROM hero h "
 					+ "LEFT JOIN race r on h.race_ID = r.ID "
 					+ "LEFT JOIN heroClass c on h.class_ID = c.ID "
 					+ "LEFT JOIN faction f on h.faction_ID = f.ID where user_id=" + UsersControllerDDBB.getCurrentUserId() + " ORDER BY name ASC;";
 
-			String allQuery = "SELECT char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
+			String allQuery = "SELECT name, r.raceName, c.className, f.factionName, title, life, "
 					+ "runicpower, strength, stamina FROM hero h "
 					+ "LEFT JOIN race r on h.race_ID = r.ID "
 					+ "LEFT JOIN heroClass c on h.class_ID = c.ID "
@@ -90,24 +91,23 @@ public class CharControllerDDBB {
 			Statement stmt = conx.prepareStatement(isAdmin ? allQuery : allQueryUser);
 			ResultSet result = stmt.executeQuery(isAdmin ? allQuery : allQueryUser);
 
-			String char_id, user_id, name, race, faction, title, life, rpower, strength, stamina;
+			String name, race, heroClass, faction, title, life, rpower, strength, stamina;
 
 			while (result.next()) {
 				if(result.wasNull()) {
 					StringHandler.MessageHandler("noChars");
 				} else {
-					char_id = result.getString(1);
-					user_id = result.getString(2);
-					name = result.getString(3);
-					race = result.getString(4);
-					faction = result.getString(5);
-					title = result.getString(6);
-					life = result.getString(7);
-					rpower = result.getString(8);
-					strength = result.getString(9);
-					stamina = result.getString(10);
+					name = result.getString(1);
+					race = result.getString(2);
+					faction = result.getString(3);
+					heroClass = result.getString(4);
+					title = result.getString(5);
+					life = result.getString(6);
+					rpower = result.getString(7);
+					strength = result.getString(8);
+					stamina = result.getString(9);
 
-					String[] rows = { char_id, user_id, name, race, faction, title, life, rpower, strength, stamina };
+					String[] rows = { name, race, faction, heroClass, title, life, rpower, strength, stamina };
 					System.out.println(Arrays.toString(rows));
 					((DefaultTableModel) jtable.getModel()).addRow(rows);
 				}
@@ -121,45 +121,37 @@ public class CharControllerDDBB {
 		}
 	}
 
-	public static String[] ShowAllColumns() {
-		try {
-			String[] charArr = new String[0];
-
-			Connection conx = FunctionsHandler.ConnectDDBB();
-
-			boolean isAdmin = UsersControllerDDBB.isCurrentUserAdmin();
-
-			String allQueryUser = "SELECT char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
-					+ "runicpower, strength, stamina FROM hero h "
-					+ "LEFT JOIN race r on h.race_ID = r.ID "
-					+ "LEFT JOIN heroClass c on h.class_ID = c.ID "
-					+ "LEFT JOIN faction f on h.faction_ID = f.ID where user_id=" + UsersControllerDDBB.getCurrentUserId() + ";";
-
-			String allQuery = "SELECT char_id, user_id, name, r.raceName, c.className, f.factionName, title, life, "
-					+ "runicpower, strength, stamina FROM hero h "
-					+ "LEFT JOIN race r on h.race_ID = r.ID "
-					+ "LEFT JOIN heroClass c on h.class_ID = c.ID "
-					+ "LEFT JOIN faction f on h.faction_ID = f.ID;";
-
-			Statement stmt = conx.prepareStatement(isAdmin ? allQuery : allQueryUser);
-			ResultSet result = stmt.executeQuery(isAdmin ? allQuery : allQueryUser);
-
-			while (result.next()) {
-				for (int i = 0; i < result.getMetaData().getColumnCount(); i++) {
-					charArr[i] = result.getString(i);
-				}
-			}
-
-			stmt.close();
-			conx.close();
-
-			return charArr;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return new String[0];
-		}
-
-	}
+//	public static String[] ShowAllColumns() {
+//		try {
+//			String[] charArr = new String[0];
+//
+//			Connection conx = FunctionsHandler.ConnectDDBB();
+//
+//			boolean isAdmin = UsersControllerDDBB.isCurrentUserAdmin();
+//
+//			String allQueryUser = "SELECT * FROM hero WHERE=" + UsersControllerDDBB.getCurrentUserId() +";";
+//
+//			String allQuery = "SELECT * FROM hero;";
+//
+//			Statement stmt = conx.prepareStatement(isAdmin ? allQuery : allQueryUser);
+//			ResultSet result = stmt.executeQuery(isAdmin ? allQuery : allQueryUser);
+//			
+//			if(result.next()) {
+//				for (int i = 0; i < result.getMetaData().getColumnCount(); i++) {
+//					charArr[i] = result.getMetaData().getColumnName(i);
+//				}
+//			}
+//
+//			stmt.close();
+//			conx.close();
+//
+//			return charArr;
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			return new String[0];
+//		}
+//
+//	}
 
 	public static void DeleteLastCharacterDB() {
 		try {
@@ -228,6 +220,10 @@ public class CharControllerDDBB {
 			ResultSet rst = stmt.executeQuery(allQuery);
 
 			FileWriter wrt = new FileWriter(path);
+			
+//			for (int i = 0; i < rst.getMetaData().getColumnCount(); i++) {
+//				wrt.write(rst.getMetaData().getColumnName(i));
+//			}
 
 			while (rst.next()) {
 				wrt.write(rst.getInt(1) + ";" + rst.getInt(2) + ";" + rst.getString(3) + ";" + rst.getInt(4) + ";"
