@@ -22,7 +22,7 @@ import vista.UsersView;
 
 public class FunctionsHandler {
 
-	// DDBB Stuff
+	// Conexiones a la BBDD
 	public static Connection ConnectDDBB() {
 		return ConnectionDDBB.connectBBDD();
 	}

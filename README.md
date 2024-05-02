@@ -16,8 +16,34 @@ El proyecto está dividido en **3 paquetes principales:**
 ### 1.- Controlador:
 El paquete de controlador contiene una clase llamada *FunctionsHandler.java*, la cual se utiliza como un puente entre el backend que conecta la base de datos (paquete Servicio) y realiza acciones sobre ella, y la vista de usuario (Paquete Vista), el cual se encarga de registrar las acciones que realiza el usuario sobre la aplicación.
 
-- Clases dentro de Controlador:
-### FunctionsHandler.java
+### Clases dentro de Controlador:
+#### FunctionsHandler.java
 Este script se dedica a funcionar como un puente entre el código que conecta la base de datos dentro del paquete Servicio, y el código que renderiza la interfaz gráfica de usuario dentro de Vista.
+```mermaid
+classDiagram
+  class FunctionsHandler {
+    +ConnectDDBB()
+    +InsertCharacter(Hero hero)
+    +UsersLogin(String name, String passwd)
+    +UsersRegister(String name, String passwd, boolean adminCheck)
+    +CreateCSV()
+    +ViewCharactersTable(JTable jtable)
+    +DeleteLastCharacter(JTable jtable)
+    +ClearTable(JTable jtable)
+    +ReadCSV()
+    +isCurrentUserAdmin()
+    +GetFactions(int selector)
+    +ViewUsersTable(JTable jtable)
+    +DeleteLastUser(JTable jtable)
+    +RecoverPassUser(String oldPasswd, String newPasswd, String name)
+    +UserLoginPanel(boolean visible)
+    +UserRegisterPanel(boolean visible)
+    +UsersControlPanel(boolean visible)
+    +CharacterCreationPanel(boolean visible)
+    +CharacterManagementPanel(boolean visible)
+    +UsersManagementPanel(boolean visible)
+    +UsersRecoverPanel(boolean visible)
+  }
+```
 
 ### Controlador:
