@@ -7,7 +7,6 @@ Este proyecto de **MVC (Modelo Vista Controlador)** es un simple gestor de perso
 
 Se usa la librería de ventanas gráficas **Java Swing** y está basado en la versión de **Java 21**.
 
-
 ## Paquetes del proyecto:
 El proyecto está dividido en **3 paquetes principales:**
 1. Controlador
@@ -19,6 +18,6 @@ El paquete de controlador contiene una clase llamada *FunctionsHandler.java*, la
 
 - Clases dentro de Controlador:
 ### FunctionsHandler.java
-Esta
+Este script se dedica a funcionar como un puente entre el código que conecta la base de datos dentro del paquete Servicio, y el código que renderiza la interfaz gráfica de usuario dentro de Vista.
 
 ### Controlador:
