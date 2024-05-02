@@ -16,7 +16,7 @@ public class ConnectionDDBB {
 	private final static String bbddURL = "jdbc:mysql://localhost:3306/" + bbdd + tmz;
 	private static Connection conx;
 
-	public static Connection connectBBDD() {
+	public static Connection connectDDBB() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conx = DriverManager.getConnection(bbddURL, user, passwd);

@@ -24,7 +24,7 @@ public class FunctionsHandler {
 
 	// Conexiones a la BBDD
 	public static Connection ConnectDDBB() {
-		return ConnectionDDBB.connectBBDD();
+		return ConnectionDDBB.connectDDBB();
 	}
 
 	public void InsertCharacter(Hero hero) {

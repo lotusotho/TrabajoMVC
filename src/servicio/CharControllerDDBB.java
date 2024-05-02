@@ -40,7 +40,7 @@ public class CharControllerDDBB {
 
 	public void InsertCharacter(Hero heroObj) {
 		try {
-			Connection conx = ConnectionDDBB.connectBBDD();
+			Connection conx = ConnectionDDBB.connectDDBB();
 
 			String insertQuery = "INSERT INTO hero (user_id, name, race_id, faction_id, class_id, title, "
 					+ "life, runicpower, strength, stamina) "

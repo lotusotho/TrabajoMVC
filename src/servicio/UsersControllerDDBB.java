@@ -25,7 +25,7 @@ public class UsersControllerDDBB {
 
 	public void usersLogin(String name, String passwd) {
 		try {
-			Connection conx = ConnectionDDBB.connectBBDD();
+			Connection conx = ConnectionDDBB.connectDDBB();
 
 			Encryption encryption = new Encryption();
 
@@ -58,7 +58,7 @@ public class UsersControllerDDBB {
 
 	public boolean usersRegister(String name, String passwd, boolean isAdmin) {
 		try {
-			Connection conx = ConnectionDDBB.connectBBDD();
+			Connection conx = ConnectionDDBB.connectDDBB();
 
 			String regQuery = "INSERT INTO user (name, passwd, isAdmin) VALUES(?, ?, ?);";
 
@@ -93,7 +93,7 @@ public class UsersControllerDDBB {
 	 * @return
 	 */
 	public boolean isCurrentUserAdmin() {
-		Connection conx = ConnectionDDBB.connectBBDD();
+		Connection conx = ConnectionDDBB.connectDDBB();
 
 		String adminQuery = "SELECT isAdmin FROM user WHERE user_id=?;";
 
