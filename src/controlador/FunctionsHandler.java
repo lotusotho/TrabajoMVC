@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import servicio.CharControllerDDBB;
 import servicio.ConnectionDDBB;
 import servicio.Hero;
-import servicio.UsersControllerDDBB;
+import servicio.UserControllerDDBB;
 import vista.CharacterCreation;
 import vista.CharacterView;
 import vista.StringHandler;
@@ -35,12 +35,12 @@ public class FunctionsHandler {
 	}
 
 	public void UsersLogin(String name, String passwd) {
-		UsersControllerDDBB usersControllerDDBB = new UsersControllerDDBB();
+		UserControllerDDBB usersControllerDDBB = new UserControllerDDBB();
 		usersControllerDDBB.usersLogin(name, passwd);
 	}
 
 	public void UsersRegister(String name, String passwd, boolean adminCheck) {
-		UsersControllerDDBB usersControllerDDBB = new UsersControllerDDBB();
+		UserControllerDDBB usersControllerDDBB = new UserControllerDDBB();
 		usersControllerDDBB.usersRegister(name, passwd, adminCheck);
 	}
 
@@ -87,7 +87,7 @@ public class FunctionsHandler {
 	}
 
 	public boolean isCurrentUserAdmin() {
-		UsersControllerDDBB usersControllerDDBB = new UsersControllerDDBB();
+		UserControllerDDBB usersControllerDDBB = new UserControllerDDBB();
 		return usersControllerDDBB.isCurrentUserAdmin();
 	}
 
@@ -103,19 +103,19 @@ public class FunctionsHandler {
 			ClearTable(jtable);
 		}
 
-		UsersControllerDDBB usersControllerDDBB = new UsersControllerDDBB();
+		UserControllerDDBB usersControllerDDBB = new UserControllerDDBB();
 		usersControllerDDBB.ShowAllRows(jtable);
 	}
 
 	public void DeleteLastUser(JTable jtable) {
-		UsersControllerDDBB usersControllerDDBB = new UsersControllerDDBB();
+		UserControllerDDBB usersControllerDDBB = new UserControllerDDBB();
 		usersControllerDDBB.DeleteLastUserDB();
 
 		((DefaultTableModel) jtable.getModel()).removeRow(jtable.getModel().getRowCount() - 1);
 	}
 
 	public void RecoverPassUser(String oldPasswd, String newPasswd, String name) {
-		UsersControllerDDBB usersControllerDDBB = new UsersControllerDDBB();
+		UserControllerDDBB usersControllerDDBB = new UserControllerDDBB();
 		usersControllerDDBB.RecoverPassUser(oldPasswd, newPasswd, name);
 	}
 

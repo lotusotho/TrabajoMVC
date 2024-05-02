@@ -19,7 +19,7 @@ import vista.StringHandler;
  * tabla characters
  */
 
-public class UsersControllerDDBB {
+public class UserControllerDDBB {
 
 	private int currentUserId;
 

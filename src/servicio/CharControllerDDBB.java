@@ -48,7 +48,7 @@ public class CharControllerDDBB {
 
 			PreparedStatement preStmt = conx.prepareStatement(insertQuery);
 
-			UsersControllerDDBB usersControllerDDBB = new UsersControllerDDBB();
+			UserControllerDDBB usersControllerDDBB = new UserControllerDDBB();
 
 			preStmt.setInt(1, usersControllerDDBB.getCurrentUserId());
 			preStmt.setString(2, heroObj.getName());
@@ -77,7 +77,7 @@ public class CharControllerDDBB {
 		try {
 			Connection conx = FunctionsHandler.ConnectDDBB();
 
-			UsersControllerDDBB usersControllerDDBB = new UsersControllerDDBB();
+			UserControllerDDBB usersControllerDDBB = new UserControllerDDBB();
 
 			StringHandler stringHandler = new StringHandler();
 
@@ -248,7 +248,7 @@ public class CharControllerDDBB {
 	}
 
 	public void ReadCSV() {
-		UsersControllerDDBB usersControllerDDBB = new UsersControllerDDBB();
+		UserControllerDDBB usersControllerDDBB = new UserControllerDDBB();
 
 		StringHandler stringHandler = new StringHandler();
 
