@@ -7,6 +7,17 @@ Este proyecto de **MVC (Modelo Vista Controlador)** es un simple gestor de perso
 
 Se usa la librería de ventanas gráficas **Java Swing** y está basado en la versión de **Java 21**.
 
+```mermaid
+flowchart LR
+    m[Main]
+    c[Controlador]
+    s[Servicio]
+    v[Vista]
+    db[(BBDD)]
+
+m -.-> v ==> c ==> s ==> db
+```
+
 # Diagrama de clases:
 ```mermaid
 classDiagram
