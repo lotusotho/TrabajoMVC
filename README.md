@@ -15,7 +15,7 @@ flowchart LR
     v[Vista]
     db[(BBDD)]
 
-m -.-> v ==> c ==> s ==> db
+m -.-> v <==> c <==> s <==> db
 ```
 
 # Diagrama de clases:
