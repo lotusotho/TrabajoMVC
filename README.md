@@ -161,7 +161,7 @@ classDiagram
   }
 ```
 
-## Paquetes del proyecto:
+# Paquetes del proyecto:
 El proyecto está dividido en **3 paquetes principales:**
 1. Controlador
 2. Servicio (Modelo)
