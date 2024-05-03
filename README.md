@@ -174,5 +174,28 @@ El paquete de controlador contiene una clase llamada *FunctionsHandler.java*, la
 #### FunctionsHandler.java
 Este script se dedica a funcionar como un puente entre el código que conecta la base de datos dentro del paquete Servicio, y el código que renderiza la interfaz gráfica de usuario dentro de Vista.
 
+## Métodos
 
-### Controlador:
+La clase tiene varios métodos que pueden clasificarse en tres grupos:
+
+1. ### Operaciones con la base de datos
+	1. ConnectDDBB(): Establece una conexión con la base de datos.
+	2. InsertCharacter(Hero): Inserta un nuevo personaje en la base de datos.
+	3. UsersLogin(String name, String passwd): Registra un usuario con las credenciales proporcionadas.
+	4. UsersRegister(String name, String passwd, boolean adminCheck): Registra un nuevo usuario con las credenciales proporcionadas y el estado admin.
+2. ### Gestión de datos
+	1. ViewCharactersTable(JTable jtable): Muestra la lista de personajes en una tabla.
+	2. DeleteLastCharacter(JTable jtable): Borra el último personaje de la base de datos.
+	3. ClearTable(JTable jtable): Borra todas las filas de la tabla.
+	4. ReadCSV(): Lee un fichero CSV que contiene datos de personajes.
+3. ### Gestión de Usuarios
+	1. isCurrentUserAdmin(): Comprueba si el usuario actualmente conectado es un administrador.
+	2. GetFactions(int selector): Obtiene una lista de las facciones basada en el selector proporcionado.
+4. ### Gestión de Paneles
+	1. UserLoginPanel(boolean visible): Muestra el panel de login del usuario.
+	2. UserRegisterPanel(boolean visible): Muestra el panel de registro de usuarios.
+	3. UsersControlPanel(boolean visible): Muestra el panel de control de usuarios.
+	4. CharacterCreationPanel(boolean visible): Muestra el panel de creación de personajes.
+	5. CharacterManagementPanel(boolean visible): Muestra el panel de gestión de personajes.
+	6. UsersManagementPanel(boolean visible): Muestra el panel de gestión de usuarios.
+	7. UsersRecoverPanel(boolean visible): Muestra el panel de recuperación de usuarios.
