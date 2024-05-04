@@ -48,9 +48,7 @@ public class CharControllerDDBB {
 
 			PreparedStatement preStmt = conx.prepareStatement(insertQuery);
 
-			UserControllerDDBB usersControllerDDBB = new UserControllerDDBB();
-
-			preStmt.setInt(1, usersControllerDDBB.getCurrentUserId());
+			preStmt.setInt(1, UserControllerDDBB.getCurrentUserId());
 			preStmt.setString(2, heroObj.getName());
 			preStmt.setInt(3, heroObj.getRace_id());
 			preStmt.setBoolean(4, heroObj.getFaction_id());
@@ -77,17 +75,15 @@ public class CharControllerDDBB {
 		try {
 			Connection conx = FunctionsHandler.ConnectDDBB();
 
-			UserControllerDDBB usersControllerDDBB = new UserControllerDDBB();
-
 			StringHandler stringHandler = new StringHandler();
 
-			boolean isAdmin = usersControllerDDBB.isCurrentUserAdmin();
+			boolean isAdmin = UserControllerDDBB.isCurrentUserAdmin();
 
 			String allQueryUser = "SELECT name, r.raceName, c.className, f.factionName, title, life, "
 					+ "runicpower, strength, stamina FROM hero h "
 					+ "LEFT JOIN race r on h.race_ID = r.ID "
 					+ "LEFT JOIN heroClass c on h.class_ID = c.ID "
-					+ "LEFT JOIN faction f on h.faction_ID = f.ID where user_id=" + usersControllerDDBB.getCurrentUserId() + " ORDER BY name ASC;";
+					+ "LEFT JOIN faction f on h.faction_ID = f.ID where user_id=" + UserControllerDDBB.getCurrentUserId() + " ORDER BY name ASC;";
 
 			String allQuery = "SELECT name, r.raceName, c.className, f.factionName, title, life, "
 					+ "runicpower, strength, stamina FROM hero h "
@@ -248,8 +244,6 @@ public class CharControllerDDBB {
 	}
 
 	public void ReadCSV() {
-		UserControllerDDBB usersControllerDDBB = new UserControllerDDBB();
-
 		StringHandler stringHandler = new StringHandler();
 
 		List<List<String>> features = new ArrayList<>(10);
@@ -274,7 +268,7 @@ public class CharControllerDDBB {
         		PreparedStatement preStmt = conx.prepareStatement(insertQuery);
 
         		preStmt.setInt(1, Integer.parseInt(feature.get(0)));
-        		preStmt.setInt(2, usersControllerDDBB.getCurrentUserId());
+        		preStmt.setInt(2, UserControllerDDBB.getCurrentUserId());
         		preStmt.setString(3, feature.get(2));
         		preStmt.setInt(4, Integer.parseInt(feature.get(3)));
         		preStmt.setInt(5, Integer.parseInt(feature.get(4)));

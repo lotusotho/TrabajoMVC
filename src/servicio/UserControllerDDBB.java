@@ -21,7 +21,7 @@ import vista.StringHandler;
 
 public class UserControllerDDBB {
 
-	private int currentUserId;
+	private static int currentUserId;
 
 	public void usersLogin(String name, String passwd) {
 		try {
@@ -40,7 +40,7 @@ public class UserControllerDDBB {
 			ResultSet result = prepStmt.executeQuery();
 
 			if (result.next()) {
-				setCurrentUserid(result.getInt("user_id"));
+				this.setCurrentUserid(result.getInt(1));
 				FunctionsHandler functionsHandler = new FunctionsHandler();
 				functionsHandler.UsersControlPanel(true);
 			} else {
@@ -92,29 +92,33 @@ public class UserControllerDDBB {
 	 *
 	 * @return
 	 */
-	public boolean isCurrentUserAdmin() {
-		Connection conx = ConnectionDDBB.connectDDBB();
-
-		String adminQuery = "SELECT isAdmin FROM user WHERE user_id=?;";
-
+	public static boolean isCurrentUserAdmin() {
 		try {
-			PreparedStatement prepStmt = conx.prepareStatement(adminQuery);
+			Connection conx = ConnectionDDBB.connectDDBB();
+			
+			String isAdminQuery = "SELECT isAdmin FROM user WHERE user_id=?;";
+			
+			PreparedStatement prepStmt = conx.prepareStatement(isAdminQuery);
+			
 			prepStmt.setInt(1, getCurrentUserId());
 
 			ResultSet result = prepStmt.executeQuery();
-
-			while (result.next()) {
-				return result.getBoolean(1);
+			
+			boolean finalResult = false;
+			
+			if (result.next()) {
+				finalResult = result.getBoolean(1);
 			}
-
+			
 			prepStmt.close();
+			
 			conx.close();
+			
+			return finalResult;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
-
-		return false;
 	}
 
 	// UsersView
@@ -218,11 +222,11 @@ public class UserControllerDDBB {
 		}
 	}
 
-	public int getCurrentUserId() {
+	public static int getCurrentUserId() {
 		return currentUserId;
 	}
 
-	public void setCurrentUserid(int userId) {
+	public static void setCurrentUserid(int userId) {
 		currentUserId = userId;
 	}
 

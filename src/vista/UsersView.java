@@ -21,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.FunctionsHandler;
+import javax.swing.ImageIcon;
 
 public class UsersView extends JFrame {
 
@@ -89,14 +90,20 @@ public class UsersView extends JFrame {
 		btnDelLastRow.setFont(new Font("Verdana", Font.PLAIN, 15));
 		btnDelLastRow.setBounds(998, 195, 214, 61);
 		contentPane.add(btnDelLastRow);
+		
+		JPanel TitleJPanel = new JPanel();
+		TitleJPanel.setBorder(UIManager.getBorder("InternalFrame.border"));
+		TitleJPanel.setBounds(431, 43, 305, 35);
+		contentPane.add(TitleJPanel);
+		TitleJPanel.setLayout(null);
 
 		JLabel lblPanelDelUsuario = new JLabel("Vista de Usuarios:");
+		lblPanelDelUsuario.setBounds(0, 0, 305, 35);
+		TitleJPanel.add(lblPanelDelUsuario);
 		lblPanelDelUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPanelDelUsuario.setForeground(Color.BLACK);
 		lblPanelDelUsuario.setFont(new Font("Verdana", Font.PLAIN, 28));
 		lblPanelDelUsuario.setBackground(Color.BLACK);
-		lblPanelDelUsuario.setBounds(431, 43, 305, 35);
-		contentPane.add(lblPanelDelUsuario);
 
 		JButton btnBack = new JButton("Volver");
 		btnBack.addActionListener(new ActionListener() {
@@ -108,5 +115,10 @@ public class UsersView extends JFrame {
 		});
 		btnBack.setBounds(10, 11, 89, 23);
 		contentPane.add(btnBack);
+		
+		JLabel BGlbl = new JLabel("");
+		BGlbl.setIcon(new ImageIcon(UsersView.class.getResource("/img/userManagement.jpg")));
+		BGlbl.setBounds(0, 0, 1264, 681);
+		contentPane.add(BGlbl);
 	}
 }

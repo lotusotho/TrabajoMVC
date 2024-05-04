@@ -21,6 +21,9 @@ import vista.UsersRegister;
 import vista.UsersView;
 
 public class FunctionsHandler {
+	UserControllerDDBB usersControllerDDBB = new UserControllerDDBB();
+	StringHandler stringHandler = new StringHandler();
+	CharControllerDDBB charControllerDDBB = new CharControllerDDBB();
 
 	// Conexiones a la BBDD
 	public static Connection ConnectDDBB() {
@@ -28,27 +31,21 @@ public class FunctionsHandler {
 	}
 
 	public void InsertCharacter(Hero hero) {
-		CharControllerDDBB charControllerDDBB = new CharControllerDDBB();
 		charControllerDDBB.InsertCharacter(hero);
-		StringHandler stringHandler = new StringHandler();
 		stringHandler.MessageHandler("charCreate");
 	}
 
 	public void UsersLogin(String name, String passwd) {
-		UserControllerDDBB usersControllerDDBB = new UserControllerDDBB();
 		usersControllerDDBB.usersLogin(name, passwd);
 	}
 
 	public void UsersRegister(String name, String passwd, boolean adminCheck) {
-		UserControllerDDBB usersControllerDDBB = new UserControllerDDBB();
 		usersControllerDDBB.usersRegister(name, passwd, adminCheck);
 	}
 
 	public void CreateCSV() {
 		try {
-			CharControllerDDBB charControllerDDBB = new CharControllerDDBB();
 			charControllerDDBB.GenerateCSV();
-			StringHandler stringHandler = new StringHandler();
 			stringHandler.MessageHandler("createCSVOK");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -66,12 +63,10 @@ public class FunctionsHandler {
 			ClearTable(jtable);
 		}
 
-		CharControllerDDBB charControllerDDBB = new CharControllerDDBB();
 		charControllerDDBB.ShowAllRows(jtable);
 	}
 
 	public void DeleteLastCharacter(JTable jtable) {
-		CharControllerDDBB charControllerDDBB = new CharControllerDDBB();
 		charControllerDDBB.DeleteLastCharacterDB();
 
 		((DefaultTableModel) jtable.getModel()).removeRow(jtable.getModel().getRowCount() - 1);
@@ -82,17 +77,14 @@ public class FunctionsHandler {
 	}
 
 	public void ReadCSV() {
-		CharControllerDDBB charControllerDDBB = new CharControllerDDBB();
 		charControllerDDBB.ReadCSV();
 	}
 
 	public boolean isCurrentUserAdmin() {
-		UserControllerDDBB usersControllerDDBB = new UserControllerDDBB();
-		return usersControllerDDBB.isCurrentUserAdmin();
+		return UserControllerDDBB.isCurrentUserAdmin();
 	}
 
 	public ArrayList<String> GetFactions(int selector){
-		CharControllerDDBB charControllerDDBB = new CharControllerDDBB();
 		return charControllerDDBB.GetCharacterFRC(selector);
 	}
 
@@ -103,19 +95,16 @@ public class FunctionsHandler {
 			ClearTable(jtable);
 		}
 
-		UserControllerDDBB usersControllerDDBB = new UserControllerDDBB();
 		usersControllerDDBB.ShowAllRows(jtable);
 	}
 
 	public void DeleteLastUser(JTable jtable) {
-		UserControllerDDBB usersControllerDDBB = new UserControllerDDBB();
 		usersControllerDDBB.DeleteLastUserDB();
 
 		((DefaultTableModel) jtable.getModel()).removeRow(jtable.getModel().getRowCount() - 1);
 	}
 
 	public void RecoverPassUser(String oldPasswd, String newPasswd, String name) {
-		UserControllerDDBB usersControllerDDBB = new UserControllerDDBB();
 		usersControllerDDBB.RecoverPassUser(oldPasswd, newPasswd, name);
 	}
 
