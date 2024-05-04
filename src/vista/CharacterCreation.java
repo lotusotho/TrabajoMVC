@@ -72,12 +72,25 @@ public class CharacterCreation extends JFrame {
 				functionsHandler.UsersControlPanel(true);
 			}
 		});
+		
+		JPanel TitleJPanel = new JPanel();
+		TitleJPanel.setBorder(UIManager.getBorder("InternalFrame.border"));
+		TitleJPanel.setBounds(458, 35, 314, 74);
+		contentPane.add(TitleJPanel);
+		TitleJPanel.setLayout(null);
+		
+		JLabel lblCreaTuPersonaje = new JLabel("Crea Tu Personaje");
+		lblCreaTuPersonaje.setBounds(0, 0, 314, 74);
+		TitleJPanel.add(lblCreaTuPersonaje);
+		lblCreaTuPersonaje.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCreaTuPersonaje.setFont(new Font("Verdana", Font.PLAIN, 26));
 
 		JPanel panelFormClass = new JPanel();
+		panelFormClass.setBorder(UIManager.getBorder("InternalFrame.border"));
 		panelFormClass.setLayout(null);
 		panelFormClass.setForeground((Color) null);
 		panelFormClass.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
-		panelFormClass.setBounds(118, 338, 328, 46);
+		panelFormClass.setBounds(119, 421, 328, 46);
 		contentPane.add(panelFormClass);
 
 		JLabel lblTtulo_1 = new JLabel("Clase:");
@@ -95,7 +108,7 @@ public class CharacterCreation extends JFrame {
 
 		JButton btnCreateChar = new JButton("Crear Personaje");
 		btnCreateChar.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		btnCreateChar.setBounds(542, 457, 187, 53);
+		btnCreateChar.setBounds(543, 540, 187, 53);
 		contentPane.add(btnCreateChar);
 		btnCreateChar.addActionListener(new ActionListener() {
 			@Override
@@ -128,10 +141,11 @@ public class CharacterCreation extends JFrame {
 		});
 
 		JPanel panelFormStamina = new JPanel();
+		panelFormStamina.setBorder(UIManager.getBorder("InternalFrame.border"));
 		panelFormStamina.setLayout(null);
 		panelFormStamina.setForeground((Color) null);
 		panelFormStamina.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
-		panelFormStamina.setBounds(792, 338, 328, 46);
+		panelFormStamina.setBounds(793, 421, 328, 46);
 		contentPane.add(panelFormStamina);
 
 		JLabel lblStamina = new JLabel("Estamina:");
@@ -146,10 +160,11 @@ public class CharacterCreation extends JFrame {
 		panelFormStamina.add(StmTextField);
 
 		JPanel panelFormStrength = new JPanel();
+		panelFormStrength.setBorder(UIManager.getBorder("InternalFrame.border"));
 		panelFormStrength.setLayout(null);
 		panelFormStrength.setForeground((Color) null);
 		panelFormStrength.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
-		panelFormStrength.setBounds(792, 252, 328, 46);
+		panelFormStrength.setBounds(793, 335, 328, 46);
 		contentPane.add(panelFormStrength);
 
 		JLabel lblFuerza = new JLabel("Fuerza:");
@@ -164,10 +179,11 @@ public class CharacterCreation extends JFrame {
 		panelFormStrength.add(StrTextField);
 
 		JPanel panelFormRPower = new JPanel();
+		panelFormRPower.setBorder(UIManager.getBorder("InternalFrame.border"));
 		panelFormRPower.setLayout(null);
 		panelFormRPower.setForeground((Color) null);
 		panelFormRPower.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
-		panelFormRPower.setBounds(792, 160, 328, 46);
+		panelFormRPower.setBounds(793, 243, 328, 46);
 		contentPane.add(panelFormRPower);
 
 		JLabel lblPoderRnico = new JLabel("Poder Rúnico:");
@@ -182,10 +198,11 @@ public class CharacterCreation extends JFrame {
 		panelFormRPower.add(RunicPTextField);
 
 		JPanel panelFormLife = new JPanel();
+		panelFormLife.setBorder(UIManager.getBorder("InternalFrame.border"));
 		panelFormLife.setLayout(null);
 		panelFormLife.setForeground((Color) null);
 		panelFormLife.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
-		panelFormLife.setBounds(792, 68, 328, 46);
+		panelFormLife.setBounds(793, 151, 328, 46);
 		contentPane.add(panelFormLife);
 
 		JLabel lblVida = new JLabel("Vida:");
@@ -200,10 +217,11 @@ public class CharacterCreation extends JFrame {
 		panelFormLife.add(LifeTextField);
 
 		JPanel panelFormTitle = new JPanel();
+		panelFormTitle.setBorder(UIManager.getBorder("InternalFrame.border"));
 		panelFormTitle.setLayout(null);
 		panelFormTitle.setForeground((Color) null);
 		panelFormTitle.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
-		panelFormTitle.setBounds(118, 410, 328, 46);
+		panelFormTitle.setBounds(119, 493, 328, 46);
 		contentPane.add(panelFormTitle);
 
 		JLabel lblTtulo = new JLabel("Título:");
@@ -218,10 +236,11 @@ public class CharacterCreation extends JFrame {
 		panelFormTitle.add(TitleTextField);
 
 		JPanel panelFormFaction = new JPanel();
+		panelFormFaction.setBorder(UIManager.getBorder("InternalFrame.border"));
 		panelFormFaction.setLayout(null);
 		panelFormFaction.setForeground((Color) null);
 		panelFormFaction.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
-		panelFormFaction.setBounds(118, 252, 328, 46);
+		panelFormFaction.setBounds(119, 335, 328, 46);
 		contentPane.add(panelFormFaction);
 
 		JLabel lblFaccin = new JLabel("Facción:");
@@ -236,10 +255,11 @@ public class CharacterCreation extends JFrame {
 		panelFormFaction.add(factionComboBox);
 
 		JPanel panelFormRace = new JPanel();
+		panelFormRace.setBorder(UIManager.getBorder("InternalFrame.border"));
 		panelFormRace.setLayout(null);
 		panelFormRace.setForeground((Color) null);
 		panelFormRace.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
-		panelFormRace.setBounds(118, 160, 328, 46);
+		panelFormRace.setBounds(119, 243, 328, 46);
 		contentPane.add(panelFormRace);
 
 		JLabel lblRaza = new JLabel("Raza:");
@@ -254,7 +274,8 @@ public class CharacterCreation extends JFrame {
 		panelFormRace.add(raceComboBox);
 
 		JPanel panelFormName = new JPanel();
-		panelFormName.setBounds(118, 68, 328, 46);
+		panelFormName.setBorder(UIManager.getBorder("InternalFrame.border"));
+		panelFormName.setBounds(119, 151, 328, 46);
 		panelFormName.setForeground((Color) null);
 		panelFormName.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
 		contentPane.add(panelFormName);

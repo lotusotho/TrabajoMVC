@@ -117,7 +117,7 @@ public class UsersView extends JFrame {
 		contentPane.add(btnBack);
 		
 		JLabel BGlbl = new JLabel("");
-		BGlbl.setIcon(new ImageIcon(UsersView.class.getResource("/img/userManagement.jpg")));
+		BGlbl.setIcon(new ImageIcon(UsersView.class.getResource("/img/usersManagementBG.jpeg")));
 		BGlbl.setBounds(0, 0, 1264, 681);
 		contentPane.add(BGlbl);
 	}

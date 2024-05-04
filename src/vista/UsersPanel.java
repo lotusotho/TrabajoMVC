@@ -17,6 +17,8 @@ import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import controlador.FunctionsHandler;
+import javax.swing.ImageIcon;
+import javax.swing.UIManager;
 
 /**
  * Interfaz del panel de gestion de usuario
@@ -47,14 +49,20 @@ public class UsersPanel extends JFrame {
 		contentPane.setLayout(null);
 
 		FunctionsHandler functionsHandler = new FunctionsHandler();
+		
+		JPanel TitleJPanel = new JPanel();
+		TitleJPanel.setBorder(UIManager.getBorder("InternalFrame.border"));
+		TitleJPanel.setBounds(199, 32, 305, 35);
+		contentPane.add(TitleJPanel);
+		TitleJPanel.setLayout(null);
 
 		JLabel lblPanelDelUsuario = new JLabel("Panel del usuario:");
-		lblPanelDelUsuario.setBounds(199, 32, 305, 35);
+		lblPanelDelUsuario.setBounds(0, 0, 305, 35);
+		TitleJPanel.add(lblPanelDelUsuario);
 		lblPanelDelUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPanelDelUsuario.setForeground(Color.BLACK);
 		lblPanelDelUsuario.setFont(new Font("Verdana", Font.PLAIN, 28));
 		lblPanelDelUsuario.setBackground(Color.BLACK);
-		contentPane.add(lblPanelDelUsuario);
 
 		JLabel lblBG = new JLabel("");
 		lblBG.setBounds(279, 383, 46, 14);
@@ -91,6 +99,7 @@ public class UsersPanel extends JFrame {
 		});
 		btnBack.setBounds(10, 11, 89, 23);
 		contentPane.add(btnBack);
+		
 
 		if(functionsHandler.isCurrentUserAdmin()) {
 			JButton btnAdminUsers = new JButton("Admin. Usuarios");
@@ -104,5 +113,10 @@ public class UsersPanel extends JFrame {
 			btnAdminUsers.setBounds(229, 344, 236, 80);
 			contentPane.add(btnAdminUsers);
 		}
+
+		JLabel BGlbl = new JLabel("");
+		BGlbl.setIcon(new ImageIcon(UsersPanel.class.getResource("/img/usersPanelBG.jpg")));
+		BGlbl.setBounds(0, 0, 704, 461);
+		contentPane.add(BGlbl);
 	}
 }

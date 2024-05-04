@@ -40,7 +40,7 @@ public class UserControllerDDBB {
 			ResultSet result = prepStmt.executeQuery();
 
 			if (result.next()) {
-				this.setCurrentUserid(result.getInt(1));
+				setCurrentUserid(result.getInt(1));
 				FunctionsHandler functionsHandler = new FunctionsHandler();
 				functionsHandler.UsersControlPanel(true);
 			} else {
