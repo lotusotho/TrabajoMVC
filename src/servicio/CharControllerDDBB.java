@@ -216,7 +216,7 @@ public class CharControllerDDBB {
 
 		String allQuery = "SELECT * FROM hero;";
 
-		String path = "src/hero.csv";
+		String path = "src/heroes.csv";
 
 		try {
 			Statement stmt = conx.prepareStatement(allQuery);
@@ -248,7 +248,7 @@ public class CharControllerDDBB {
 
 		List<List<String>> features = new ArrayList<>(10);
 
-		String path = "src/hero.csv";
+		String path = "src/heroes.csv";
 
 		try (Scanner scanner = new Scanner(new File(path))) {
 		    while (scanner.hasNextLine()) {
