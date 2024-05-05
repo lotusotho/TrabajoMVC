@@ -95,25 +95,25 @@ public class UserControllerDDBB {
 	public static boolean isCurrentUserAdmin() {
 		try {
 			Connection conx = ConnectionDDBB.connectDDBB();
-			
+
 			String isAdminQuery = "SELECT isAdmin FROM user WHERE user_id=?;";
-			
+
 			PreparedStatement prepStmt = conx.prepareStatement(isAdminQuery);
-			
+
 			prepStmt.setInt(1, getCurrentUserId());
 
 			ResultSet result = prepStmt.executeQuery();
-			
+
 			boolean finalResult = false;
-			
+
 			if (result.next()) {
 				finalResult = result.getBoolean(1);
 			}
-			
+
 			prepStmt.close();
-			
+
 			conx.close();
-			
+
 			return finalResult;
 		} catch (SQLException e) {
 			e.printStackTrace();

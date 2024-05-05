@@ -98,16 +98,16 @@ public class UsersLogin extends JFrame {
 		userTextField = new JTextField();
 		userTextField.setBounds(195, 27, 143, 29);
 		panelFormUsers.add(userTextField);
-		
+
 		panelFormUsers.requestFocus();
-		
+
 		userTextField.setColumns(10);
 
 		passTextField = new JPasswordField();
 		passTextField.setBounds(195, 97, 143, 29);
 		panelFormUsers.add(passTextField);
 		passTextField.setColumns(10);
-		
+
 		passTextField.addKeyListener(new KeyListener() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -119,7 +119,7 @@ public class UsersLogin extends JFrame {
 
 			@Override
 			public void keyTyped(KeyEvent e) {
-				
+
 			}
 
 			@Override
@@ -138,7 +138,7 @@ public class UsersLogin extends JFrame {
 				functionsHandler.UsersLogin(userTextField.getText(), passTextField.getText());
 			}
 		});
-		
+
 		contentPane.add(btnUserLogin);
 
 		JButton btnUserRegister = new JButton("Registrarse");

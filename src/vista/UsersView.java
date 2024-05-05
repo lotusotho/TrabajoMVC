@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,7 +22,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.FunctionsHandler;
-import javax.swing.ImageIcon;
 
 public class UsersView extends JFrame {
 
@@ -90,7 +90,7 @@ public class UsersView extends JFrame {
 		btnDelLastRow.setFont(new Font("Verdana", Font.PLAIN, 15));
 		btnDelLastRow.setBounds(998, 195, 214, 61);
 		contentPane.add(btnDelLastRow);
-		
+
 		JPanel TitleJPanel = new JPanel();
 		TitleJPanel.setBorder(UIManager.getBorder("InternalFrame.border"));
 		TitleJPanel.setBounds(431, 43, 305, 35);
@@ -115,7 +115,7 @@ public class UsersView extends JFrame {
 		});
 		btnBack.setBounds(10, 11, 89, 23);
 		contentPane.add(btnBack);
-		
+
 		JLabel BGlbl = new JLabel("");
 		BGlbl.setIcon(new ImageIcon(UsersView.class.getResource("/img/usersManagementBG.jpeg")));
 		BGlbl.setBounds(0, 0, 1264, 681);

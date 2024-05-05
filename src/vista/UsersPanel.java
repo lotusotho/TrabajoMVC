@@ -8,17 +8,17 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import controlador.FunctionsHandler;
-import javax.swing.ImageIcon;
-import javax.swing.UIManager;
 
 /**
  * Interfaz del panel de gestion de usuario
@@ -49,7 +49,7 @@ public class UsersPanel extends JFrame {
 		contentPane.setLayout(null);
 
 		FunctionsHandler functionsHandler = new FunctionsHandler();
-		
+
 		JPanel TitleJPanel = new JPanel();
 		TitleJPanel.setBorder(UIManager.getBorder("InternalFrame.border"));
 		TitleJPanel.setBounds(199, 32, 305, 35);
@@ -99,7 +99,7 @@ public class UsersPanel extends JFrame {
 		});
 		btnBack.setBounds(10, 11, 89, 23);
 		contentPane.add(btnBack);
-		
+
 
 		if(functionsHandler.isCurrentUserAdmin()) {
 			JButton btnAdminUsers = new JButton("Admin. Usuarios");

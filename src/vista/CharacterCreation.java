@@ -75,13 +75,13 @@ public class CharacterCreation extends JFrame {
 				functionsHandler.UsersControlPanel(true);
 			}
 		});
-		
+
 		JPanel TitleJPanel = new JPanel();
 		TitleJPanel.setBorder(UIManager.getBorder("InternalFrame.border"));
 		TitleJPanel.setBounds(458, 35, 314, 74);
 		contentPane.add(TitleJPanel);
 		TitleJPanel.setLayout(null);
-		
+
 		JLabel lblCreaTuPersonaje = new JLabel("Crea Tu Personaje");
 		lblCreaTuPersonaje.setBounds(0, 0, 314, 74);
 		TitleJPanel.add(lblCreaTuPersonaje);
@@ -137,7 +137,7 @@ public class CharacterCreation extends JFrame {
 		StmTextField = new JTextField();
 		StmTextField.setColumns(10);
 		StmTextField.setBounds(157, 13, 143, 29);
-		
+
 		StmTextField.addKeyListener(new KeyListener() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -148,7 +148,7 @@ public class CharacterCreation extends JFrame {
 
 			@Override
 			public void keyTyped(KeyEvent e) {
-				
+
 			}
 
 			@Override
@@ -156,7 +156,7 @@ public class CharacterCreation extends JFrame {
 
 			}
 		});
-		
+
 		panelFormStamina.add(StmTextField);
 
 		JPanel panelFormStrength = new JPanel();
@@ -304,9 +304,9 @@ public class CharacterCreation extends JFrame {
 		lblCreacinDePersonajes.setFont(new Font("Verdana", Font.PLAIN, 28));
 		lblCreacinDePersonajes.setBackground(Color.BLACK);
 		contentPane.add(lblCreacinDePersonajes);
-		
+
 	}
-	
+
 	private void AddCharacter() {
 		Hero tempHero = new Hero(NameTextField.getText(), raceComboBox.getSelectedIndex() + 1, factionComboBox.getSelectedIndex() == 1 ? true : false,
 				classComboBox.getSelectedIndex() + 1, TitleTextField.getText(),
@@ -314,18 +314,18 @@ public class CharacterCreation extends JFrame {
 				Integer.parseInt(RunicPTextField.getText()),
 				BigDecimal.valueOf(Double.parseDouble(StrTextField.getText())),
 				BigDecimal.valueOf(Double.parseDouble(StmTextField.getText())));
-		
+
 		functionsHandler.InsertCharacter(tempHero);
-		
+
 		ArrayList<JTextField> allTextFields = new ArrayList<>();
-		
+
 		allTextFields.add(NameTextField);
 		allTextFields.add(TitleTextField);
 		allTextFields.add(LifeTextField);
 		allTextFields.add(RunicPTextField);
 		allTextFields.add(StrTextField);
 		allTextFields.add(StmTextField);
-		
+
 		for (JTextField textField : allTextFields) {
 			textField.setText("");
 			factionComboBox.setSelectedIndex(0);
