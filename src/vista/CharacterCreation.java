@@ -7,6 +7,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
@@ -44,6 +46,8 @@ public class CharacterCreation extends JFrame {
 	private JComboBox<String> raceComboBox = new JComboBox<>();
 	private JComboBox<String> classComboBox = new JComboBox<>();
 
+	FunctionsHandler functionsHandler = new FunctionsHandler();
+
 	public CharacterCreation() {
 		setResizable(false);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -56,7 +60,6 @@ public class CharacterCreation extends JFrame {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 
-		FunctionsHandler functionsHandler = new FunctionsHandler();
 
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(224, 242, 243));
@@ -113,30 +116,7 @@ public class CharacterCreation extends JFrame {
 		btnCreateChar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Hero tempHero = new Hero(NameTextField.getText(), raceComboBox.getSelectedIndex() + 1, factionComboBox.getSelectedIndex() == 1 ? true : false,
-						classComboBox.getSelectedIndex() + 1, TitleTextField.getText(),
-						BigDecimal.valueOf(Double.parseDouble(LifeTextField.getText())),
-						Integer.parseInt(RunicPTextField.getText()),
-						BigDecimal.valueOf(Double.parseDouble(StrTextField.getText())),
-						BigDecimal.valueOf(Double.parseDouble(StmTextField.getText())));
-
-				functionsHandler.InsertCharacter(tempHero);
-
-				ArrayList<JTextField> allTextFields = new ArrayList<>();
-
-				allTextFields.add(NameTextField);
-				allTextFields.add(TitleTextField);
-				allTextFields.add(LifeTextField);
-				allTextFields.add(RunicPTextField);
-				allTextFields.add(StrTextField);
-				allTextFields.add(StmTextField);
-
-				for (JTextField textField : allTextFields) {
-					textField.setText("");
-					factionComboBox.setSelectedIndex(0);
-					raceComboBox.setSelectedIndex(0);
-					classComboBox.setSelectedIndex(0);
-				}
+				AddCharacter();
 			}
 		});
 
@@ -157,6 +137,26 @@ public class CharacterCreation extends JFrame {
 		StmTextField = new JTextField();
 		StmTextField.setColumns(10);
 		StmTextField.setBounds(157, 13, 143, 29);
+		
+		StmTextField.addKeyListener(new KeyListener() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getExtendedKeyCode() == KeyEvent.VK_ENTER) {
+					AddCharacter();
+				}
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+
+			}
+		});
+		
 		panelFormStamina.add(StmTextField);
 
 		JPanel panelFormStrength = new JPanel();
@@ -243,11 +243,11 @@ public class CharacterCreation extends JFrame {
 		panelFormFaction.setBounds(119, 335, 328, 46);
 		contentPane.add(panelFormFaction);
 
-		JLabel lblFaccin = new JLabel("Facción:");
-		lblFaccin.setHorizontalAlignment(SwingConstants.LEFT);
-		lblFaccin.setFont(new Font("Verdana", Font.PLAIN, 19));
-		lblFaccin.setBounds(22, 11, 105, 24);
-		panelFormFaction.add(lblFaccin);
+		JLabel lblFaction = new JLabel("Facción:");
+		lblFaction.setHorizontalAlignment(SwingConstants.LEFT);
+		lblFaction.setFont(new Font("Verdana", Font.PLAIN, 19));
+		lblFaction.setBounds(22, 11, 105, 24);
+		panelFormFaction.add(lblFaction);
 
 		factionComboBox.setModel(new DefaultComboBoxModel(functionsHandler.GetFactions(1).toArray()));
 		factionComboBox.setMaximumRowCount(2);
@@ -304,5 +304,33 @@ public class CharacterCreation extends JFrame {
 		lblCreacinDePersonajes.setFont(new Font("Verdana", Font.PLAIN, 28));
 		lblCreacinDePersonajes.setBackground(Color.BLACK);
 		contentPane.add(lblCreacinDePersonajes);
+		
+	}
+	
+	private void AddCharacter() {
+		Hero tempHero = new Hero(NameTextField.getText(), raceComboBox.getSelectedIndex() + 1, factionComboBox.getSelectedIndex() == 1 ? true : false,
+				classComboBox.getSelectedIndex() + 1, TitleTextField.getText(),
+				BigDecimal.valueOf(Double.parseDouble(LifeTextField.getText())),
+				Integer.parseInt(RunicPTextField.getText()),
+				BigDecimal.valueOf(Double.parseDouble(StrTextField.getText())),
+				BigDecimal.valueOf(Double.parseDouble(StmTextField.getText())));
+		
+		functionsHandler.InsertCharacter(tempHero);
+		
+		ArrayList<JTextField> allTextFields = new ArrayList<>();
+		
+		allTextFields.add(NameTextField);
+		allTextFields.add(TitleTextField);
+		allTextFields.add(LifeTextField);
+		allTextFields.add(RunicPTextField);
+		allTextFields.add(StrTextField);
+		allTextFields.add(StmTextField);
+		
+		for (JTextField textField : allTextFields) {
+			textField.setText("");
+			factionComboBox.setSelectedIndex(0);
+			raceComboBox.setSelectedIndex(0);
+			classComboBox.setSelectedIndex(0);
+		}
 	}
 }

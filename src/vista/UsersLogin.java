@@ -7,6 +7,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -96,12 +98,35 @@ public class UsersLogin extends JFrame {
 		userTextField = new JTextField();
 		userTextField.setBounds(195, 27, 143, 29);
 		panelFormUsers.add(userTextField);
+		
+		panelFormUsers.requestFocus();
+		
 		userTextField.setColumns(10);
 
 		passTextField = new JPasswordField();
 		passTextField.setBounds(195, 97, 143, 29);
 		panelFormUsers.add(passTextField);
 		passTextField.setColumns(10);
+		
+		passTextField.addKeyListener(new KeyListener() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getExtendedKeyCode() == KeyEvent.VK_ENTER) {
+					FunctionsHandler functionsHandler = new FunctionsHandler();
+					functionsHandler.UsersLogin(userTextField.getText(), passTextField.getText());
+				}
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+
+			}
+		});
 
 		JButton btnUserLogin = new JButton("Entrar");
 		btnUserLogin.setBounds(391, 278, 136, 42);
@@ -113,6 +138,7 @@ public class UsersLogin extends JFrame {
 				functionsHandler.UsersLogin(userTextField.getText(), passTextField.getText());
 			}
 		});
+		
 		contentPane.add(btnUserLogin);
 
 		JButton btnUserRegister = new JButton("Registrarse");
