@@ -33,78 +33,79 @@ INSERT INTO `faction` (`ID`, `factionName`) VALUES
 
 -- Volcando estructura para tabla gestwow.hero
 CREATE TABLE IF NOT EXISTS `hero` (
-  `char_id` int(4) NOT NULL AUTO_INCREMENT,
+  `char_id` int(4) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(4) unsigned zerofill NOT NULL DEFAULT 0000,
   `name` varchar(20) NOT NULL,
   `race_ID` tinyint(15) unsigned NOT NULL,
-  `class_ID` tinyint(13) NOT NULL,
+  `class_ID` tinyint(13) unsigned NOT NULL,
   `faction_ID` bit(1) NOT NULL DEFAULT b'0',
-  `title` varchar(25) NOT NULL,
-  `life` decimal(8,2) NOT NULL DEFAULT 0.00,
-  `runicpower` int(8) NOT NULL DEFAULT 0,
-  `strength` decimal(8,2) NOT NULL DEFAULT 0.00,
-  `stamina` decimal(8,2) NOT NULL DEFAULT 0.00,
+  `title` varchar(40) NOT NULL,
+  `life` decimal(8,2) unsigned NOT NULL DEFAULT 0.00,
+  `runicpower` int(8) unsigned NOT NULL DEFAULT 0,
+  `strength` decimal(8,2) unsigned NOT NULL DEFAULT 0.00,
+  `stamina` decimal(8,2) unsigned NOT NULL DEFAULT 0.00,
   PRIMARY KEY (`char_id`),
   UNIQUE KEY `name` (`name`),
   KEY `FK_characters_users` (`user_id`),
   KEY `FK_character_faction` (`faction_ID`),
   KEY `FK_characters_race` (`race_ID`),
-  KEY `FK_characters_class` (`class_ID`),
+  KEY `FK_hero_heroclass` (`class_ID`),
   CONSTRAINT `FK_character_faction` FOREIGN KEY (`faction_ID`) REFERENCES `faction` (`ID`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  CONSTRAINT `FK_characters_class` FOREIGN KEY (`class_ID`) REFERENCES `heroclass` (`ID`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `FK_characters_race` FOREIGN KEY (`race_ID`) REFERENCES `race` (`ID`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  CONSTRAINT `FK_characters_users` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Here we save the WoW character properties';
+  CONSTRAINT `FK_characters_users` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_hero_heroclass` FOREIGN KEY (`class_ID`) REFERENCES `heroclass` (`ID`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Here we save the WoW character properties';
 
--- Volcando datos para la tabla gestwow.hero: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla gestwow.hero: ~2 rows (aproximadamente)
 INSERT INTO `hero` (`char_id`, `user_id`, `name`, `race_ID`, `class_ID`, `faction_ID`, `title`, `life`, `runicpower`, `strength`, `stamina`) VALUES
-	(84, 0019, 'hola', 1, 0, b'1', 'hola2', 1212.00, 1212, 12121.00, 212.00);
+	(1, 0002, 'Warrhumluis', 1, 1, b'0', 'la Perdición del Rey Caído', 20420.00, 532, 841.00, 1021.00),
+	(2, 0001, 'Palorcale', 1, 2, b'1', 'El Programador de Java', 32856.00, 254, 768.00, 1265.00);
 
 -- Volcando estructura para tabla gestwow.heroclass
 CREATE TABLE IF NOT EXISTS `heroclass` (
-  `ID` tinyint(13) NOT NULL,
-  `className` varchar(20) NOT NULL,
+  `ID` tinyint(13) unsigned NOT NULL,
+  `className` varchar(25) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla gestwow.heroclass: ~11 rows (aproximadamente)
+-- Volcando datos para la tabla gestwow.heroclass: ~13 rows (aproximadamente)
 INSERT INTO `heroclass` (`ID`, `className`) VALUES
-	(0, 'Warrior'),
-	(1, 'Paladin'),
-	(2, 'Hunter'),
-	(3, 'Rogue'),
-	(4, 'Priest'),
-	(5, 'Shaman'),
-	(6, 'Mage'),
-	(7, 'Warlock'),
-	(8, 'Monk'),
-	(9, 'Druid'),
-	(10, 'Demon Hunter'),
-	(11, 'Death Knight'),
-	(12, 'Evoker');
+	(0, 'Guerrero'),
+	(1, 'Paladín'),
+	(2, 'Cazador'),
+	(3, 'Pícaro'),
+	(4, 'Sacerdote'),
+	(5, 'Chamán'),
+	(6, 'Mago'),
+	(7, 'Brujo'),
+	(8, 'Monje'),
+	(9, 'Druida'),
+	(10, 'Cazador de demonios'),
+	(11, 'Caballero de la Muerte'),
+	(12, 'Invocador');
 
 -- Volcando estructura para tabla gestwow.race
 CREATE TABLE IF NOT EXISTS `race` (
   `ID` tinyint(15) unsigned NOT NULL,
-  `raceName` varchar(10) NOT NULL,
+  `raceName` varchar(15) NOT NULL,
   PRIMARY KEY (`ID`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla gestwow.race: ~15 rows (aproximadamente)
 INSERT INTO `race` (`ID`, `raceName`) VALUES
-	(0, 'Human'),
-	(1, 'Dwarf'),
-	(2, 'Night Elf'),
-	(3, 'Gnome'),
+	(0, 'Humano'),
+	(1, 'Enano'),
+	(2, 'Elfo de Noche'),
+	(3, 'Gnomo'),
 	(4, 'Draenei'),
-	(5, 'Worgen'),
+	(5, 'Huargen'),
 	(6, 'Pandaren'),
 	(7, 'Dracthyr'),
-	(8, 'Orc'),
-	(9, 'Undead'),
+	(8, 'Orco'),
+	(9, 'No-muerto'),
 	(10, 'Tauren'),
-	(11, 'Troll'),
-	(12, 'Blood Elf'),
+	(11, 'Trol'),
+	(12, 'Elfo de Sangre'),
 	(13, 'Goblin');
 
 -- Volcando estructura para tabla gestwow.user
@@ -114,12 +115,12 @@ CREATE TABLE IF NOT EXISTS `user` (
   `passwd` char(64) NOT NULL DEFAULT '',
   `isAdmin` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Here we save the users properties';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Here we save the users properties';
 
--- Volcando datos para la tabla gestwow.user: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla gestwow.user: ~2 rows (aproximadamente)
 INSERT INTO `user` (`user_id`, `name`, `passwd`, `isAdmin`) VALUES
-	(0019, '1', 'b221d9dbb083a7f33428d7c2a3c3198ae925614d70210e28716ccaa7cd4ddb79', b'1'),
-	(0020, 'qwe', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', b'0');
+	(0001, 'alejandro', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', b'1'),
+	(0002, 'luis', 'cbfad02f9ed2a8d1e08d8f74f5303e9eb93637d47f82ab6f1c15871cf8dd0481', b'0');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
