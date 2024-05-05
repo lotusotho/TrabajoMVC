@@ -230,7 +230,7 @@ public class CharControllerDDBB {
 
 			while (rst.next()) {
 				wrt.write(rst.getInt(1) + ";" + rst.getInt(2) + ";" + rst.getString(3) + ";" + rst.getInt(4) + ";"
-						+ rst.getInt(5) + ";" + rst.getInt(6) + ";" + rst.getString(7) + ";" + rst.getBigDecimal(8)
+						+ rst.getBoolean(5) + ";" + rst.getInt(6) + ";" + rst.getString(7) + ";" + rst.getBigDecimal(8)
 						+ ";" + rst.getInt(9) + ";" + rst.getBigDecimal(10) + ";" + rst.getBigDecimal(11) + "\n");
 			}
 
@@ -271,8 +271,8 @@ public class CharControllerDDBB {
         		preStmt.setInt(2, UserControllerDDBB.getCurrentUserId());
         		preStmt.setString(3, feature.get(2));
         		preStmt.setInt(4, Integer.parseInt(feature.get(3)));
-        		preStmt.setInt(5, Integer.parseInt(feature.get(4)));
-        		preStmt.setInt(6, Integer.parseInt(feature.get(5)));
+        		preStmt.setBoolean(6, Boolean.parseBoolean(feature.get(4)));
+        		preStmt.setInt(5, Integer.parseInt(feature.get(5)));
         		preStmt.setString(7, feature.get(6));
         		preStmt.setString(8, feature.get(7));
         		preStmt.setString(9, feature.get(8));
