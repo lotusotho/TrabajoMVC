@@ -116,7 +116,7 @@ public class UsersPanel extends JFrame {
 
 		JLabel BGlbl = new JLabel("");
 		BGlbl.setIcon(new ImageIcon(UsersPanel.class.getResource("/img/usersPanelBG.jpg")));
-		BGlbl.setBounds(0, 0, 704, 461);
+		BGlbl.setBounds(0, 0, 713, 471);
 		contentPane.add(BGlbl);
 	}
 }
