@@ -148,7 +148,7 @@ public class CharacterCreation extends JFrame {
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
 
-				if (StmTextField.getText().toCharArray().length > 7 || Character.isAlphabetic(c)) {
+				if (StmTextField.getText().toCharArray().length > 5 || Character.isAlphabetic(c)) {
 					e.consume();
 				}
 			}
@@ -176,7 +176,7 @@ public class CharacterCreation extends JFrame {
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
 
-				if (StrTextField.getText().toCharArray().length > 7 || Character.isAlphabetic(c)) {
+				if (StrTextField.getText().toCharArray().length > 5 || Character.isAlphabetic(c)) {
 					e.consume();
 				}
 			}
@@ -205,7 +205,7 @@ public class CharacterCreation extends JFrame {
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
 
-				if (RunicPTextField.getText().toCharArray().length > 7 || Character.isAlphabetic(c)) {
+				if (RunicPTextField.getText().toCharArray().length > 5 || Character.isAlphabetic(c)) {
 					e.consume();
 				}
 			}
@@ -234,7 +234,7 @@ public class CharacterCreation extends JFrame {
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
 
-				if (LifeTextField.getText().toCharArray().length > 7 || Character.isAlphabetic(c)) {
+				if (LifeTextField.getText().toCharArray().length > 5 || Character.isAlphabetic(c)) {
 					e.consume();
 				}
 			}
