@@ -7,8 +7,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -96,6 +96,14 @@ public class UsersLogin extends JFrame {
 		lblPassTitle.setFont(new Font("Verdana", Font.PLAIN, 19));
 
 		userTextField = new JTextField();
+		userTextField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (userTextField.getText().toCharArray().length > 9) {
+					e.consume();
+				}
+			}
+		});
 		userTextField.setBounds(195, 27, 143, 29);
 		panelFormUsers.add(userTextField);
 
@@ -108,7 +116,7 @@ public class UsersLogin extends JFrame {
 		panelFormUsers.add(passTextField);
 		passTextField.setColumns(10);
 
-		passTextField.addKeyListener(new KeyListener() {
+		passTextField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getExtendedKeyCode() == KeyEvent.VK_ENTER) {
@@ -119,12 +127,9 @@ public class UsersLogin extends JFrame {
 
 			@Override
 			public void keyTyped(KeyEvent e) {
-
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-
+				if (passTextField.getText().toCharArray().length > 19) {
+					e.consume();
+				}
 			}
 		});
 

@@ -40,7 +40,12 @@ public class FunctionsHandler {
 	}
 
 	public void UsersRegister(String name, String passwd, boolean adminCheck) {
-		usersControllerDDBB.usersRegister(name, passwd, adminCheck);
+		if(!name.isBlank() && !passwd.isBlank()) {
+			usersControllerDDBB.usersRegister(name, passwd, adminCheck);
+		} else {
+			StringHandler stmHandler = new StringHandler();
+			stmHandler.MessageHandler("passUserRegisterKO");
+		}
 	}
 
 	public void CreateCSV() {
@@ -105,7 +110,12 @@ public class FunctionsHandler {
 	}
 
 	public void RecoverPassUser(String oldPasswd, String newPasswd, String name) {
-		usersControllerDDBB.RecoverPassUser(oldPasswd, newPasswd, name);
+		if(!name.isBlank() && !newPasswd.isBlank() && !name.isBlank()) {
+			usersControllerDDBB.RecoverPassUser(oldPasswd, newPasswd, name);
+		} else {
+			StringHandler stmHandler = new StringHandler();
+			stmHandler.MessageHandler("passUserRegisterKO");
+		}
 	}
 
 	// Vista Panels

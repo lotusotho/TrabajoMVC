@@ -7,8 +7,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
@@ -34,7 +34,6 @@ import servicio.Hero;
 
 public class CharacterCreation extends JFrame {
 
-
 	private JPanel contentPane;
 	private JTextField NameTextField;
 	private JTextField TitleTextField;
@@ -59,7 +58,6 @@ public class CharacterCreation extends JFrame {
 
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
-
 
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(224, 242, 243));
@@ -125,7 +123,7 @@ public class CharacterCreation extends JFrame {
 		panelFormStamina.setLayout(null);
 		panelFormStamina.setForeground((Color) null);
 		panelFormStamina.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
-		panelFormStamina.setBounds(793, 421, 328, 46);
+		panelFormStamina.setBounds(793, 421, 220, 46);
 		contentPane.add(panelFormStamina);
 
 		JLabel lblStamina = new JLabel("Estamina:");
@@ -136,24 +134,23 @@ public class CharacterCreation extends JFrame {
 
 		StmTextField = new JTextField();
 		StmTextField.setColumns(10);
-		StmTextField.setBounds(157, 13, 143, 29);
+		StmTextField.setBounds(137, 13, 76, 29);
 
-		StmTextField.addKeyListener(new KeyListener() {
+		StmTextField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(e.getExtendedKeyCode() == KeyEvent.VK_ENTER) {
+				if (e.getExtendedKeyCode() == KeyEvent.VK_ENTER) {
 					AddCharacter();
 				}
 			}
 
 			@Override
 			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
 
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-
+				if (StmTextField.getText().toCharArray().length > 7 || Character.isAlphabetic(c)) {
+					e.consume();
+				}
 			}
 		});
 
@@ -164,7 +161,7 @@ public class CharacterCreation extends JFrame {
 		panelFormStrength.setLayout(null);
 		panelFormStrength.setForeground((Color) null);
 		panelFormStrength.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
-		panelFormStrength.setBounds(793, 335, 328, 46);
+		panelFormStrength.setBounds(793, 335, 220, 46);
 		contentPane.add(panelFormStrength);
 
 		JLabel lblFuerza = new JLabel("Fuerza:");
@@ -174,8 +171,18 @@ public class CharacterCreation extends JFrame {
 		panelFormStrength.add(lblFuerza);
 
 		StrTextField = new JTextField();
+		StrTextField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+
+				if (StrTextField.getText().toCharArray().length > 7 || Character.isAlphabetic(c)) {
+					e.consume();
+				}
+			}
+		});
 		StrTextField.setColumns(10);
-		StrTextField.setBounds(157, 13, 143, 29);
+		StrTextField.setBounds(137, 13, 76, 29);
 		panelFormStrength.add(StrTextField);
 
 		JPanel panelFormRPower = new JPanel();
@@ -183,7 +190,7 @@ public class CharacterCreation extends JFrame {
 		panelFormRPower.setLayout(null);
 		panelFormRPower.setForeground((Color) null);
 		panelFormRPower.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
-		panelFormRPower.setBounds(793, 243, 328, 46);
+		panelFormRPower.setBounds(793, 243, 220, 46);
 		contentPane.add(panelFormRPower);
 
 		JLabel lblPoderRnico = new JLabel("Poder Rúnico:");
@@ -193,8 +200,18 @@ public class CharacterCreation extends JFrame {
 		panelFormRPower.add(lblPoderRnico);
 
 		RunicPTextField = new JTextField();
+		RunicPTextField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+
+				if (RunicPTextField.getText().toCharArray().length > 7 || Character.isAlphabetic(c)) {
+					e.consume();
+				}
+			}
+		});
 		RunicPTextField.setColumns(10);
-		RunicPTextField.setBounds(157, 13, 143, 29);
+		RunicPTextField.setBounds(137, 11, 76, 29);
 		panelFormRPower.add(RunicPTextField);
 
 		JPanel panelFormLife = new JPanel();
@@ -202,7 +219,7 @@ public class CharacterCreation extends JFrame {
 		panelFormLife.setLayout(null);
 		panelFormLife.setForeground((Color) null);
 		panelFormLife.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
-		panelFormLife.setBounds(793, 151, 328, 46);
+		panelFormLife.setBounds(793, 151, 220, 46);
 		contentPane.add(panelFormLife);
 
 		JLabel lblVida = new JLabel("Vida:");
@@ -212,8 +229,18 @@ public class CharacterCreation extends JFrame {
 		panelFormLife.add(lblVida);
 
 		LifeTextField = new JTextField();
+		LifeTextField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+
+				if (LifeTextField.getText().toCharArray().length > 7 || Character.isAlphabetic(c)) {
+					e.consume();
+				}
+			}
+		});
 		LifeTextField.setColumns(10);
-		LifeTextField.setBounds(157, 13, 143, 29);
+		LifeTextField.setBounds(137, 13, 74, 29);
 		panelFormLife.add(LifeTextField);
 
 		JPanel panelFormTitle = new JPanel();
@@ -221,7 +248,7 @@ public class CharacterCreation extends JFrame {
 		panelFormTitle.setLayout(null);
 		panelFormTitle.setForeground((Color) null);
 		panelFormTitle.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
-		panelFormTitle.setBounds(119, 493, 328, 46);
+		panelFormTitle.setBounds(119, 493, 371, 46);
 		contentPane.add(panelFormTitle);
 
 		JLabel lblTtulo = new JLabel("Título:");
@@ -231,8 +258,18 @@ public class CharacterCreation extends JFrame {
 		panelFormTitle.add(lblTtulo);
 
 		TitleTextField = new JTextField();
+		TitleTextField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+
+				if (TitleTextField.getText().toCharArray().length > 19 || Character.isDigit(c)) {
+					e.consume();
+				}
+			}
+		});
 		TitleTextField.setColumns(10);
-		TitleTextField.setBounds(158, 11, 143, 29);
+		TitleTextField.setBounds(158, 11, 203, 29);
 		panelFormTitle.add(TitleTextField);
 
 		JPanel panelFormFaction = new JPanel();
@@ -275,7 +312,7 @@ public class CharacterCreation extends JFrame {
 
 		JPanel panelFormName = new JPanel();
 		panelFormName.setBorder(UIManager.getBorder("InternalFrame.border"));
-		panelFormName.setBounds(119, 151, 328, 46);
+		panelFormName.setBounds(119, 151, 371, 46);
 		panelFormName.setForeground((Color) null);
 		panelFormName.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
 		contentPane.add(panelFormName);
@@ -288,7 +325,17 @@ public class CharacterCreation extends JFrame {
 		panelFormName.add(lblUserTitle);
 
 		NameTextField = new JTextField();
-		NameTextField.setBounds(157, 13, 143, 29);
+		NameTextField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+
+				if (NameTextField.getText().toCharArray().length > 19 || Character.isDigit(c)) {
+					e.consume();
+				}
+			}
+		});
+		NameTextField.setBounds(157, 13, 203, 29);
 		NameTextField.setColumns(10);
 		panelFormName.add(NameTextField);
 
@@ -308,9 +355,9 @@ public class CharacterCreation extends JFrame {
 	}
 
 	private void AddCharacter() {
-		Hero tempHero = new Hero(NameTextField.getText(), raceComboBox.getSelectedIndex() + 1, factionComboBox.getSelectedIndex() == 1 ? true : false,
-				classComboBox.getSelectedIndex() + 1, TitleTextField.getText(),
-				BigDecimal.valueOf(Double.parseDouble(LifeTextField.getText())),
+		Hero tempHero = new Hero(NameTextField.getText(), raceComboBox.getSelectedIndex() + 1,
+				factionComboBox.getSelectedIndex() == 1 ? true : false, classComboBox.getSelectedIndex() + 1,
+				TitleTextField.getText(), BigDecimal.valueOf(Double.parseDouble(LifeTextField.getText())),
 				Integer.parseInt(RunicPTextField.getText()),
 				BigDecimal.valueOf(Double.parseDouble(StrTextField.getText())),
 				BigDecimal.valueOf(Double.parseDouble(StmTextField.getText())));

@@ -57,6 +57,9 @@ public class StringHandler {
 		case "noChars":
 			JOptionPane.showMessageDialog(null, "Este usuario no tiene todavía ningún personaje");
 			break;
+		case "passUserRegisterKO":
+			JOptionPane.showMessageDialog(null, "Por favor, introduce un usuario/contraseña");
+			break;
 		}
 	}
 }

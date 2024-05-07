@@ -7,6 +7,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -99,11 +101,27 @@ public class UsersRecover extends JFrame {
 		panelFormUsers.add(lblOldPassTitle);
 
 		userTextField = new JTextField();
+		userTextField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (userTextField.getText().toCharArray().length > 9) {
+					e.consume();
+				}
+			}
+		});
 		userTextField.setColumns(10);
 		userTextField.setBounds(250, 27, 143, 29);
 		panelFormUsers.add(userTextField);
 
 		oldPassTextField = new JPasswordField();
+		oldPassTextField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (oldPassTextField.getText().toCharArray().length > 19) {
+					e.consume();
+				}
+			}
+		});
 		oldPassTextField.setColumns(10);
 		oldPassTextField.setBounds(250, 84, 143, 29);
 		panelFormUsers.add(oldPassTextField);
@@ -115,6 +133,21 @@ public class UsersRecover extends JFrame {
 		panelFormUsers.add(lblNewPassTitle);
 
 		newPassTextField = new JTextField();
+		newPassTextField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (newPassTextField.getText().toCharArray().length > 19) {
+					e.consume();
+				}
+			}
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getExtendedKeyCode() == KeyEvent.VK_ENTER) {
+					FunctionsHandler functionsHandler = new FunctionsHandler();
+					functionsHandler.RecoverPassUser(oldPassTextField.getText(), newPassTextField.getText(), userTextField.getText());
+				}
+			}
+		});
 		newPassTextField.setColumns(10);
 		newPassTextField.setBounds(250, 139, 143, 29);
 		panelFormUsers.add(newPassTextField);

@@ -7,6 +7,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -99,6 +101,14 @@ public class UsersRegister extends JFrame {
 		panelFormUsers.add(lblPassTitle);
 
 		userTextField = new JTextField();
+		userTextField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (userTextField.getText().toCharArray().length > 9) {
+					e.consume();
+				}
+			}
+		});
 		userTextField.setColumns(10);
 		userTextField.setBounds(195, 27, 143, 29);
 		panelFormUsers.add(userTextField);
@@ -124,6 +134,22 @@ public class UsersRegister extends JFrame {
 			}
 		});
 		contentPane.add(btnRegistrar);
+
+		passTextField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (passTextField.getText().toCharArray().length > 19) {
+					e.consume();
+				}
+			}
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getExtendedKeyCode() == KeyEvent.VK_ENTER) {
+					FunctionsHandler functionsHandler = new FunctionsHandler();
+					functionsHandler.UsersRegister(userTextField.getText(), passTextField.getText(), adminCheckBox.isSelected());
+				}
+			}
+		});
 
 		JLabel bgLabel = new JLabel("");
 		bgLabel.setIcon(new ImageIcon(UsersRegister.class.getResource("/img/bgRegister.png")));
