@@ -123,7 +123,7 @@ public class CharacterCreation extends JFrame {
 		panelFormStamina.setLayout(null);
 		panelFormStamina.setForeground((Color) null);
 		panelFormStamina.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
-		panelFormStamina.setBounds(793, 421, 220, 46);
+		panelFormStamina.setBounds(793, 421, 234, 46);
 		contentPane.add(panelFormStamina);
 
 		JLabel lblStamina = new JLabel("Estamina:");
@@ -161,7 +161,7 @@ public class CharacterCreation extends JFrame {
 		panelFormStrength.setLayout(null);
 		panelFormStrength.setForeground((Color) null);
 		panelFormStrength.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
-		panelFormStrength.setBounds(793, 335, 220, 46);
+		panelFormStrength.setBounds(793, 335, 234, 46);
 		contentPane.add(panelFormStrength);
 
 		JLabel lblFuerza = new JLabel("Fuerza:");
@@ -190,7 +190,7 @@ public class CharacterCreation extends JFrame {
 		panelFormRPower.setLayout(null);
 		panelFormRPower.setForeground((Color) null);
 		panelFormRPower.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
-		panelFormRPower.setBounds(793, 243, 220, 46);
+		panelFormRPower.setBounds(793, 243, 234, 46);
 		contentPane.add(panelFormRPower);
 
 		JLabel lblPoderRnico = new JLabel("Poder Rúnico:");
@@ -219,7 +219,7 @@ public class CharacterCreation extends JFrame {
 		panelFormLife.setLayout(null);
 		panelFormLife.setForeground((Color) null);
 		panelFormLife.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
-		panelFormLife.setBounds(793, 151, 220, 46);
+		panelFormLife.setBounds(793, 151, 234, 46);
 		contentPane.add(panelFormLife);
 
 		JLabel lblVida = new JLabel("Vida:");
