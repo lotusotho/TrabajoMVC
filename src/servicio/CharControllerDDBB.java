@@ -124,38 +124,6 @@ public class CharControllerDDBB {
 		}
 	}
 
-//	public String[] ShowAllColumns() {
-//		try {
-//			String[] charArr = new String[0];
-//
-//			Connection conx = FunctionsHandler.ConnectDDBB();
-//
-//			boolean isAdmin = UsersControllerDDBB.isCurrentUserAdmin();
-//
-//			String allQueryUser = "SELECT * FROM hero WHERE=" + UsersControllerDDBB.getCurrentUserId() +";";
-//
-//			String allQuery = "SELECT * FROM hero;";
-//
-//			Statement stmt = conx.prepareStatement(isAdmin ? allQuery : allQueryUser);
-//			ResultSet result = stmt.executeQuery(isAdmin ? allQuery : allQueryUser);
-//
-//			if(result.next()) {
-//				for (int i = 0; i < result.getMetaData().getColumnCount(); i++) {
-//					charArr[i] = result.getMetaData().getColumnName(i);
-//				}
-//			}
-//
-//			stmt.close();
-//			conx.close();
-//
-//			return charArr;
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			return new String[0];
-//		}
-//
-//	}
-
 	public void DeleteLastCharacterDB() {
 		try {
 			Connection conx = FunctionsHandler.ConnectDDBB();
@@ -223,10 +191,6 @@ public class CharControllerDDBB {
 			ResultSet rst = stmt.executeQuery(allQuery);
 
 			FileWriter wrt = new FileWriter(path);
-
-//			for (int i = 0; i < rst.getMetaData().getColumnCount(); i++) {
-//				wrt.write(rst.getMetaData().getColumnName(i));
-//			}
 
 			while (rst.next()) {
 				wrt.write(rst.getInt(1) + ";" + rst.getInt(2) + ";" + rst.getString(3) + ";" + rst.getInt(4) + ";"

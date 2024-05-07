@@ -121,7 +121,6 @@ public class UserControllerDDBB {
 		}
 	}
 
-	// UsersView
 	public void ShowAllRows(JTable jtable) {
 		try {
 			Connection conx = FunctionsHandler.ConnectDDBB();

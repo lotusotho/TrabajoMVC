@@ -59,10 +59,6 @@ public class FunctionsHandler {
 		}
 	}
 
-//	public String[] GetAllCharacters() {
-//		return CharControllerDDBB.ShowAllColumns();
-//	}
-
 	public void ViewCharactersTable(JTable jtable) {
 		if (((DefaultTableModel) jtable.getModel()).getRowCount() > 0) {
 			ClearTable(jtable);
