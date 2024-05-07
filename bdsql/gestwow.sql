@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `hero` (
   `race_ID` tinyint(15) unsigned NOT NULL,
   `class_ID` tinyint(13) unsigned NOT NULL,
   `faction_ID` bit(1) NOT NULL DEFAULT b'0',
-  `title` varchar(40) NOT NULL,
+  `title` varchar(20) NOT NULL,
   `life` decimal(8,2) unsigned NOT NULL DEFAULT 0.00,
   `runicpower` int(8) unsigned NOT NULL DEFAULT 0,
   `strength` decimal(8,2) unsigned NOT NULL DEFAULT 0.00,
@@ -58,8 +58,8 @@ CREATE TABLE IF NOT EXISTS `hero` (
 
 -- Volcando datos para la tabla gestwow.hero: ~2 rows (aproximadamente)
 INSERT INTO `hero` (`char_id`, `user_id`, `name`, `race_ID`, `class_ID`, `faction_ID`, `title`, `life`, `runicpower`, `strength`, `stamina`) VALUES
-	(1, 0002, 'Warrhumluis', 1, 1, b'0', 'la Perdición del Rey Caído', 20420.00, 532, 841.00, 1021.00),
-	(2, 0001, 'Palorcale', 1, 2, b'1', 'El Programador de Java', 32856.00, 254, 768.00, 1265.00);
+	(1, 0001, 'Warrhumluis', 1, 0, b'0', 'la Perdición del Rey', 20420.00, 532, 841.00, 1021.00),
+	(2, 0001, 'Palorcale', 1, 0, b'1', 'El Programador de Ja', 32856.00, 254, 768.00, 1265.00);
 
 -- Volcando estructura para tabla gestwow.heroclass
 CREATE TABLE IF NOT EXISTS `heroclass` (
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `race` (
   PRIMARY KEY (`ID`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla gestwow.race: ~15 rows (aproximadamente)
+-- Volcando datos para la tabla gestwow.race: ~14 rows (aproximadamente)
 INSERT INTO `race` (`ID`, `raceName`) VALUES
 	(0, 'Humano'),
 	(1, 'Enano'),
@@ -111,11 +111,11 @@ INSERT INTO `race` (`ID`, `raceName`) VALUES
 -- Volcando estructura para tabla gestwow.user
 CREATE TABLE IF NOT EXISTS `user` (
   `user_id` int(4) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL,
+  `name` varchar(10) NOT NULL,
   `passwd` char(64) NOT NULL DEFAULT '',
   `isAdmin` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Here we save the users properties';
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Here we save the users properties';
 
 -- Volcando datos para la tabla gestwow.user: ~2 rows (aproximadamente)
 INSERT INTO `user` (`user_id`, `name`, `passwd`, `isAdmin`) VALUES
