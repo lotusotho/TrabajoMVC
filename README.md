@@ -246,8 +246,18 @@ La base de datos se llama gestwow y está formada por las siguientes tablas:
 2. Tabla hero: Esta tabla guarda información detallada sobre los personajes del juego, como su nombre, raza, clase, facción, estadísticas, etc.
 3. Tabla faction: Esta tabla almacena información sobre las facciones del juego (por ejemplo, Alianza y Horda).
 4. Tabla heroclass: Almacena información sobre las clases disponibles en el juego (por ejemplo, Guerrero, Paladín, Cazador, etc.).
-5. Tabla race: Contiene información sobre las razas disponibles en el juego (por ejemplo, Humano, Enano, Elfo de la Noche, etc.).-
+5. Tabla race: Contiene información sobre las razas disponibles en el juego (por ejemplo, Humano, Enano, Elfo de la Noche, etc.).-
+
 ## Uso de la base de datos:
 Para poder comenzar a usar la aplicación, deberemos crear una base de datos dentro de MySQL llamada `gestwow` y luego importar el archivo `gestwow.sql`, el cual se encuentra dentro de la carpeta `bdsql`.
 Podemos realizar la importación fácilmente con el siguiente comando: `mysql -u root gestwow < gestwow.sql`.
+
+# Usuarios de la base de datos
+## Alejandro - Administrador
+- Usuario: alejandro
+- Contraseña: 123
+
+## Luis - Usuario normal
+- Usuario: luis
+- Contraseña: 1212
 
