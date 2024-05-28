@@ -58,8 +58,8 @@ CREATE TABLE IF NOT EXISTS `hero` (
 
 -- Volcando datos para la tabla gestwow.hero: ~2 rows (aproximadamente)
 INSERT INTO `hero` (`char_id`, `user_id`, `name`, `race_ID`, `class_ID`, `faction_ID`, `title`, `life`, `runicpower`, `strength`, `stamina`) VALUES
-	(1, 0001, 'Warrhumluis', 1, 0, b'0', 'la Perdición del Rey', 20420.00, 532, 841.00, 1021.00),
-	(2, 0001, 'Palorcale', 1, 0, b'1', 'El Programador de Ja', 32856.00, 254, 768.00, 1265.00);
+	(1, 0001, 'Palorcale', 1, 2, b'0', 'El Programador Java', 32856.00, 254, 768.00, 1265.00),
+	(2, 0002, 'Warrhumluis', 1, 1, b'0', 'La Perdición del Rey', 20420.00, 532, 841.12, 1021.20);
 
 -- Volcando estructura para tabla gestwow.heroclass
 CREATE TABLE IF NOT EXISTS `heroclass` (
