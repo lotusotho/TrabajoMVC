@@ -205,7 +205,7 @@ public class CharacterCreation extends JFrame {
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
 
-				if (RunicPTextField.getText().toCharArray().length > 5 || Character.isAlphabetic(c)) {
+				if (c == ',' || c == '.' || RunicPTextField.getText().toCharArray().length > 5 || Character.isAlphabetic(c)) {
 					e.consume();
 				}
 			}
