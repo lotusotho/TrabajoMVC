@@ -56,7 +56,7 @@ public class UsersLogin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JButton btnUserRecover = new JButton("Contraseña Olvidada");
+		JButton btnUserRecover = new JButton("Cambiar Contraseña");
 		btnUserRecover.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

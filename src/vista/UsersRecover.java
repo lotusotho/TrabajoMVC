@@ -72,7 +72,7 @@ public class UsersRecover extends JFrame {
 		contentPane.add(panelTitle);
 		panelTitle.setLayout(null);
 
-		JLabel lblRegistroDeUsuarios = new JLabel("Recuperar contraseña:");
+		JLabel lblRegistroDeUsuarios = new JLabel("Cambiar contraseña:");
 		lblRegistroDeUsuarios.setBounds(0, 0, 366, 35);
 		panelTitle.add(lblRegistroDeUsuarios);
 		lblRegistroDeUsuarios.setBackground(new Color(0, 0, 0));
@@ -152,7 +152,7 @@ public class UsersRecover extends JFrame {
 		newPassTextField.setBounds(250, 139, 143, 29);
 		panelFormUsers.add(newPassTextField);
 
-		JButton btnRegistrar = new JButton("Cambiar contraseña");
+		JButton btnRegistrar = new JButton("Aceptar cambio");
 		btnRegistrar.setFont(new Font("Verdana", Font.PLAIN, 14));
 		btnRegistrar.setBounds(258, 361, 189, 42);
 		btnRegistrar.addActionListener(new ActionListener() {
